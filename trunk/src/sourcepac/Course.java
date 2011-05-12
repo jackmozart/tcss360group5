@@ -1,5 +1,5 @@
 package sourcepac;
 
-public class Voter {
+public class Course {
 
 }
