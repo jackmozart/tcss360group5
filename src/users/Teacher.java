@@ -20,7 +20,7 @@ public class Teacher extends Voter {
 	/**
 	 * This field holds the courses the teacher is unwilling to teach.
 	 */
-	private Set my_unpreferred_courses;
+	private Set<Course> my_unpreferred_courses;
 	/**
 	 * This field holds an availability matrix of the times the teacher is willing
 	 * and unwilling to teach.
