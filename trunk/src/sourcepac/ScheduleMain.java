@@ -44,7 +44,7 @@ public class ScheduleMain {
 		
 	}
 	
-	public Set loadCourseTimes(String the_file_name) {
+	public Set<Time> loadCourseTimes(String the_file_name) {
 		Set<Time> times = new TreeSet<Time>();
 		
 		return times;
