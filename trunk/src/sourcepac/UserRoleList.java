@@ -1,6 +1,7 @@
 
 package sourcepac;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import users.Voter;
@@ -13,5 +14,18 @@ import users.Voter;
  */
 public class UserRoleList {
   List<Voter> my_roles;
+  
+  public UserRoleList() {
+    my_roles = new ArrayList<Voter>();
+  }
+  public void add(Voter the_role) {
+    
+    
+  }
+
+  public boolean contains(Voter the_role) {
+    
+    return false;
+  }
 
 }

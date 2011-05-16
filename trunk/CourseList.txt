@@ -1,53 +1,52 @@
-TCSS 142, Introduction to Object-Oriented Programming, 5
-TCSS 143, Fundamentals of Object-Oriented Programming Theory and Application, 5
-TCSS 305, Programming Practicum, 5
-TCSS 321, Discrete Structures I, 5
-TCSS 321, Discrete Structures II, 5
-TCSS 325, Computers Ethics and Society, 5
-TCSS 342. Data Structures, 5
-TCSS 343, Design and Analysis of Algorithms, 5
-TCSS 360, Software Development and Quality Assurance Techniques, 5
-TCSS 371, Machine Organization, 5
-TCSS 372, Computer Architecture, 5
-TCSS 422, Computer Operating Systems, 5
-TCSS 430, Networking and Distributed Systems, 5
-TCSS 431, Network Security, 5
-TCSS 435, Artificial Intelligence and Knowledge Acquisition, 5
-TCSS 437, Mobile Robotics, 5
-TCSS 440, Formal Models in Computer Science, 5
-TCSS 445, Database Systems Design, 5
-TCSS 452, Human-Computer Interaction, 5
-TCSS 460, Client/Server Programming for Internet Applications, 5
-TCSS 465, Embedded Real-Time System Programming, 5
-TCSS 466, Computer-Mediated Communications, 5
-TCSS 470, Software Reengineering, 5
-TCSS 480, Comparative Programming Languages, 5
-TCSS 481, Computer Security, 5
-TCSS 490, Special Topics in Computing and Software Systems, 5
-TCSS 491, Computational Worlds, 5
-TCSS 497, Internship in Computing and Software Systems, 5
-TCSS 498, Directed Readings in Computing and Software Systems, 5
-TCSS 499, Undergraduate Research in Computing and Software Systems, 10
-TCSS 522, Computer Operating Systems, 5
-TCSS 523, Data Compression, 5
-TCSS 540, Theory of Computing, 5
-TCSS 543, Advanced Algorithms, 5
-TCSS 545, Database Systems Design, 5
-TCSS 555, Data Mining, 5
-TCSS 558, Applied Distributed Computing, 5
-TCSS 559, Web Services, 5
-TCSS 560, Software Engineering, 5
-TCSS 566, Computer-Mediated Communications, 5
-TCSS 570, Introduction to Parallel Computing, 5
-TCSS 572, Computing Systems Design, 5
-TCSS 581, Cryptology, 5
-TCSS 588, Bioinformatics, 5
-TCSS 590, Special Topics in Computing and Software Systems, 5
-TCSS 598, Masters Seminar in CSS, 5
-TCSS 600, Independent Study in Computing and Software Systems, 10
-TCSS 700, Master's Thesis in Computing and Software Systems, 10
-TCSS 702, Design Project in Computing and Software Systems, 10
-
+TCSS 142,Introduction to Object-Oriented Programming,5
+TCSS 143,Fundamentals of Object-Oriented Programming Theory and Application,5
+TCSS 305,Programming Practicum,5
+TCSS 321,Discrete Structures I,5
+TCSS 321,Discrete Structures II,5
+TCSS 325,Computers Ethics and Society,5
+TCSS 342,Data Structures,5
+TCSS 343,Design and Analysis of Algorithms,5
+TCSS 360,Software Development and Quality Assurance Techniques,5
+TCSS 371,Machine Organization,5
+TCSS 372,Computer Architecture,5
+TCSS 422,Computer Operating Systems,5
+TCSS 430,Networking and Distributed Systems,5
+TCSS 431,Network Security,5
+TCSS 435,Artificial Intelligence and Knowledge Acquisition,5
+TCSS 437,Mobile Robotics,5
+TCSS 440,Formal Models in Computer Science,5
+TCSS 445,Database Systems Design,5
+TCSS 452,Human-Computer Interaction,5
+TCSS 460,Client/Server Programming for Internet Applications,5
+TCSS 465,Embedded Real-Time System Programming,5
+TCSS 466,Computer-Mediated Communications,5
+TCSS 470,Software Reengineering,5
+TCSS 480,Comparative Programming Languages,5
+TCSS 481,Computer Security,5
+TCSS 490,Special Topics in Computing and Software Systems,5
+TCSS 491,Computational Worlds,5
+TCSS 497,Internship in Computing and Software Systems,5
+TCSS 498,Directed Readings in Computing and Software Systems,5
+TCSS 499,Undergraduate Research in Computing and Software Systems,10
+TCSS 522,Computer Operating Systems,5
+TCSS 523,Data Compression,5
+TCSS 540,Theory of Computing,5
+TCSS 543,Advanced Algorithms,5
+TCSS 545,Database Systems Design,5
+TCSS 555,Data Mining,5
+TCSS 558,Applied Distributed Computing,5
+TCSS 559,Web Services,5
+TCSS 560,Software Engineering,5
+TCSS 566,Computer-Mediated Communications,5
+TCSS 570,Introduction to Parallel Computing,5
+TCSS 572,Computing Systems Design,5
+TCSS 581,Cryptology,5
+TCSS 588,Bioinformatics,5
+TCSS 590,Special Topics in Computing and Software Systems,5
+TCSS 598,Masters Seminar in CSS,5
+TCSS 600,Independent Study in Computing and Software Systems,10
+TCSS 700,Master's Thesis in Computing and Software Systems,10
+TCSS 702,Design Project in Computing and Software Systems,10
 
 
 
