@@ -70,10 +70,12 @@ public class NumberOneConstraintTest {
   public void teacherSameTimeTestShouldFail() {
     for (int i = 0; i < my_schedule_list_one.size(); i++) {
       for (int j = i + 1; j < my_schedule_list_one.size(); j++) {
-        if (my_schedule_list_one.get(i).getTeacher()
-        	.equals(my_schedule_list_one.get(j).getTeacher())) {
+        if (my_schedule_list_one.get(i).getTeacher().equals
+          (my_schedule_list_one.get(j).getTeacher())) {
           if (my_schedule_list_one.get(i).getStartTime() ==
-        		my_schedule_list_one.get(j).getStartTime()) {
+        		my_schedule_list_one.get(j).getStartTime() &&
+                my_schedule_list_two.get(i).getDay() ==
+                    my_schedule_list_two.get(j).getDay()) {
             fail("The teacher (teacher name here) is teaching" +
                 " two classes at the same time on the same day.");
           }
@@ -93,9 +95,11 @@ public class NumberOneConstraintTest {
         if (my_schedule_list_two.get(i).getTeacher()
         	.equals(my_schedule_list_two.get(j).getTeacher())) {
           if (my_schedule_list_two.get(i).getStartTime() ==
-        	  my_schedule_list_two.get(j).getStartTime()) {
-            fail("The teacher (teacher name here) is teaching" +
-                " two classes at the same time on the same day.");
+        	  my_schedule_list_two.get(j).getStartTime() &&
+        	  my_schedule_list_two.get(i).getDay() ==
+                  my_schedule_list_two.get(j).getDay()) {
+            fail("The teacher " + my_schedule_list_two.get(i).getTeacher() +
+            		" is teaching two classes at the same time on the same day.");
           }
         }
       }
