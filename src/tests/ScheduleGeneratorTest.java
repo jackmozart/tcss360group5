@@ -61,7 +61,7 @@ public class ScheduleGeneratorTest {
   public void loadsCorrectScheduleTest() {
     my_generator.importSchedule("OneCourse.csv");
     Schedule compare = new Schedule();
-    compare.addCourse(new CourseCopy("TCSS360", "jtenenbg",
+    compare.addCourse(new CourseCopy("TCSS360", "jtenenbg",5,
                                      1615, 1820));
     assertEquals((List<CourseCopy>) my_generator.
                  getSchedule().getCourses(), 
