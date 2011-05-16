@@ -23,11 +23,16 @@ public class NumberOneConstraintTest {
   /**
    * A list of CourseCopy.
    */
-  private List<CourseCopy> my_schedule_list;
+  private List<CourseCopy> my_schedule_list_one;
   
   /**
-    * Start time at 8.
-    */
+   * A list of CourseCopy.
+   */
+  private List<CourseCopy> my_schedule_list_two;
+  
+  /**
+   * Start time at 8.
+   */
   public static final int START_TIME_ONE = 8;
   
   /**
@@ -35,9 +40,9 @@ public class NumberOneConstraintTest {
    */
   public static final String TEACHER_NAME_ONE = "Tenenberg";
   
- /**
-  * End time at 10.
-  */
+  /**
+   * End time at 10.
+   */
   public static final int END_TIME_ONE = 10;
 
   /**
@@ -45,9 +50,16 @@ public class NumberOneConstraintTest {
    */
   @Before
   public void setUp() {
-    my_schedule_list = new ArrayList<CourseCopy>();
-    my_schedule_list.add(new CourseCopy("TCSS 343", TEACHER_NAME_ONE, START_TIME_ONE, 10));
-    my_schedule_list.add(new CourseCopy("TCSS 360", TEACHER_NAME_ONE, START_TIME_ONE, 10));
+    my_schedule_list_one = new ArrayList<CourseCopy>();
+    my_schedule_list_one.add(new CourseCopy("TCSS 343", "A TCSS class", 5,
+    		                                START_TIME_ONE, END_TIME_ONE, TEACHER_NAME_ONE, 1));
+    my_schedule_list_one.add(new CourseCopy("TCSS 360", "A TCSS class", 5,
+    		                                START_TIME_ONE, END_TIME_ONE, TEACHER_NAME_ONE, 1));
+    my_schedule_list_two = new ArrayList<CourseCopy>();
+    my_schedule_list_two.add(new CourseCopy("TCSS 343", "A TCSS class", 5,
+    		                                START_TIME_ONE, END_TIME_ONE, TEACHER_NAME_ONE, 1));
+    my_schedule_list_two.add(new CourseCopy("TCSS 360", "A TCSS class", 5,
+    		                                10, 12, TEACHER_NAME_ONE, 1));
   }
 
   /**
@@ -55,13 +67,36 @@ public class NumberOneConstraintTest {
    * day.
    */
   @Test
-  public void teacherSameTimeTest() {
+  public void teacherSameTimeTestShouldFail() {
+    for (int i = 0; i < my_schedule_list_one.size(); i++) {
+      for (int j = i + 1; j < my_schedule_list_one.size(); j++) {
+        if (my_schedule_list_one.get(i).getTeacher()
+        	.equals(my_schedule_list_one.get(j).getTeacher())) {
+          if (my_schedule_list_one.get(i).getStartTime() ==
+        		my_schedule_list_one.get(j).getStartTime()) {
+            fail("The teacher (teacher name here) is teaching" +
+                " two classes at the same time on the same day.");
+          }
+        }
+      }
+    }
+  }
+  /**
+   * Checks to see if any teachers are teaching at the same time on the same
+   * day.
+   */
+  @Test
+  public void teacherSameTimeTestShouldSuccess() {
     
-    for (int i = 0; i < my_schedule_list.size(); i++) {
-      for (int j = i + 1; j < my_schedule_list.size(); j++) {
-        if (my_schedule_list.get(i) == my_schedule_list.get(j)) {
-          fail("The teacher (teacher name here) is teaching" +
-               " two classes at the same time on the same day.");
+    for (int i = 0; i < my_schedule_list_two.size(); i++) {
+      for (int j = i + 1; j < my_schedule_list_two.size(); j++) {
+        if (my_schedule_list_two.get(i).getTeacher()
+        	.equals(my_schedule_list_two.get(j).getTeacher())) {
+          if (my_schedule_list_two.get(i).getStartTime() ==
+        	  my_schedule_list_two.get(j).getStartTime()) {
+            fail("The teacher (teacher name here) is teaching" +
+                " two classes at the same time on the same day.");
+          }
         }
       }
     }
