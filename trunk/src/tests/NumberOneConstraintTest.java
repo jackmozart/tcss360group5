@@ -20,16 +20,34 @@ import sourcepac.CourseCopy;
  */
 
 public class NumberOneConstraintTest {
-	/**
-	 * A list of CourseCopy
-	 */
-	List<CourseCopy> scheduleList;
+  /**
+   * A list of CourseCopy.
+   */
+  private List<CourseCopy> my_schedule_list;
+  
+  /**
+    * Start time at 8.
+    */
+  public static final int START_TIME_ONE = 8;
+  
+  /**
+   * First teacher name.
+   */
+  public static final String TEACHER_NAME_ONE = "Tenenberg";
+  
+ /**
+  * End time at 10.
+  */
+  public static final int END_TIME_ONE = 10;
+
   /**
    * Creates many CourseCopy to prepare for the testing.
    */
   @Before
   public void setUp() {
-	  scheduleList = new ArrayList<CourseCopy>();
+    my_schedule_list = new ArrayList<CourseCopy>();
+    my_schedule_list.add(new CourseCopy("TCSS 343", TEACHER_NAME_ONE, START_TIME_ONE, 10));
+    my_schedule_list.add(new CourseCopy("TCSS 360", TEACHER_NAME_ONE, START_TIME_ONE, 10));
   }
 
   /**
@@ -39,10 +57,11 @@ public class NumberOneConstraintTest {
   @Test
   public void teacherSameTimeTest() {
     
-    for (int i = 0; i < scheduleList.size(); i++) {
-      for (int j = i + 1; j < scheduleList.size(); j++) {
-        if (scheduleList.get(i) == scheduleList.get(j)) {
-          fail("The teacher (teacher name here) is teaching two classes at the same time on the same day.");
+    for (int i = 0; i < my_schedule_list.size(); i++) {
+      for (int j = i + 1; j < my_schedule_list.size(); j++) {
+        if (my_schedule_list.get(i) == my_schedule_list.get(j)) {
+          fail("The teacher (teacher name here) is teaching" +
+               " two classes at the same time on the same day.");
         }
       }
     }
