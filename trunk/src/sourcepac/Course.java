@@ -26,7 +26,7 @@ public class Course {
 
   /**
    * This constructor creates a course object from the given parameters.
-   * 
+   * @author Steven Cozart 
    * @param the_course_title The Department and Code for the course
    * @param the_course_description The full name of the course
    * @param the_credit The credit worth of the course
@@ -34,7 +34,11 @@ public class Course {
   public Course(String the_course_title, String the_course_description, int the_credit) {
     my_course_title = the_course_title;
     my_course_description = the_course_description;
-    my_credit = the_credit;
+    if (the_credit < 0) {
+      throw new IllegalArgumentException();
+    } else {
+      my_credit = the_credit;
+    }
   }
 
   /**
