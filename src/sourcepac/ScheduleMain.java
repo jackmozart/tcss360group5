@@ -33,7 +33,7 @@ public class ScheduleMain {
   public static void main(String[] args) {
 
   }
-  
+
   public Map<String, Course> getCourseCatalog() {
     return my_course_catalog;
   }
