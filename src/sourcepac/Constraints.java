@@ -42,7 +42,7 @@ public class Constraints {
     return test_results.toString();
   }
 
-  private String teacherSameTimes() {
+  public String teacherSameTimes() {
     String error_message = "Teacher " + "" + "is teaching two classes at the same time";
     return error_message;
   }
