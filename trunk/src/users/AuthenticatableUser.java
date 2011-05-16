@@ -5,7 +5,7 @@ package users;
  * This class is the Super class for all other users. It contains user login
  * information and the name of the specific user.
  * 
- * @author Phillip Bernard
+ * @author Phillip Bernard  comments modified by Steven Cozart
  * @version 5/10/2011
  */
 public class AuthenticatableUser {
@@ -35,14 +35,26 @@ public class AuthenticatableUser {
     my_name = the_name;
   }
 
+  /**
+   * 
+   * @return User name for specific user.
+   */
   public String getUsername() {
     return my_username;
   }
 
+  /**
+   * 
+   * @return Password for specific user.
+   */
   public String getPassword() {
     return my_password;
   }
 
+  /**
+   * 
+   * @return Legal name of user.
+   */
   public String getName() {
     return my_name;
   }
