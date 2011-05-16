@@ -17,37 +17,30 @@ import users.Voter;
  * @version 5/13/2011
  */
 public class ScheduleMain {
-  
   /**
    * Weight applied to course preferences of student user type.  
    */
   public static final int STUDENT_WEIGHT = 1;
-  
   /**
    * Weight applied to course preferences of teacher user type.  
    */
   public static final int TEACHER_WEIGHT = 2;
-  
   /**
    * Weight applied to course preferences of advisor user type.  
    */
   public static final int ADVISOR_WEIGHT = 3;
-  
   /**
    * All possible courses to be offered.  
    */
   private Map<String, Course> my_course_catalog;
-  
   /**
    * All possible time blocks courses can be offered.
    */
   private Set<Time> my_course_times;
-  
   /**
    * List of all users.  
    */
-  private Map<String, List<Voter>> my_users;
-  
+  private Map<String, UserRoleList> my_users;  
   /**
    * Division between day and evening classes.
    */
@@ -59,6 +52,7 @@ public class ScheduleMain {
   public ScheduleMain() {
     my_course_catalog = loadCourseData("CourseList.txt");
     my_course_times = loadCourseTimes("CourseTimes.txt");
+    my_users = new HashMap<String, UserRoleList>();
   }
 
   /**
@@ -83,25 +77,24 @@ public class ScheduleMain {
    * @return
    */
   public Map<String, Course> loadCourseData(String the_file_name) {
-    Map<String, Course> courses = new HashMap<String, Course>();
-
+    final Map<String, Course> courses = new HashMap<String, Course>();
     return courses;
 
   }
 
   public Set<Time> loadCourseTimes(String the_file_name) {
-    Set<Time> times = new TreeSet<Time>();
+    final  Set<Time> times = new TreeSet<Time>();
 
     return times;
   }
 
-  public Map<String, List<Voter>> loadUsers(String the_file_name) {
-    Map<String, List<Voter>> users = new HashMap<String, List<Voter>>();
+  public Map<String, UserRoleList> loadUsers(String the_file_name) {
+    final  Map<String, UserRoleList> users = new HashMap<String, UserRoleList>();
 
     return users;
   }
 
-  public List<Voter> getUser(String the_username) {
+  public UserRoleList getUser(String the_username) {
     return my_users.get(the_username);
   }
 }
