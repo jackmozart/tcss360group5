@@ -6,7 +6,6 @@ import static org.junit.Assert.fail;
 
 import java.util.List;
 
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -48,7 +47,7 @@ public class ScheduleGeneratorTest {
     try {
       my_generator.importSchedule("IDontExist.csv");
       fail("IO should have messed up. Find out why it's working.");
-    } catch (Exception expected){
+    } catch (Exception expected) {
       // Test passes
     }
   }
