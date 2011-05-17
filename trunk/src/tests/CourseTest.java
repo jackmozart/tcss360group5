@@ -66,6 +66,14 @@ public class CourseTest {
       // test passed exception was thrown
     }
   }
+  
+  /**
+   * Tests for credit input error.
+   */
+  @Test (expected = IllegalArgumentException.class)
+  public void creditInputTestB() {
+      my_course = new Course(COURSE_NAME, COURSE_DESCRIPTION, -1);
+  }
 
   /**
    * Test for correct credit input.
