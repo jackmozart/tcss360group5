@@ -1,19 +1,20 @@
 
 package sourcepac;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
-
-import users.Voter;
 
 /**
  * This class is the holds the data types needed for running the Scheduling
  * program.
  * 
  * @author Phillip Bernard comments by Steven Cozart
+ * @version 5/16/2011 fixed loadCourses method.
  * @version 5/13/2011
  */
 public class ScheduleMain {
@@ -51,7 +52,7 @@ public class ScheduleMain {
    */
   public ScheduleMain() {
     my_course_catalog = loadCourseData("CourseList.txt");
-    my_course_times = loadCourseTimes("CourseTimes.txt");
+    //my_course_times = loadCourseTimes("CourseTimes.txt");
     my_users = new HashMap<String, UserRoleList>();
   }
 
@@ -73,11 +74,38 @@ public class ScheduleMain {
 
   /**
    * 
-   * @param the_file_name
-   * @return
+   * @param the_file_name the file name to load courses from
+   * @return A Map of courses in the file
    */
   public Map<String, Course> loadCourseData(String the_file_name) {
     final Map<String, Course> courses = new HashMap<String, Course>();
+    final File course_file = new File(the_file_name);
+    Scanner scanner = null;
+    String next_line = "";
+    try {
+      scanner = new Scanner(course_file);
+    } catch (FileNotFoundException e) {
+      System.err.println("FileNotFound");
+    }
+   
+    while (scanner.hasNext()) {
+      String course_title;
+      String course_description;
+      int credit;
+      
+      next_line = scanner.nextLine();
+      
+      final Scanner line_scanner = new Scanner(next_line);
+      line_scanner.useDelimiter(",");
+      course_title = line_scanner.next();
+      course_description = line_scanner.next();
+      credit = line_scanner.nextInt();
+      
+      courses.put(course_title, new Course(course_title,
+                                                     course_description,
+                                                     credit));
+    }
+    
     return courses;
 
   }

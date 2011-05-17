@@ -47,7 +47,3 @@ TCSS 598,Masters Seminar in CSS,5
 TCSS 600,Independent Study in Computing and Software Systems,10
 TCSS 700,Master's Thesis in Computing and Software Systems,10
 TCSS 702,Design Project in Computing and Software Systems,10
-
-
-
-
