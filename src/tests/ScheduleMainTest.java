@@ -5,7 +5,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -32,24 +35,34 @@ public class ScheduleMainTest {
   /**
    * This method sets us the field for testing.
    */
-  @Before
-  public final void startUp() {
-    my_scheduler = new ScheduleMain();
+  public final void startUp(String test_file) {
+    my_scheduler = new ScheduleMain(test_file);
   }
-
+  
+  @Test
+  public void loadCourseTimesTest() {
+    startUp("singleAdvisorTestFile.txt");
+    Map<Integer, Time> times =  
+                my_scheduler.loadCourseTimes("CourseTimes.txt");
+    
+    Time time1 = times.get(800);
+    
+  }
+  
   /**
    * This methods test the loadUsers method for loading an Advisor object
    * from a file.
    */
   @Test
   public void loadUserFileAdvisorTest() {
+    startUp("singleAdvisorTestFile.txt");
     final Advisor test_advisor = new Advisor("jsnuffy", 
                                              "123456789", 
                                              "Joe Snuffy", 
                                              new HashSet<Course>());
-    my_scheduler.loadUsers("SingleAdvisorTest.txt");
+
     assertEquals("Users should be the same", test_advisor, 
-                                my_scheduler.getUser("jsnuffy"));
+                                my_scheduler.getUser("jsnuffy").getAdvisor());
   }
 
   /**
@@ -58,14 +71,15 @@ public class ScheduleMainTest {
    */
   @Test
   public void loadUserFileStudentTest() {
+    startUp("singleStudentTestFile.txt");
     final Student test_student = new Student("obrother", 
                                              "234567891", 
                                              "Ou Brother", 
                                              new HashSet<Course>(), 
                                              new ArrayList<Time>());
-    my_scheduler.loadUsers("SingleStudentTest.txt");
+
     assertEquals("Users should be the same", test_student,
-                         my_scheduler.getUser("obrother"));
+                         my_scheduler.getUser("obrother").getStudent());
   }
 
   /**
@@ -74,13 +88,14 @@ public class ScheduleMainTest {
    */
   @Test
   public void loadUserFileTeacherTest() {
+    startUp("singleTeacherTestFile.txt");
     final Teacher test_teacher = new Teacher("hseaward", 
                                              "345678912", 
                                              "Harold Seaward", 
                                              new HashSet<Course>(),
                                              new HashSet<Course>(),
                                              new int[][]{});
-    my_scheduler.loadUsers("SingleTeacherTest.txt");
+
     assertEquals("Users should be the same", test_teacher, 
                          my_scheduler.getUser("hseaward"));
   }
@@ -91,20 +106,21 @@ public class ScheduleMainTest {
    */
   @Test
   public void loadSingleMultiRoleUserTest() {
+    startUp("singleMultiRoledUserTestFile.txt");
     final Student multi_role_test_student = new Student("darmstrong",
                                               "456789123",
                                               "Richard Armstrong",
                                               new HashSet<Course>(),
-                                              new ArrayList<Time>());
+                                              new LinkedList<Time>());
     final Advisor multi_role_test_advisor = new Advisor("darmstrong",
                                              "456789123",
                                              "Richard Armstrong",
                                              new HashSet<Course>());
-    my_scheduler.loadUsers("SingleMultiUserTest.txt");
+    
     final UserRoleList test_user_list = my_scheduler.getUser("darmstrong");
 
-    assertTrue(test_user_list.contains(multi_role_test_student) &&
-                      test_user_list.contains(multi_role_test_advisor));
+    assertTrue(test_user_list.getStudent().equals(multi_role_test_student) &&
+                  test_user_list.getAdvisor().equals(multi_role_test_advisor));
     
   }
   
@@ -114,6 +130,7 @@ public class ScheduleMainTest {
    */
   @Test
   public void loadMultipleUsersTest() {
+    startUp("multipleUsersTestFile.txt");
     final Student test_student = new Student("obrother", 
                                              "234567891", 
                                              "Ou Brother", 
@@ -138,7 +155,7 @@ public class ScheduleMainTest {
                                                        "456789123",
                                                        "Richard Armstrong",
                                                        new HashSet<Course>());
-    my_scheduler.loadUsers("MultipleUserTest.txt");
+
     final UserRoleList test_user_list = my_scheduler.getUser("darmstrong");
     
     assertTrue(test_user_list.contains(multi_role_test_student) &&
@@ -150,6 +167,7 @@ public class ScheduleMainTest {
   
   @Test
   public void loadCourseCatalogTest() {
+    startUp("singleAdvisorTestFile.txt");
     my_scheduler.loadCourseData("CourseList.txt");
   }
 }

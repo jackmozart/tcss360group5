@@ -1,2 +1,11 @@
-(S, T, A) UserName UserPassword FirstName LastName PreferredCourseName ... PreferredCourseName / 4 Time .null... Time / UnpreferredCourseName ... UnpreferredCourseName / 5 0 0 0 0 0 / 5 0 0 0 0 0 / 5 0 0 0 0 0 / 5 0 0 0 0 0 /*
-                                                                                                 ^num of times    
+(S, T, A) UserName UserPassword FirstName LastName PreferredCourseName ... PreferredCourseName / 4 Time ... Time     
+     ^user role                                                                                  ^num of times--list.size                                                   ^num of days   
+     	A for Advisor     
+     
+(S, T, A) UserName UserPassword FirstName LastName PreferredCourseName... PreferredCourseName / 4 Time ... Time     
+     ^user role                                                                                 ^num of times--list.size                                                   ^num of days   
+     	S for Student                                                                               ^Time = start time.                                                     ^ num of different timeblocks         
+     	
+(S, T, A) UserName UserPassword FirstName LastName PreferredCourseName ... PreferredCourseName / UnpreferredCourseName ... UnpreferredCourseName / 4 5 0 0 0 0 0 / 5 0 0 0 0 0 / 5 0 0 0 0 0 / 5 0 0 0 0 0 /* 
+     ^user role                                                                                                                                    ^num of days   
+     	T for Teacher                                                                                                                                ^ num of different timeblocks                                                                                     
