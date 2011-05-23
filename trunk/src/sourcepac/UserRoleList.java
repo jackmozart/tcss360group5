@@ -2,6 +2,7 @@
 package sourcepac;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import users.Advisor;
@@ -12,8 +13,9 @@ import users.Voter;
 /**
  * This Class manages user roles for a specific user.
  * 
- * @author
- * @version 5/13/2011
+ * @author Phillip Bernard
+ * @version 2.1 5/22/2011
+ * @version 1.0 5/13/2011
  */
 public class UserRoleList {
   private Advisor my_advisor;
@@ -48,6 +50,16 @@ public class UserRoleList {
   
   public Student getStudent() {
     return my_student;
+  }
+  
+  public List<Voter> getRoles() {
+    final List<Voter> roles = new LinkedList<Voter>();
+    roles.add(my_student);
+    roles.add(my_advisor);
+    roles.add(my_teacher);
+    
+    return roles;
+    
   }
   
   public boolean contains(Voter the_role) {
