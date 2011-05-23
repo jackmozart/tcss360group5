@@ -157,7 +157,7 @@ public class Schedule {
                                      "course section",
                                      finished_course_list.get(i).getCourseDescription(),
                                      finished_course_list.get(i).getCredit(),
-                                     8, 10, a_teacher_list.get(k).getName(), 1));
+                                     8, 10, a_teacher_list.get(k).getName(), new boolean[7]));
             number_of_teacher_courses[k]++;
             has_added = true;
           } else if(k == a_teacher_list.size()) {
@@ -165,7 +165,7 @@ public class Schedule {
                                      "course section",
                                      finished_course_list.get(i).getCourseDescription(),
                                      finished_course_list.get(i).getCredit(),
-                                     8, 10, a_teacher_list.get(rand_int).getName(), 1));
+                                     8, 10, a_teacher_list.get(rand_int).getName(), new boolean[7]));
             has_added = true;
           }
           k++;
@@ -175,7 +175,7 @@ public class Schedule {
                                  "course section",
                                  finished_course_list.get(i).getCourseDescription(),
                                  finished_course_list.get(i).getCredit(),
-                                 8, 10, a_teacher_list.get(rand_int).getName(), 1));
+                                 8, 10, a_teacher_list.get(rand_int).getName(), new boolean[7]));
         number_of_teacher_courses[rand_int]++;
       }
     }

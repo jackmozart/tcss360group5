@@ -54,14 +54,14 @@ public class NumberOneConstraintTest {
   public void setUp() {
     my_schedule_list_one = new ArrayList<CourseCopy>();
     my_schedule_list_one.add(new CourseCopy("TCSS 343", "A", "A TCSS class", 5,
-                         START_TIME_ONE, END_TIME_ONE, TEACHER_NAME_ONE, 1));
+                         START_TIME_ONE, END_TIME_ONE, TEACHER_NAME_ONE, new boolean[7]));
     my_schedule_list_one.add(new CourseCopy("TCSS 360", "B", "A TCSS class", 5,
-                         START_TIME_ONE, END_TIME_ONE, TEACHER_NAME_ONE, 1));
+                         START_TIME_ONE, END_TIME_ONE, TEACHER_NAME_ONE, new boolean[7]));
     my_schedule_list_two = new ArrayList<CourseCopy>();
     my_schedule_list_two.add(new CourseCopy("TCSS 343", "A", "A TCSS class", 5,
-                         START_TIME_ONE, END_TIME_ONE, TEACHER_NAME_ONE, 1));
+                         START_TIME_ONE, END_TIME_ONE, TEACHER_NAME_ONE, new boolean[7]));
     my_schedule_list_two.add(new CourseCopy("TCSS 360", "B",  "A TCSS class", 5,
-                         10, 12, TEACHER_NAME_ONE, 1));
+                         10, 12, TEACHER_NAME_ONE, new boolean[7]));
   }
 
   /**
@@ -76,8 +76,8 @@ public class NumberOneConstraintTest {
            (my_schedule_list_one.get(j).getTeacher())) {
           if (my_schedule_list_one.get(i).getStartTime() ==
               my_schedule_list_one.get(j).getStartTime() &&
-              my_schedule_list_two.get(i).getDay() ==
-                    my_schedule_list_two.get(j).getDay()) {
+              my_schedule_list_two.get(i).getDays() ==
+                    my_schedule_list_two.get(j).getDays()) {
             fail("The teacher (teacher name here) is teaching" +
                 " two classes at the same time on the same day.");
           }
@@ -98,8 +98,8 @@ public class NumberOneConstraintTest {
         	.equals(my_schedule_list_two.get(j).getTeacher())) {
           if (my_schedule_list_two.get(i).getStartTime() ==
         	  my_schedule_list_two.get(j).getStartTime() &&
-        	  my_schedule_list_two.get(i).getDay() ==
-              my_schedule_list_two.get(j).getDay()) {
+        	  my_schedule_list_two.get(i).getDays() ==
+              my_schedule_list_two.get(j).getDays()) {
             fail("The teacher " + my_schedule_list_two.get(i).getTeacher() +
             		" is teaching two classes at the same time on the same day.");
           }
