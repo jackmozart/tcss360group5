@@ -2,6 +2,7 @@
 package sourcepac;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -27,12 +28,12 @@ public class Schedule {
    * Adds the course to the list of possible courses if the students preferred it
    * more than this many amounts of time.
    */
-  public static final int ADD_COURSE = 5;
+  public static final int ADD_COURSE = 10;
   
   /**
    * Determines whether there be two of the same courses added to the list
    */
-  public static final int ADD_SECOND_COURSE = 50;
+  public static final int ADD_SECOND_COURSE = 20;
   
   /** The Schedule's title, i.e.: "Autumn 2010" */
   private String my_title;
@@ -105,11 +106,13 @@ public class Schedule {
      */
     for(int i = 0; i < finished_course_list.size(); i++) {
       for(int j = 0; j < an_advisor_list.size(); j++)  {
-//        for(int k = 0; j < an_advisor_list.get(j).getPreferedCourses().size(); k++)  {
-//          if (an_advisor_list.get(i).getPreferedCourses().contains(finished_course_list.get(i)))  {
-//              finished_course_list.add(an_advisor_list.get(j).getPreferedCourses().get(k));
-//          }
-//        }
+        Iterator<Course> advisor_iter = an_advisor_list.get(j).getPreferedCourses().iterator();
+        while (advisor_iter.hasNext())  {
+          Course current = advisor_iter.next();
+          if(current != finished_course_list.get(i))  {
+            finished_course_list.add(current);
+          }
+        }
       }
     }
     /*
