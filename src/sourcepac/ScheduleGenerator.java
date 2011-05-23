@@ -22,11 +22,17 @@ public class ScheduleGenerator {
     my_schedule = new Schedule();
   }
   
+  /**
+   * Imports a schedule from a .csv file in the specified
+   * format for constraints checking.
+   * @param fileName The name of the file for importing.
+   */
   public void importSchedule(String fileName) {
     final File inputSchedule = new File(fileName);
     Scanner in = null;
     String current = "";
     String[] line = new String[8];
+    boolean[] days = new boolean[7];
     CourseCopy course;
     try {
       in = new Scanner(inputSchedule);
@@ -46,13 +52,49 @@ public class ScheduleGenerator {
     while (in.hasNext()) {
       current = in.nextLine();
       line = current.split(",");
+      days = parseDays(line[4]);
       course = new CourseCopy(line[0], line[1], line[2], 
                               Integer.parseInt(line[7]),
                               Integer.parseInt(line[5]),
-                              Integer.parseInt(line[6]), line[3], 1);
-      //Fix the above line when we decide on how to represent days
+                              Integer.parseInt(line[6]), line[3], days);
       my_schedule.addCourse(course);
     }
+  }
+
+  /**
+   * This method takes weekdays in the MTWRFSN format and
+   * stores them in a format useful to constraints checking.
+   * @param days The String representing the days taught.
+   * @return A boolean[] with appropriate values for the
+   *         days taught.
+   */
+  private boolean[] parseDays(String days) {
+    boolean[] week = new boolean[7];
+    for(int i = 0; i < days.length(); i++) {
+      switch(days.charAt(i)) {
+        case 'N':
+          week[0] = true;
+          break;
+        case 'M':
+          week[1] = true;
+          break;
+        case 'T':
+          week[2] = true;
+          break;
+        case 'W':
+          week[3] = true;
+          break;
+        case 'R':
+          week[4] = true;
+          break;
+        case 'F':
+          week[5] = true;
+          break;
+        case 'S':
+          week[6] = true;
+      }
+    }
+    return week;
   }
 
   /**

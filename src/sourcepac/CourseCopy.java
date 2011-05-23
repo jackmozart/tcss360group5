@@ -36,7 +36,7 @@ public class CourseCopy extends Course {
   /**
    * Day of the course.
    */
-  private int my_day;
+  private boolean[] my_days;
   
   /**
    * This constructor creates a course object from the given parameters.
@@ -51,7 +51,7 @@ public class CourseCopy extends Course {
     my_section = "A";
     my_start_time = 0;
     my_end_time = 0;
-    my_day = 0;
+    my_days = new boolean[7];
   }
 
   /**
@@ -70,7 +70,7 @@ public class CourseCopy extends Course {
     my_section = "A";
     my_start_time = the_start;
     my_end_time = the_end;
-    my_day = 0;
+    my_days = new boolean[7];
   }
 
   /**
@@ -87,13 +87,13 @@ public class CourseCopy extends Course {
    */
   public CourseCopy(String the_course_title, String the_course_section, 
                     String the_course_description, int the_credit,
-                    int the_start, int the_end, String the_teacher, int the_day) {
+                    int the_start, int the_end, String the_teacher, boolean[] the_days) {
     super(the_course_title, the_course_description, the_credit);
     my_section = the_course_section;
     my_teacher = the_teacher;
     my_start_time = the_start;
     my_end_time = the_end;
-    my_day = the_day;
+    my_days = the_days;
   }
 
 
@@ -121,8 +121,8 @@ public class CourseCopy extends Course {
   /**
    * @return The day course will be taught.
    */
-  public int getDay() {
-    return my_day;
+  public boolean[] getDays() {
+    return my_days;
   }
 
 

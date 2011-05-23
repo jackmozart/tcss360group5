@@ -127,9 +127,7 @@ public class ScheduleMain {
                                            course_description,
                                                       credit));
     }
-    
     return courses;
-
   }
 
   /**
@@ -161,9 +159,10 @@ public class ScheduleMain {
   }
 
   /**
+   * This method loads users and their preferences from a file
    * 
-   * @param the_file_name
-   * @return
+   * @param the_file_name to load the users from
+   * @return a Map of users
    */
   public Map<String, UserRoleList> loadUsers(String the_file_name) {
     final  Map<String, UserRoleList> users = new HashMap<String, UserRoleList>();
