@@ -4,6 +4,10 @@ package sourcepac;
 import java.util.ArrayList;
 import java.util.List;
 
+import users.Advisor;
+import users.Student;
+import users.Teacher;
+
 
 /**
  * Stores courses together in a schedule for easier constraint
@@ -16,6 +20,12 @@ import java.util.List;
 public class Schedule {
 
   private List<CourseCopy> my_courses;
+  
+  /**
+   * Adds the course to the list of possible courses if the students preferred it
+   * more than this many amounts of time.
+   */
+  public static final int ADD_COURSE = 5;
   
   /** The Schedule's title, i.e.: "Autumn 2010" */
   private String my_title;
@@ -36,7 +46,48 @@ public class Schedule {
     my_title = quarter;
   }
   
-  public List<CourseCopy> generateSchedule(final List<CourseCopy> a_course_copy)  {
+  public List<CourseCopy> generateSchedule(List<Course> a_course_list,
+                                           List<Student> a_student_list,
+                                           List<Teacher> a_teacher_list,
+                                           List<Advisor> an_advisor_list)  {
+    List<Course> finished_course_list = new ArrayList<Course>();
+    int[] student_preference_adder = new int[a_course_list.size()];
+    /*
+     * Counts the number of votes per class offered for students
+     */
+    for(int i = 0; i < a_student_list.size(); i++)  {
+      for(int j = 0; j < a_course_list.size(); j++)  {
+//        for(int k = 0; k < a_student_list.get(i).getPreferedCourses().size(); k++)  {
+          if (a_student_list.get(i).getPreferedCourses().contains(a_course_list.get(j)))  {
+            student_preference_adder[j]++;
+//          }
+        }  
+      }
+    }
+    /*
+     * Add course to finished course list if the students voted for the class more
+     * than the specified amount to add a course.
+     */
+    for(int i = 0; i < a_course_list.size(); i++)  {
+      if(student_preference_adder[i] > ADD_COURSE)  {
+        finished_course_list.add(a_course_list.get(i));
+      }
+    }
+    
+    /*
+     * Adds an advisor preference to the list of finished_course_list
+     * if it is not already there.
+     */
+    for(int i = 0; i < finished_course_list.size(); i++) {
+      for(int j = 0; j < an_advisor_list.size(); j++)  {
+//        for(int k = 0; j < an_advisor_list.get(j).getPreferedCourses().size(); k++)  {
+//          if (an_advisor_list.get(i).getPreferedCourses().contains(finished_course_list.get(i)))  {
+//              finished_course_list.add(an_advisor_list.get(j).getPreferedCourses().get(k));
+//          }
+//        }
+      }
+    }
+    
     
     return getCourses();
   }
