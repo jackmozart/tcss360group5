@@ -16,7 +16,7 @@ import sourcepac.CourseCopy;
  * Tests the constraints to validate whether the teacher is teaching at the same
  * time on the same day.
  * 
- * @author Christian
+ * @author Christian, Chris (minor edits to setUp)
  * @version 1.0
  */
 
@@ -53,14 +53,14 @@ public class NumberOneConstraintTest {
   @Before
   public void setUp() {
     my_schedule_list_one = new ArrayList<CourseCopy>();
-    my_schedule_list_one.add(new CourseCopy("TCSS 343", "A TCSS class", 5,
+    my_schedule_list_one.add(new CourseCopy("TCSS 343", "A", "A TCSS class", 5,
                          START_TIME_ONE, END_TIME_ONE, TEACHER_NAME_ONE, 1));
-    my_schedule_list_one.add(new CourseCopy("TCSS 360", "A TCSS class", 5,
+    my_schedule_list_one.add(new CourseCopy("TCSS 360", "B", "A TCSS class", 5,
                          START_TIME_ONE, END_TIME_ONE, TEACHER_NAME_ONE, 1));
     my_schedule_list_two = new ArrayList<CourseCopy>();
-    my_schedule_list_two.add(new CourseCopy("TCSS 343", "A TCSS class", 5,
+    my_schedule_list_two.add(new CourseCopy("TCSS 343", "A", "A TCSS class", 5,
                          START_TIME_ONE, END_TIME_ONE, TEACHER_NAME_ONE, 1));
-    my_schedule_list_two.add(new CourseCopy("TCSS 360", "A TCSS class", 5,
+    my_schedule_list_two.add(new CourseCopy("TCSS 360", "B",  "A TCSS class", 5,
                          10, 12, TEACHER_NAME_ONE, 1));
   }
 
