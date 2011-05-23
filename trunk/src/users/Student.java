@@ -19,6 +19,7 @@ public class Student extends Voter {
    */
   private List<Time> my_times;
 
+  private Set<Course> my_course;
   /**
    * This constructor creates a Student object with the given parameters.
    * 
@@ -31,7 +32,7 @@ public class Student extends Voter {
   public Student(String the_username, String the_password, String the_name,
                  Set<Course> the_courses, List<Time> the_times) {
     super(the_username, the_password, the_name, the_courses);
-
+    my_course = the_courses;
     my_times = the_times;
 
   }
