@@ -13,6 +13,7 @@ import users.Teacher;
 /**
  * Stores courses together in a schedule for easier constraint
  * checking and output and creates schedule.
+ * 
  * @author Chris Davidson
  * @author Christian Tomyn
  * @version 5/22/2011
@@ -58,6 +59,7 @@ public class Schedule {
    * 
    * Generates a schedule based on the input param and outputs the schedule.
    * 
+   * @author Christian Tomyn
    * @param a_course_list
    * @param a_student_list
    * @param a_teacher_list
