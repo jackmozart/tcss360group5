@@ -3,6 +3,7 @@ package sourcepac;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import users.Advisor;
 import users.Student;
@@ -11,7 +12,7 @@ import users.Teacher;
 
 /**
  * Stores courses together in a schedule for easier constraint
- * checking and output
+ * checking and output and creates schedule.
  * @author Chris Davidson
  * @author Christian Tomyn
  * @version 5/22/2011
@@ -26,6 +27,11 @@ public class Schedule {
    * more than this many amounts of time.
    */
   public static final int ADD_COURSE = 5;
+  
+  /**
+   * Determines whether there be two of the same courses added to the list
+   */
+  public static final int ADD_SECOND_COURSE = 50;
   
   /** The Schedule's title, i.e.: "Autumn 2010" */
   private String my_title;
@@ -46,12 +52,25 @@ public class Schedule {
     my_title = quarter;
   }
   
+  /**
+   //Check random and array initialization to determine if
+   //array out of bounds error will occur.
+   * 
+   * Generates a schedule based on the input param and outputs the schedule.
+   * 
+   * @param a_course_list
+   * @param a_student_list
+   * @param a_teacher_list
+   * @param an_advisor_list
+   * @return
+   */
   public List<CourseCopy> generateSchedule(List<Course> a_course_list,
                                            List<Student> a_student_list,
                                            List<Teacher> a_teacher_list,
                                            List<Advisor> an_advisor_list)  {
     List<Course> finished_course_list = new ArrayList<Course>();
     int[] student_preference_adder = new int[a_course_list.size()];
+    int[] number_of_teacher_courses;
     /*
      * Counts the number of votes per class offered for students
      */
@@ -64,13 +83,17 @@ public class Schedule {
         }  
       }
     }
+    
     /*
      * Add course to finished course list if the students voted for the class more
      * than the specified amount to add a course.
      */
     for(int i = 0; i < a_course_list.size(); i++)  {
-      if(student_preference_adder[i] > ADD_COURSE)  {
+      if(student_preference_adder[i] >= ADD_COURSE)  {
         finished_course_list.add(a_course_list.get(i));
+        if(student_preference_adder[i] >= ADD_SECOND_COURSE)  {
+          finished_course_list.add(a_course_list.get(i));
+        }
       }
     }
     
@@ -87,7 +110,38 @@ public class Schedule {
 //        }
       }
     }
-    
+    /*
+     * Assigns a teacher at random to a course and time to teach the course unless
+     * the course is unpreferred.
+     */
+    number_of_teacher_courses = new int[a_teacher_list.size()];
+    for(int i = 0; i < finished_course_list.size(); i++)  {
+      Random rand = new Random(a_teacher_list.size());
+      int rand_int = rand.nextInt();
+      
+      /*
+       * Checks if a teacher has been assigned to teach three courses already.
+       */
+      for(int j = 0; j < number_of_teacher_courses.length; j++)  {
+        if(number_of_teacher_courses[j] > 3 && a_teacher_list.get(j) != null)  {
+          a_teacher_list.set(j, null);
+        }
+      }
+      
+      //Need to finish time assignment for this course copy adding.
+      //not sure how we will represent the time slots or days.
+      if(a_teacher_list.get(rand_int).getUnpreferedCourses()
+         .contains(finished_course_list.get(i)) || a_teacher_list.get(rand_int) == null)  {
+        i--;
+      } else {
+        addCourse(new CourseCopy(finished_course_list.get(i).getCourseTitle(),
+                                 "course section",
+                                 finished_course_list.get(i).getCourseDescription(),
+                                 finished_course_list.get(i).getCredit(),
+                                 8, 10, a_teacher_list.get(i).getName(), 1));
+        number_of_teacher_courses[rand_int]++;
+      }
+    }
     
     return getCourses();
   }
