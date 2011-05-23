@@ -9,6 +9,7 @@ import java.util.List;
  * Stores courses together in a schedule for easier constraint
  * checking and output
  * @author Chris Davidson
+ * @author Christian Tomyn
  * @version 5/22/2011
  *
  */
@@ -33,6 +34,11 @@ public class Schedule {
   public Schedule(String quarter) {
     my_courses = new ArrayList<CourseCopy>();
     my_title = quarter;
+  }
+  
+  public List<CourseCopy> generateSchedule(final List<CourseCopy> a_course_copy)  {
+    
+    return getCourses();
   }
   
   /**
