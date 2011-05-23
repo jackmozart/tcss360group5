@@ -61,6 +61,7 @@ public class Teacher extends Voter {
   /**
    * This method gets the courses that are unpreferred for this teacher.
    * 
+   * @author Christian Tomyn
    * @return the unpreferred courses
    */
   public Set<Course> getUnpreferedCourses() {
