@@ -3,7 +3,7 @@ package sourcepac;
 
 /**
  * Course copy stores a inputed course assigned to a teacher and time.  
- * @author Steven Cozart 
+ * @author Steven Cozart, Chris Davidson (constructor changes)
  * @version 1.0 5/16/11
  */
 public class CourseCopy extends Course {
@@ -17,6 +17,11 @@ public class CourseCopy extends Course {
    * Teacher of course.
    */
   private String my_teacher;
+  
+  /**
+   * The section letter
+   */
+  private String my_section;
   
   /**
    * Time of the start course.
@@ -43,6 +48,7 @@ public class CourseCopy extends Course {
   public CourseCopy(String the_course_title, String the_course_description, int the_credit) {
     super(the_course_title, the_course_description, the_credit);
     my_teacher = NO_TEACHER_ASSIGNED_MESSAGE;
+    my_section = "A";
     my_start_time = 0;
     my_end_time = 0;
     my_day = 0;
@@ -61,6 +67,7 @@ public class CourseCopy extends Course {
                     int the_start, int the_end) {
     super(the_course_title, the_course_description, the_credit);
     my_teacher = NO_TEACHER_ASSIGNED_MESSAGE;
+    my_section = "A";
     my_start_time = the_start;
     my_end_time = the_end;
     my_day = 0;
@@ -70,6 +77,7 @@ public class CourseCopy extends Course {
    * This constructor creates a course object from the given parameters.
    * 
    * @param the_course_title The Department and Code for the course
+   * @param the_course_section The section for this course copy
    * @param the_course_description The full name of the course
    * @param the_credit The credit worth of the course
    * @param the_start The start time of the course
@@ -77,9 +85,11 @@ public class CourseCopy extends Course {
    * @param the_teacher The name of the teacher. 
    * @param the_day The day of the class. 
    */
-  public CourseCopy(String the_course_title, String the_course_description, int the_credit,
+  public CourseCopy(String the_course_title, String the_course_section, 
+                    String the_course_description, int the_credit,
                     int the_start, int the_end, String the_teacher, int the_day) {
     super(the_course_title, the_course_description, the_credit);
+    my_section = the_course_section;
     my_teacher = the_teacher;
     my_start_time = the_start;
     my_end_time = the_end;
