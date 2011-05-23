@@ -57,5 +57,13 @@ public class Teacher extends Voter {
     my_max_credit_load = DEFAULT_MAX_CREDIT_LOAD;
 
   }
-
+  
+  /**
+   * This method gets the courses that are unpreferred for this teacher.
+   * 
+   * @return the unpreferred courses
+   */
+  public Set<Course> getUnpreferedCourses() {
+    return my_unpreferred_courses;
+  }
 }
