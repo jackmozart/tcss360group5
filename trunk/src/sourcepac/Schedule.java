@@ -133,9 +133,17 @@ public class Schedule {
         }
       }
       
+      /*
+       * Adds the course to my_courses. If it's not prefered by any
+       * teacher a random teacher will be chosen. If the number of classes
+       * outweighs the teachers then nothing will be added.
+       */
       //Need to finish time assignment for this course copy adding.
       //not sure how we will represent the time slots or days.
-      if(a_teacher_list.get(rand_int) == null)  {
+      if(a_teacher_list.size() > finished_course_list.size()/3)  {
+        System.out.print("Did not create schedule. Not enough teachers.\n" +
+        		"Must have at least one-third the amount of teachers than classes");
+      } else if(a_teacher_list.get(rand_int) == null)  {
         i--;
       } else if(a_teacher_list.get(rand_int).getUnpreferedCourses()
           .contains(finished_course_list.get(i))) {
@@ -152,8 +160,7 @@ public class Schedule {
                                      8, 10, a_teacher_list.get(k).getName(), 1));
             number_of_teacher_courses[k]++;
             has_added = true;
-          }
-          if(k == a_teacher_list.size()) {
+          } else if(k == a_teacher_list.size()) {
             addCourse(new CourseCopy(finished_course_list.get(i).getCourseTitle(),
                                      "course section",
                                      finished_course_list.get(i).getCourseDescription(),
