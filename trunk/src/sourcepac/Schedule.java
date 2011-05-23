@@ -65,7 +65,7 @@ public class Schedule {
    * @param a_student_list
    * @param a_teacher_list
    * @param an_advisor_list
-   * @return
+   * @return The generated schedule
    */
   public List<CourseCopy> generateSchedule(List<Course> a_course_list,
                                            List<Student> a_student_list,
@@ -116,8 +116,8 @@ public class Schedule {
       }
     }
     /*
-     * Assigns a teacher at random to a course and time to teach the course unless
-     * the course is unpreferred.
+     * Assigns the teachers at random to a course and time to teach the course unless
+     * the course is unpreferred or until the teacher has been assigned to three classes.
      */
     number_of_teacher_courses = new int[a_teacher_list.size()];
     for(int i = 0; i < finished_course_list.size(); i++)  {
@@ -135,19 +135,43 @@ public class Schedule {
       
       //Need to finish time assignment for this course copy adding.
       //not sure how we will represent the time slots or days.
-      if(a_teacher_list.get(rand_int).getUnpreferedCourses()
-         .contains(finished_course_list.get(i)) || a_teacher_list.get(rand_int) == null)  {
+      if(a_teacher_list.get(rand_int) == null)  {
         i--;
+      } else if(a_teacher_list.get(rand_int).getUnpreferedCourses()
+          .contains(finished_course_list.get(i))) {
+        int k = 0;
+        boolean has_added = false;
+        while(k <= a_teacher_list.size() && !has_added)  {
+          if(!a_teacher_list.get(k).getUnpreferedCourses()
+          .contains(finished_course_list.get(i)) &&
+            a_teacher_list.get(rand_int) != null)  {
+            addCourse(new CourseCopy(finished_course_list.get(i).getCourseTitle(),
+                                     "course section",
+                                     finished_course_list.get(i).getCourseDescription(),
+                                     finished_course_list.get(i).getCredit(),
+                                     8, 10, a_teacher_list.get(k).getName(), 1));
+            number_of_teacher_courses[k]++;
+            has_added = true;
+          }
+          if(k == a_teacher_list.size()) {
+            addCourse(new CourseCopy(finished_course_list.get(i).getCourseTitle(),
+                                     "course section",
+                                     finished_course_list.get(i).getCourseDescription(),
+                                     finished_course_list.get(i).getCredit(),
+                                     8, 10, a_teacher_list.get(rand_int).getName(), 1));
+            has_added = true;
+          }
+          k++;
+        }
       } else {
         addCourse(new CourseCopy(finished_course_list.get(i).getCourseTitle(),
                                  "course section",
                                  finished_course_list.get(i).getCourseDescription(),
                                  finished_course_list.get(i).getCredit(),
-                                 8, 10, a_teacher_list.get(i).getName(), 1));
+                                 8, 10, a_teacher_list.get(rand_int).getName(), 1));
         number_of_teacher_courses[rand_int]++;
       }
     }
-    
     return getCourses();
   }
   
