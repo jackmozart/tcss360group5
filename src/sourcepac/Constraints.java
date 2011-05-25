@@ -12,7 +12,7 @@ import users.Teacher;
  */
 public class Constraints {
 
-  private List<StudentPrefrence> my_students;
+  private List<StudentPreference> my_students;
   
   private List<CourseCopy> my_courses;
   
@@ -27,7 +27,7 @@ public class Constraints {
    * @param the_advisors
    * @param the_teachers
    */
-  public Constraints(List<CourseCopy> the_list, List<StudentPrefrence> the_students,
+  public Constraints(List<CourseCopy> the_list, List<StudentPreference> the_students,
                      List<AdvisorPrefrence> the_advisors, List<Teacher> the_teachers) {
     my_courses = the_list;
     my_students = the_students;
@@ -89,7 +89,7 @@ public class Constraints {
    */
   public String checkCreditLoad() {
     final StringBuilder error_message = new StringBuilder();
-    Teacher teacher;
+    Teacher teacher = null;
     for (CourseCopy course : my_courses) {
       String teacherName = course.getTeacher();
       int i = 0;
@@ -110,7 +110,7 @@ public class Constraints {
       }
       while (matchFound);
       
-      teacher.setCredits(  course.getCredit() + teacher.getCurrCredits());
+      teacher.setCurrCredits(  course.getCredit() + teacher.getCurrCredits());
       
     }
     

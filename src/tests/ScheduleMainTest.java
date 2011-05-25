@@ -96,7 +96,7 @@ public class ScheduleMainTest {
                                              "345678912", 
                                              "Harold Seaward", 
                                              new HashSet<Course>(), 25,
-                                             new HashSet<Course>(),
+                                             0, new HashSet<Course>(),
                                              new int[][]{});
 
     assertEquals("Users should be the same", test_teacher, 
@@ -143,7 +143,7 @@ public class ScheduleMainTest {
                                              "345678912", 
                                              "Harold Seaward", 
                                              new HashSet<Course>(), 25,
-                                             new HashSet<Course>(), 
+                                             0, new HashSet<Course>(), 
                                              new int[][]{});
     final Advisor test_advisor = new Advisor("jsnuffy", 
                                              "123456789", 
@@ -167,6 +167,7 @@ public class ScheduleMainTest {
                test_teacher.equals(my_scheduler.getUser("hseaward")) &&
                test_advisor.equals(my_scheduler.getUser("jsnuffy")));
   }
+  
   
   @Test
   public void loadCourseCatalogTest() {

@@ -3,6 +3,7 @@ package sourcepac;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -56,6 +57,8 @@ public class ScheduleMain {
    * List of all users.  
    */
   private Map<String, UserRoleList> my_users;  
+ 
+  private List<Teacher> my_teachers;
   /**
    * Division between day and evening classes.
    */
@@ -67,12 +70,15 @@ public class ScheduleMain {
   public ScheduleMain() {
     my_course_catalog = loadCourseData("CourseList.txt");
     my_course_times = loadCourseTimes("CourseTimes.txt");
+    my_teachers = new ArrayList<Teacher>();
     my_users = loadUsers("Userlist.txt");
+    
   }
   
   public ScheduleMain(String the_user_list) {
     my_course_catalog = loadCourseData("CourseList.txt");
     my_course_times = loadCourseTimes("CourseTimes.txt");
+    my_teachers = new ArrayList<Teacher>();
     my_users = loadUsers(the_user_list);
   }
 
@@ -159,7 +165,7 @@ public class ScheduleMain {
   }
 
   /**
-   * This method loads users and their preferences from a file
+   * This method loads users and their preferences from a file.
    * 
    * @param the_file_name to load the users from
    * @return a Map of users
@@ -182,7 +188,8 @@ public class ScheduleMain {
       String user_pass;
       String first_name;
       String last_name;
-      int credit_load;
+      int max_credit_load;
+      int current_credit_load;
       Set<Course> preferred_courses = new HashSet<Course>();
       Set<Course> unpreferred_courses;
       List<Time> times;
@@ -216,14 +223,17 @@ public class ScheduleMain {
             
             break;
           case 'T':
-            credit_load = line_scanner.nextInt();
+            max_credit_load = line_scanner.nextInt();
+            current_credit_load = line_scanner.nextInt();
             unpreferred_courses = readCourses(line_scanner);
             availability = readAvailability(line_scanner);
-            roles.setTeacher(new Teacher(user_name, user_pass, 
+            Teacher t = new Teacher(user_name, user_pass, 
                                     first_name + " " + last_name,
-                                    preferred_courses, credit_load,
-                                    unpreferred_courses, 
-                                    availability));
+                                    preferred_courses, max_credit_load,
+                                    current_credit_load,unpreferred_courses, 
+                                    availability);
+            roles.setTeacher(t);
+            my_teachers.add(t);
             break;
           default:
             throw new IllegalArgumentException("Invalid Character");
@@ -234,11 +244,11 @@ public class ScheduleMain {
     return users;
   }
 
-  public List<Time> readTimes(Scanner scanner) {
+  public List<Time> readTimes(Scanner the_scanner) {
     final List<Time> times = new LinkedList<Time>();
    
-    for (int i = scanner.nextInt(); i > 0; i--) {
-      times.add(my_course_times.get(scanner.nextInt()));
+    for (int i = the_scanner.nextInt(); i > 0; i--) {
+      times.add(my_course_times.get(the_scanner.nextInt()));
     }
     return times;
   }
@@ -282,5 +292,12 @@ public class ScheduleMain {
   
   public UserRoleList getUser(String the_username) {
     return my_users.get(the_username); 
+  }
+  
+  public List<Teacher> getTeachers() {
+    List teachers = new ArrayList<Teacher>();
+    
+    
+    return teachers;
   }
 }
