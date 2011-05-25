@@ -11,6 +11,7 @@ import users.Student;
 import users.Teacher;
 
 
+
 /**
  * Stores courses together in a schedule for easier constraint
  * checking and output and creates schedule.
