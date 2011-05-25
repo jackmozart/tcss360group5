@@ -8,18 +8,18 @@ package sourcepac;
  * @author Christian Tomyn
  *
  */
-public class StudentPrefrence {
+public class StudentPreference {
   
-  private String my_prefrence;
+  private String my_preference;
   
   private String my_student_name;
   
-  public StudentPrefrence(String a_name, String a_prefrence)  {
+  public StudentPreference(String a_name, String a_preference)  {
     my_student_name = a_name;
-    my_prefrence = a_prefrence;
+    my_preference = a_preference;
   }
   
   public String getPrefrences() {
-    return my_prefrence;  
+    return my_preference;  
   }
 }
