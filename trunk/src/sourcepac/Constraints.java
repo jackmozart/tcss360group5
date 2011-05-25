@@ -85,7 +85,7 @@ public class Constraints {
    * 
    * @return Error message in form (teacher) exceeds credit load by (amount) credits.
    */
-  public String checkCreditLoad() {
+//  public String checkCreditLoad() {
 //    final StringBuilder error_message = new StringBuilder();
 //    for (CourseCopy course : my_courses) {
 //      String teacher = course.getTeacher();
@@ -107,7 +107,11 @@ public class Constraints {
 
     // the code is close to done but we need to decide how to implement the
     // teacher object for me to finish.
-    return null;
-  }
+    // the above should be poped out to be used for other posible overlaps
+    // if your a noob and dont know how to undo mass coments ctrl /
+//    return null;
+//  }
+  
+  
 
 }
