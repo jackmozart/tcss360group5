@@ -39,6 +39,9 @@ public class ScheduleMainTest {
     my_scheduler = new ScheduleMain(test_file);
   }
   
+  /**
+   * 
+   */
   @Test
   public void loadCourseTimesTest() {
     startUp("singleAdvisorTestFile.txt");
@@ -92,7 +95,7 @@ public class ScheduleMainTest {
     final Teacher test_teacher = new Teacher("hseaward", 
                                              "345678912", 
                                              "Harold Seaward", 
-                                             new HashSet<Course>(),
+                                             new HashSet<Course>(), 25,
                                              new HashSet<Course>(),
                                              new int[][]{});
 
@@ -139,7 +142,7 @@ public class ScheduleMainTest {
     final Teacher test_teacher = new Teacher("hseaward", 
                                              "345678912", 
                                              "Harold Seaward", 
-                                             new HashSet<Course>(),
+                                             new HashSet<Course>(), 25,
                                              new HashSet<Course>(), 
                                              new int[][]{});
     final Advisor test_advisor = new Advisor("jsnuffy", 
