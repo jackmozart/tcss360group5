@@ -48,9 +48,10 @@ public class Teacher extends Voter {
    * @param the_availability the times the teacher is available to teach
    */
   public Teacher(String the_username, String the_password, String the_name,
-                 Set<Course> the_courses, Set<Course> the_unpreferred_courses,
+                 Set<Course> the_courses, int the_credit_load, Set<Course> the_unpreferred_courses,
                                                      int[][] the_availability) {
     super(the_username, the_password, the_name, the_courses);
+    my_max_credit_load = the_credit_load;
     my_unpreferred_courses = the_unpreferred_courses;
     my_availability = the_availability;
     

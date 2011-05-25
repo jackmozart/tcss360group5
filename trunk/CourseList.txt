@@ -2,7 +2,7 @@ TCSS142,Introduction to Object-Oriented Programming,5
 TCSS143,Fundamentals of Object-Oriented Programming Theory and Application,5
 TCSS305,Programming Practicum,5
 TCSS321,Discrete Structures I,5
-TCSS321,Discrete Structures II,5
+TCSS322,Discrete Structures II,5
 TCSS325,Computers Ethics and Society,5
 TCSS342,Data Structures,5
 TCSS343,Design and Analysis of Algorithms,5

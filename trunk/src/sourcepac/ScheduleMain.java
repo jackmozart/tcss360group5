@@ -182,6 +182,7 @@ public class ScheduleMain {
       String user_pass;
       String first_name;
       String last_name;
+      int credit_load;
       Set<Course> preferred_courses = new HashSet<Course>();
       Set<Course> unpreferred_courses;
       List<Time> times;
@@ -215,11 +216,12 @@ public class ScheduleMain {
             
             break;
           case 'T':
+            credit_load = line_scanner.nextInt();
             unpreferred_courses = readCourses(line_scanner);
             availability = readAvailability(line_scanner);
             roles.setTeacher(new Teacher(user_name, user_pass, 
                                     first_name + " " + last_name,
-                                    preferred_courses, 
+                                    preferred_courses, credit_load,
                                     unpreferred_courses, 
                                     availability));
             break;
