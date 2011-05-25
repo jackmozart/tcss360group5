@@ -3,6 +3,8 @@ package sourcepac;
 import java.util.ArrayList;
 import java.util.List;
 
+import users.Teacher;
+
 /**
  * 
  * @author Steven Cozart
@@ -14,7 +16,7 @@ public class Constraints {
   
   private List<CourseCopy> my_courses;
   
-  private List<TeacherPrefrence> my_teachers;
+  private List<Teacher> my_teachers;
   
   private List<AdvisorPrefrence> my_advisors;
 
@@ -26,7 +28,7 @@ public class Constraints {
    * @param the_teachers
    */
   public Constraints(List<CourseCopy> the_list, List<StudentPrefrence> the_students,
-                     List<AdvisorPrefrence> the_advisors, List<TeacherPrefrence> the_teachers) {
+                     List<AdvisorPrefrence> the_advisors, List<Teacher> the_teachers) {
     my_courses = the_list;
     my_students = the_students;
     my_teachers = the_teachers;
@@ -40,7 +42,7 @@ public class Constraints {
   public String runTests() {
     final StringBuilder test_results = new StringBuilder();
     test_results.append(teacherSameTimes());
-    
+    test_results.append(checkCreditLoad());
     return test_results.toString();
   }
 
@@ -85,32 +87,45 @@ public class Constraints {
    * 
    * @return Error message in form (teacher) exceeds credit load by (amount) credits.
    */
-//  public String checkCreditLoad() {
-//    final StringBuilder error_message = new StringBuilder();
-//    for (CourseCopy course : my_courses) {
-//      String teacher = course.getTeacher();
-//      teacher.setCredits(  course.getCredit() + teacher.getCredits());
-//      
-//    }
-//    
-//    for(TeacherPrefrence teacher_pref : my_teachers){
-//      if(teacher_pref.getCreditLoad()< teacher.getCredits()){
-//        //appends error message (teacher) exceeds credit load by (amount) credits.
-//        error_message.append(teacher_pref.getName());
-//        error_message.append(" exceeds credit load by ");
-//        error_message.append(teacher.getCredits()- teacher_pref.getCreditLoad());
-//        error_message.append(" credits.\n ");
-    //
-    // }
-    // }
-    // return error_message.toString();
-
-    // the code is close to done but we need to decide how to implement the
-    // teacher object for me to finish.
-    // the above should be poped out to be used for other posible overlaps
-    // if your a noob and dont know how to undo mass coments ctrl /
-//    return null;
-//  }
+  public String checkCreditLoad() {
+    final StringBuilder error_message = new StringBuilder();
+    Teacher teacher;
+    for (CourseCopy course : my_courses) {
+      String teacherName = course.getTeacher();
+      int i = 0;
+      boolean matchFound = false;
+      int numTeachers = my_teachers.size();
+      
+      do{
+        teacher = my_teachers.get(i);
+        matchFound = !my_teachers.get(i).getName().equals(teacherName);
+        i ++;
+        //if used to ensure that the list does not go beyond size of list in case of a missing teacher.
+        if(i > numTeachers){
+          Teacher missingTeacher = new Teacher(teacherName, teacherName, teacherName, null, numTeachers, null, null);
+          my_teachers.add(missingTeacher);
+          teacher = missingTeacher;
+          matchFound = false;
+        }
+      }
+      while (matchFound);
+      
+      teacher.setCredits(  course.getCredit() + teacher.getCurrCredits());
+      
+    }
+    
+    for(Teacher teacher_pref : my_teachers){
+      if(teacher_pref.getCreditLoad()< teacher.getCurrCredits()){
+        //appends error message (teacher) exceeds credit load by (amount) credits.
+        error_message.append(teacher_pref.getName());
+        error_message.append(" exceeds credit load by ");
+        error_message.append(teacher.getCredits()- teacher_pref.getCreditLoad());
+        error_message.append(" credits.\n ");
+    
+     }
+     }
+     return error_message.toString();
+  }
   
   
 

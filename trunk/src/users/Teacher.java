@@ -68,4 +68,19 @@ public class Teacher extends Voter {
   public Set<Course> getUnpreferedCourses() {
     return my_unpreferred_courses;
   }
+
+  public int getCreditLoad() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  public int getCurrCredits() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  public int getCredits() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
 }
