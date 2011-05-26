@@ -3,12 +3,13 @@ package sourcepac;
 import java.util.ArrayList;
 import java.util.List;
 
+import users.Advisor;
 import users.Teacher;
 
 /**
  * 
  * @author Steven Cozart
- *
+ * @version Last update May 25 2011
  */
 public class Constraints {
 
@@ -18,7 +19,7 @@ public class Constraints {
   
   private List<Teacher> my_teachers;
   
-  private List<AdvisorPrefrence> my_advisors;
+  private List<Advisor> my_advisors;
 
   /**
    * 
@@ -28,7 +29,7 @@ public class Constraints {
    * @param the_teachers
    */
   public Constraints(List<CourseCopy> the_list, List<StudentPreference> the_students,
-                     List<AdvisorPrefrence> the_advisors, List<Teacher> the_teachers) {
+                     List<Advisor> the_advisors, List<Teacher> the_teachers) {
     my_courses = the_list;
     my_students = the_students;
     my_teachers = the_teachers;
@@ -58,7 +59,7 @@ public class Constraints {
     final List<CourseCopy> posible_time_conflicts = new ArrayList<CourseCopy>();
     CourseCopy curr_course = my_courses.get(0);
     int index = 0;
-    //reads through each course collection posible conflicts
+    //reads through each course collection possible conflicts
     for (CourseCopy course : my_courses) {
       index = 1 + my_courses.indexOf(course);
       curr_course = my_courses.get(index);
@@ -90,6 +91,7 @@ public class Constraints {
   public String checkCreditLoad() {
     final StringBuilder error_message = new StringBuilder();
     Teacher teacher = null;
+    
     for (CourseCopy course : my_courses) {
       String teacherName = course.getTeacher();
       int i = 0;
@@ -121,10 +123,33 @@ public class Constraints {
         error_message.append(" exceeds credit load by ");
         error_message.append(teacher.getCredits()- teacher_pref.getCreditLoad());
         error_message.append(" credits.\n ");
-    
      }
      }
      return error_message.toString();
+  }
+  
+  /**
+   * 
+   * @return List of all courses suggested by advisor but not offered.
+   */
+  public ArrayList<Course> checkAdvisorPrefrences(){  
+    List<Course> missingCourses = new ArrayList<Course>();
+    for(Advisor advisor: my_advisors){
+      for(Course preferedCourse:advisor.getPreferedCourses()){
+        String courseName = preferedCourse.getCourseTitle();
+        boolean courseFound = false;
+        for (CourseCopy courses: my_courses){
+          if(courses.getCourseTitle().equals(courseName)){
+            courseFound = true;
+            break;
+          }     
+        }
+        if(!courseFound){
+          missingCourses.add(preferedCourse);
+        }
+      }
+    }
+    return (ArrayList<Course>) missingCourses;
   }
   
   
