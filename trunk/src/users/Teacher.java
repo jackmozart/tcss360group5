@@ -150,4 +150,11 @@ public class Teacher extends Voter {
     // TODO Auto-generated method stub
     return 0;
   }
+
+  public void setCredits(int i) {
+    // TODO Auto-generated method stub
+    
+  }
+
+
 }
