@@ -25,6 +25,9 @@ public class ScheduleGenerator {
   /**
    * Imports a schedule from a .csv file in the specified
    * format for constraints checking.
+   * @pre fileName represents a valid, existing file containing 
+   *      a correctly formatted schedule.
+   * @post A Schedule in the format readable by the program. 
    * @param fileName The name of the file for importing.
    */
   public void importSchedule(String fileName) {
@@ -62,39 +65,46 @@ public class ScheduleGenerator {
   }
 
   /**
-   * This method takes weekdays in the MTWRFSN format and
+   * This method takes weekdays in the given format and
    * stores them in a format useful to constraints checking.
+   * @pre days represents days of the week in the format specified
+   *      and contains "TBA" if no days are presently scheduled.
+   * @post A representation of the days the given course is taught.
    * @param days The String representing the days taught.
    * @return A boolean[] with appropriate values for the
    *         days taught.
    */
   private boolean[] parseDays(String days) {
     boolean[] week = new boolean[7];
-    for(int i = 0; i < days.length(); i++) {
-      switch(days.charAt(i)) {
-        case 'N':
-          week[0] = true;
-          break;
-        case 'M':
-          week[1] = true;
-          break;
-        case 'T':
-          week[2] = true;
-          break;
-        case 'W':
-          week[3] = true;
-          break;
-        case 'R':
-          week[4] = true;
-          break;
-        case 'F':
-          week[5] = true;
-          break;
-        case 'S':
-          week[6] = true;
+    if(days.contains("TBA")) {
+      return week;
+    } else {
+      for(int i = 0; i < days.length(); i++) {
+        switch(days.charAt(i)) {
+          case 'N':
+            week[0] = true;
+            break;
+          case 'M':
+            week[1] = true;
+            break;
+          case 'T':
+            week[2] = true;
+            break;
+          case 'W':
+            week[3] = true;
+            break;
+          case 'R':
+            week[4] = true;
+            break;
+          case 'F':
+            week[5] = true;
+            break;
+          case 'S':
+            week[6] = true;
+        }
       }
+      return week;
     }
-    return week;
   }
 
   /**
