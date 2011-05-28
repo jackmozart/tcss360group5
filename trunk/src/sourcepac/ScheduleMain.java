@@ -4,9 +4,11 @@ package sourcepac;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -17,12 +19,14 @@ import java.util.TreeMap;
 import users.Advisor;
 import users.Student;
 import users.Teacher;
+import users.Voter;
 
 /**
  * This class is the holds the data types needed for running the Scheduling
  * program.
  * 
  * @author Phillip Bernard comments by Steven Cozart
+ * @version 5.2 5/28/2011 fixed a mysterious bug in loadCourseTimes()
  * @version 4.2 5/23/2011 finished loadUsers()
  * @version 3.2 5/21/2011 worked on loadUsers, almost done need to finish readAvailability
  * @version 2.1 5/16/2011 fixed loadCourses method.
@@ -42,9 +46,11 @@ public class ScheduleMain {
    */
   public static final int ADVISOR_WEIGHT = 3;
   
-  public static final int NUMBER_OF_TIME_BLOCKS = 5;
+  public static final String DEFAULT_USER_LIST = "UserList.txt";
   
-  public static final int NUMBER_OF_SCHOOL_DAYS = 4;
+  private int my_number_of_time_blocks;
+  
+  private int my_number_of_days;
   /**
    * All possible courses to be offered.  
    */
@@ -57,8 +63,10 @@ public class ScheduleMain {
    * List of all users.  
    */
   private Map<String, UserRoleList> my_users;  
- 
-  private List<Teacher> my_teachers;
+  private List<StudentPreference> my_student_preferences; 
+  private List<AdvisorPreference> my_advisor_preferences;
+  private List<TeacherPreference> my_teacher_preferences;
+  private List<Teacher> my_teachers; //is this what you want Steven?
   /**
    * Division between day and evening classes.
    */
@@ -68,11 +76,7 @@ public class ScheduleMain {
    * Reads in user created files of course times and course list.  
    */
   public ScheduleMain() {
-    my_course_catalog = loadCourseData("CourseList.txt");
-    my_course_times = loadCourseTimes("CourseTimes.txt");
-    my_teachers = new ArrayList<Teacher>();
-    my_users = loadUsers("Userlist.txt");
-    
+    this("Userlist.txt");
   }
   
   public ScheduleMain(String the_user_list) {
@@ -140,6 +144,7 @@ public class ScheduleMain {
    * This method loads the course times from the given file name.
    * 
    * @param the_file_name
+   * @param my_number_of_days 
    * @return
    */
   public Map<Integer, Time> loadCourseTimes(String the_file_name) {
@@ -153,13 +158,18 @@ public class ScheduleMain {
     } catch (FileNotFoundException e) {
       System.err.println("FileNotFound");
     }
+    my_number_of_days = scanner.nextInt();
+    //scanner.next(); // clear to the next line
     while (scanner.hasNextLine()) {
-      final Scanner line_scanner = new Scanner(scanner.nextLine());
+      String line = scanner.nextLine();
+
+      final Scanner line_scanner = new Scanner(line);
     
       start_time = line_scanner.nextInt();
       end_time = line_scanner.nextInt();
       Time time = new Time(start_time, end_time);
       times.put(start_time , time);
+      my_number_of_time_blocks++;
     }
     return times;
   }
@@ -243,8 +253,31 @@ public class ScheduleMain {
     }
     return users;
   }
-
-  public List<Time> readTimes(Scanner the_scanner) {
+  
+  public UserRoleList getUser(String the_username) {
+    return my_users.get(the_username); 
+  }
+  
+  public void getPreferences() {
+    Set<UserRoleList> users = (HashSet<UserRoleList>) my_users.values();
+    Iterator itr = users.iterator();
+    
+    while(itr.hasNext()) {
+      UserRoleList roles = (UserRoleList) itr.next();
+      if(roles.getAdvisor() != null) {
+        
+      }
+    }
+  }
+  
+  public List<Teacher> getTeachers() {
+    List teachers = new ArrayList<Teacher>();
+    
+    
+    return teachers;
+  }
+  
+  private List<Time> readTimes(Scanner the_scanner) {
     final List<Time> times = new LinkedList<Time>();
    
     for (int i = the_scanner.nextInt(); i > 0; i--) {
@@ -253,7 +286,7 @@ public class ScheduleMain {
     return times;
   }
 
-  public Set<Course> readCourses(Scanner the_scanner) {
+  private Set<Course> readCourses(Scanner the_scanner) {
     Set<Course> courses = new HashSet<Course>();
     String course_name = the_scanner.next();
     
@@ -274,8 +307,8 @@ public class ScheduleMain {
    *  line to scan
    * @return a 2d array of availability preferences
    */
-  public int[][] readAvailability(Scanner the_scanner) {
-    int[][] availability = new int[NUMBER_OF_SCHOOL_DAYS][NUMBER_OF_TIME_BLOCKS];
+  private int[][] readAvailability(Scanner the_scanner) {
+    int[][] availability = new int[my_number_of_days][my_number_of_time_blocks];
     
     final int days = the_scanner.nextInt();
     
@@ -289,15 +322,5 @@ public class ScheduleMain {
     }
     return availability;
   }
-  
-  public UserRoleList getUser(String the_username) {
-    return my_users.get(the_username); 
-  }
-  
-  public List<Teacher> getTeachers() {
-    List teachers = new ArrayList<Teacher>();
-    
-    
-    return teachers;
-  }
+
 }
