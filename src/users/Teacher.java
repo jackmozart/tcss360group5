@@ -1,6 +1,7 @@
 
 package users;
 
+import java.util.Iterator;
 import java.util.Set;
 
 import sourcepac.Course;
@@ -14,7 +15,7 @@ import sourcepac.Course;
  * @author Phillip Bernard
  * @version 5/15/2011
  */
-public class Teacher extends Voter {
+public class Teacher extends Voter implements Comparable{
   /**
    * This is the constant for the default number of credits a teacher can teach.
    */
@@ -140,15 +141,52 @@ public class Teacher extends Voter {
     my_max_credit_load = the_credits;
   }
 
-  public int getCreditLoad() {
-    // TODO Auto-generated method stub
-    return 0;
+  /**
+   * 
+   */
+  public int compareTo(Object other_object) {
+    int result = 1;
+    if(this == other_object){
+       result = 0;
+     }else if (other_object != null && other_object.getClass() == getClass()){
+       Teacher other_teach = (Teacher) other_object;
+       if (this.getName().equals(other_teach.getName()) &&
+           this.getUsername().equals(other_teach.getUsername()) &&
+           this.getPassword().equals(other_teach.getPassword()) &&
+           this.my_max_credit_load == other_teach.my_max_credit_load &&
+           this.my_current_credit_load == other_teach.my_current_credit_load &&
+           this.my_unpreferred_courses.size() == other_teach.my_unpreferred_courses.size() &&
+           this.getPreferedCourses().size() == other_teach.getPreferedCourses().size()) {
+         result = 0;  
+         Iterator<Course> pref_itr = other_teach.getPreferedCourses().iterator();
+         while(pref_itr.hasNext()) {
+           if(!other_teach.getPreferedCourses().contains(pref_itr.next())) {
+             result = 1;
+           }
+         }
+         Iterator<Course> unpref_itr = other_teach.getPreferedCourses().iterator();
+         while(unpref_itr.hasNext()) {
+           if(!other_teach.getPreferedCourses().contains(unpref_itr.next())) {
+             result = 1;
+           }
+         }
+         
+         
+       }else {
+         result = 1;
+       }
+     }
+    return result;
   }
-
-
-  public int getCredits() {
-    // TODO Auto-generated method stub
-    return 0;
+  
+  public boolean equals(Object other_object){
+    boolean result = false;
+    
+    if (compareTo(other_object) == 0) {
+      result = true;
+    }
+    return result;
+    
   }
 
   public void setCredits(int i) {

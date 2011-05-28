@@ -1,14 +1,17 @@
 
 package sourcepac;
 
+import users.Teacher;
+
 /**
  * This class holds the basic information about a course including the Course
  * title course description, and the course's credit worth.
  * 
  * @author Phillip Bernard
- * @version 5/12/2011
+ * @version 1.1 5/25/2011 Added compareTo
+ * @version 1.0 5/12/2011
  */
-public class Course {
+public class Course implements Comparable{
   /**
    * This field holds the the course title which consists of the Department and
    * level number and should be formatted like this: TCSS 360.
@@ -76,5 +79,38 @@ public class Course {
    */
   public String toString() {
     return my_course_title + " " + my_course_description + " " + my_credit;
+  }
+
+  /**
+   * 
+   */
+  public int compareTo(Object other_object) {
+    int result = 1;
+    if(this == other_object){
+      result = 0;
+    }else if (other_object != null && other_object.getClass() == getClass()){
+    Course other_course = (Course) other_object;
+      if(my_course_title.equals(other_course.my_course_title) &&
+         my_course_description.equals(other_course.my_course_description) &&
+         my_credit == other_course.my_credit) {
+        result = 0;
+      } else {
+        result = my_course_title.compareTo(other_course.my_course_title) +
+          my_course_description.compareTo(other_course.my_course_description) +
+          my_credit - other_course.my_credit;
+      }
+    }
+    return result;
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public boolean equals(Object other) {
+    boolean result = false;
+    if (compareTo(other) == 0) {
+      result = true;
+    }
+    return result;
   }
 }

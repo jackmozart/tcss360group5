@@ -8,7 +8,9 @@ import users.Teacher;
 
 /**
  * 
- * @author Steven Cozart
+ * @author Steven Cozart 
+ * 
+ * @version 5/28/2011 Adjusted checkCreditLoad to use Teacher's methods -PB
  * @version Last update May 25 2011
  */
 public class Constraints {
@@ -117,11 +119,12 @@ public class Constraints {
     }
     
     for(Teacher teacher_pref : my_teachers){
-      if(teacher_pref.getCreditLoad()< teacher.getCurrCredits()){
+      if(teacher_pref.getMaxCredits() < teacher.getCurrCredits()){
         //appends error message (teacher) exceeds credit load by (amount) credits.
         error_message.append(teacher_pref.getName());
         error_message.append(" exceeds credit load by ");
-        error_message.append(teacher.getCredits()- teacher_pref.getCreditLoad());
+        error_message.append(teacher.getCurrCredits()- //PB I adjust this code so that it compiles and  
+                                           teacher_pref.getMaxCredits()); //uses the methods already in Teacher
         error_message.append(" credits.\n ");
      }
      }

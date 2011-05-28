@@ -5,7 +5,7 @@ package sourcepac;
  * @author Phillip
  * @version 1.0 5/21/2011
  */
-public class Time {
+public class Time implements Comparable{
   private final int my_start_time;
   private final int my_end_time;
   
@@ -20,5 +20,37 @@ public class Time {
   
   public int getEndTime() {
     return my_end_time;
+  }
+
+  @Override
+  public int compareTo(Object other_object) {
+    int result = 1;
+    if(this == other_object){
+      result = 0;
+    }else if (other_object != null && other_object.getClass() == getClass()){
+      Time other_time = (Time) other_object;
+      if (my_start_time == other_time.getStartTime() &&
+                my_end_time == other_time.getEndTime()){
+        result = 0;
+      } else if (my_start_time < other_time.getStartTime()){
+        result = -1;
+      } else {
+        result = 1;
+      }
+    }
+    return result;
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public boolean equals(Object the_other) {
+    boolean result = false;
+    
+    if (compareTo(the_other) == 0) {
+      result = true;
+    }
+    
+    return result;
   }
 }

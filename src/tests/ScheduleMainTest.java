@@ -168,10 +168,4 @@ public class ScheduleMainTest {
                test_advisor.equals(my_scheduler.getUser("jsnuffy")));
   }
   
-  
-  @Test
-  public void loadCourseCatalogTest() {
-    startUp("singleAdvisorTestFile.txt");
-    my_scheduler.loadCourseData("CourseList.txt");
-  }
 }
