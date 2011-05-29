@@ -1,11 +1,11 @@
-(S, T, A) UserName UserPassword FirstName LastName PreferredCourseName ... PreferredCourseName / 4 Time ... Time     
-     ^user role                                                                                  ^num of times--list.size                                                   ^num of days   
+(S, T, A) UserName UserPassword FirstName LastName PreferredCourseName ... PreferredCourseName /   
+     ^user role                                                                                  ^num of times--list.size                                                   
      	A for Advisor     
      
 (S, T, A) UserName UserPassword FirstName LastName PreferredCourseName... PreferredCourseName / 4 Time ... Time     
-     ^user role                                                                                 ^num of times--list.size                                                   ^num of days   
-     	S for Student                                                                               ^Time = start time.                                                     ^ num of different timeblocks         
+     ^user role                                                                                                                                    
+     	S for Student                                                                                                                                       
      	
 (S, T, A) UserName UserPassword FirstName LastName PreferredCourseName ... PreferredCourseName / maxCredits CurrentCredits UnpreferredCourseName ... UnpreferredCourseName / 4 5 0 0 0 0 0 / 5 0 0 0 0 0 / 5 0 0 0 0 0 / 5 0 0 0 0 0 /* 
-     ^user role                                                                                                                                    ^num of days   
-     	T for Teacher                                                                                                                                ^ num of different timeblocks                                                                                     
+     ^user role                                                                                                                                                              ^num of days   
+     	T for Teacher                                                                                                                                                          ^ num of different timeblocks                                                                                     
