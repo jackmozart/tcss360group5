@@ -35,7 +35,6 @@ public class ScheduleGenerator {
     Scanner in = null;
     String current = "";
     String[] line = new String[8];
-    boolean[] days = new boolean[7];
     CourseCopy course;
     try {
       in = new Scanner(inputSchedule);
@@ -55,11 +54,11 @@ public class ScheduleGenerator {
     while (in.hasNext()) {
       current = in.nextLine();
       line = current.split(",");
-      days = parseDays(line[4]);
       course = new CourseCopy(line[0], line[1], line[2], 
                               Integer.parseInt(line[7]),
                               Integer.parseInt(line[5]),
-                              Integer.parseInt(line[6]), line[3], days);
+                              Integer.parseInt(line[6]), line[3],
+                              parseDays(line[4]));
       my_schedule.addCourse(course);
     }
   }
