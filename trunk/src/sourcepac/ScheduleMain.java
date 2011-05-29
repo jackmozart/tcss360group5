@@ -91,7 +91,7 @@ public class ScheduleMain {
    * @param the_args Unused array of strings.
    */
   public static void main(String[] the_args) {
-    //do something here
+    ScheduleMain sm = new ScheduleMain();
   }
 
   /**
