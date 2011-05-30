@@ -159,6 +159,7 @@ public class Constraints {
   
   /**
    * Collects all courses assigned to a teacher that does not wish to teach it.   
+   * @return All courses that a teacher was assigned and is on the teacher disliked list.
    */
   public List<CourseCopy> checkTeacherPrefrence() {
     List<CourseCopy> dissLikeCourses = new ArrayList<CourseCopy>();
@@ -178,7 +179,26 @@ public class Constraints {
     return dissLikeCourses;
   }
   
-  
-  
+  /**
+   * @pre getTimePrefrences() != null, getDayPrefrences() != null
+   * @return The courses that violate the day or time constraints 
+   */
+  public List<CourseCopy> checkTeacherTimes(){
+    
+    // to do finish this once the teacher implementation is finalized (time is curently unfinished)
+    List<CourseCopy> disslikeCoursesTimes = new ArrayList<CourseCopy>();
+    // goes through each teacher
+    for (Teacher currTeacher : my_teachers) {
+      int[][] preferedTimes = currTeacher.getTimePrefrences();
+      Set<CourseCopy> coursesSet = currTeacher.getCourses();
+      for (CourseCopy course: coursesSet) {
+        //if days dont match
+        //if time dont match
+        
+      }
+
+    }
+    return disslikeCoursesTimes;
+  }
 
 }
