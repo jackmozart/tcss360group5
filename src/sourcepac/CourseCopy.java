@@ -26,12 +26,7 @@ public class CourseCopy extends Course {
   /**
    * Time of the start course.
    */
-  private int my_start_time;
-  
-  /**
-   * Time of the course.
-   */
-  private int my_end_time;
+  private Time my_time;
   
   /**
    * Day of the course.
@@ -49,8 +44,7 @@ public class CourseCopy extends Course {
     super(the_course_title, the_course_description, the_credit);
     my_teacher = NO_TEACHER_ASSIGNED_MESSAGE;
     my_section = "A";
-    my_start_time = 0;
-    my_end_time = 0;
+    my_time = new Time(0,0);
     my_days = new boolean[7];
   }
 
@@ -68,8 +62,7 @@ public class CourseCopy extends Course {
     super(the_course_title, the_course_description, the_credit);
     my_teacher = NO_TEACHER_ASSIGNED_MESSAGE;
     my_section = "A";
-    my_start_time = the_start;
-    my_end_time = the_end;
+    my_time = new Time(the_start, the_end);
     my_days = new boolean[7];
   }
 
@@ -91,8 +84,7 @@ public class CourseCopy extends Course {
     super(the_course_title, the_course_description, the_credit);
     my_section = the_course_section;
     my_teacher = the_teacher;
-    my_start_time = the_start;
-    my_end_time = the_end;
+    my_time = new Time(the_start, the_end);
     my_days = the_days;
   }
 
@@ -100,15 +92,8 @@ public class CourseCopy extends Course {
   /**
    * @return The course start time.
    */
-  public int getStartTime() {
-    return my_start_time;
-  }
-  
-  /**
-   * @return The course end time.
-   */
-  public int getEndTime() {
-    return my_end_time;
+  public Time getTime() {
+    return my_time;
   }
   
   /**

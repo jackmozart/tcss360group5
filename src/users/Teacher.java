@@ -164,17 +164,17 @@ public class Teacher extends Voter implements Comparable{
            this.my_max_credit_load == other_teach.my_max_credit_load &&
            this.my_current_credit_load == other_teach.my_current_credit_load &&
            this.my_unpreferred_courses.size() == other_teach.my_unpreferred_courses.size() &&
-           this.getPreferedCourses().size() == other_teach.getPreferedCourses().size()) {
+           this.getPreferredCourses().size() == other_teach.getPreferredCourses().size()) {
          result = 0;  
-         Iterator<Course> pref_itr = other_teach.getPreferedCourses().iterator();
+         Iterator<Course> pref_itr = other_teach.getPreferredCourses().iterator();
          while(pref_itr.hasNext()) {
-           if(!other_teach.getPreferedCourses().contains(pref_itr.next())) {
+           if(!other_teach.getPreferredCourses().contains(pref_itr.next())) {
              result = 1;
            }
          }
-         Iterator<Course> unpref_itr = other_teach.getPreferedCourses().iterator();
+         Iterator<Course> unpref_itr = other_teach.getPreferredCourses().iterator();
          while(unpref_itr.hasNext()) {
-           if(!other_teach.getPreferedCourses().contains(unpref_itr.next())) {
+           if(!other_teach.getPreferredCourses().contains(unpref_itr.next())) {
              result = 1;
            }
          }
