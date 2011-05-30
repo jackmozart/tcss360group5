@@ -36,5 +36,7 @@ public class Student extends Voter {
     my_times = the_times;
 
   }
+  
+  
 
 }

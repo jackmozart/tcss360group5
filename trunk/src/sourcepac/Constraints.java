@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import users.Advisor;
+import users.Student;
 import users.Teacher;
 
 /**
@@ -16,7 +17,7 @@ import users.Teacher;
  */
 public class Constraints {
 
-  private List<StudentPreference> my_students;
+  private List<Student> my_students;
   
   private List<CourseCopy> my_courses;
   
@@ -31,7 +32,7 @@ public class Constraints {
    * @param the_advisors
    * @param the_teachers
    */
-  public Constraints(List<CourseCopy> the_list, List<StudentPreference> the_students,
+  public Constraints(List<CourseCopy> the_list, List<Student> the_students,
                      List<Advisor> the_advisors, List<Teacher> the_teachers) {
     my_courses = the_list;
     my_students = the_students;
@@ -181,6 +182,7 @@ public class Constraints {
   
   /**
    * @pre getTimePrefrences() != null, getDayPrefrences() != null
+   * @pre timeBlocks() !=null
    * @return The courses that violate the day or time constraints 
    */
   public List<CourseCopy> checkTeacherTimes(){
@@ -189,9 +191,12 @@ public class Constraints {
     List<CourseCopy> disslikeCoursesTimes = new ArrayList<CourseCopy>();
     // goes through each teacher
     for (Teacher currTeacher : my_teachers) {
-      int[][] preferedTimes = currTeacher.getTimePrefrences();
+      int[][] preferedTimes = currTeacher.getTimePreferences();
       Set<CourseCopy> coursesSet = currTeacher.getCourses();
+      //goes through each course assigned to a teachers 
       for (CourseCopy course: coursesSet) {
+         boolean [] days = course.getDays();
+         
         //if days dont match
         //if time dont match
         
