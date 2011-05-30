@@ -2,6 +2,7 @@ package sourcepac;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import users.Advisor;
 import users.Teacher;
@@ -105,7 +106,8 @@ public class Constraints {
         matchFound = !my_teachers.get(i).getName().equals(teacherName);
         i ++;
         //if used to ensure that the list does not go beyond size of list in case of a missing teacher.
-        if(i > numTeachers){
+        if(
+            i > numTeachers){
           Teacher missingTeacher = new Teacher(teacherName, teacherName, teacherName, null, numTeachers, null, null);
           my_teachers.add(missingTeacher);
           teacher = missingTeacher;
@@ -135,7 +137,7 @@ public class Constraints {
    * 
    * @return List of all courses suggested by advisor but not offered.
    */
-  public ArrayList<Course> checkAdvisorPrefrences(){  
+  public List<Course> checkAdvisorPrefrences(){  
     List<Course> missingCourses = new ArrayList<Course>();
     for(Advisor advisor: my_advisors){
       for(Course preferedCourse:advisor.getPreferedCourses()){
@@ -152,8 +154,30 @@ public class Constraints {
         }
       }
     }
-    return (ArrayList<Course>) missingCourses;
+    return missingCourses;
   }
+  
+  /**
+   * Collects all courses assigned to a teacher that does not wish to teach it.   
+   */
+  public List<CourseCopy> checkTeacherPrefrence() {
+    List<CourseCopy> dissLikeCourses = new ArrayList<CourseCopy>();
+    // goes through each teacher
+    for(Teacher currTeacher: my_teachers) {
+      Set<Course> unpreferedCourses = currTeacher.getUnpreferedCourses();
+      //finds all courses taught and ensures they are not in the disliked list.  
+      for(CourseCopy aCourse: currTeacher.getCourses()) {
+        String courseTitle = aCourse.getCourseTitle();
+        for(Course  dislikedCourse: unpreferedCourses ) {
+          if(dislikedCourse.getCourseTitle().equals(courseTitle)){
+            dissLikeCourses.add(aCourse);
+          }
+        }
+      }
+    }
+    return dissLikeCourses;
+  }
+  
   
   
 
