@@ -26,6 +26,7 @@ import users.Voter;
  * program.
  * 
  * @author Phillip Bernard comments by Steven Cozart
+ * @version 6.3 5/30/2011 
  * @version 5.2 5/28/2011 fixed a mysterious bug in loadCourseTimes()
  * @version 4.2 5/23/2011 finished loadUsers()
  * @version 3.2 5/21/2011 worked on loadUsers, almost done need to finish readAvailability
@@ -63,9 +64,8 @@ public class ScheduleMain {
    * List of all users.  
    */
   private Map<String, UserRoleList> my_users;  
-  private List<StudentPreference> my_student_preferences; 
-  private List<AdvisorPreference> my_advisor_preferences;
-  private List<TeacherPreference> my_teacher_preferences;
+  private List<Student> my_students; 
+  private List<Advisor> my_advisors;
   private List<Teacher> my_teachers; //is this what you want Steven?
   /**
    * Division between day and evening classes.
@@ -76,13 +76,15 @@ public class ScheduleMain {
    * Reads in user created files of course times and course list.  
    */
   public ScheduleMain() {
-    this("Userlist.txt");
+    this("UserList.txt");
   }
   
   public ScheduleMain(String the_user_list) {
     my_course_catalog = loadCourseData("CourseList.txt");
     my_course_times = loadCourseTimes("CourseTimes.txt");
     my_teachers = new ArrayList<Teacher>();
+    my_students = new ArrayList<Student>();
+    my_advisors = new ArrayList<Advisor>();
     my_users = loadUsers(the_user_list);
   }
 
@@ -216,23 +218,29 @@ public class ScheduleMain {
         user_pass = line_scanner.next();
         first_name = line_scanner.next();
         last_name = line_scanner.next();
-        preferred_courses = readCourses(line_scanner);
+        
       
         switch (user_type.charAt(0)) {
           case 'A':
-            roles.setAdvisor(new Advisor(user_name, user_pass, 
-                                    first_name + " " + last_name,
-                                    preferred_courses));
-            
+            Advisor a = new Advisor(user_name, user_pass, 
+                         first_name + " " + last_name,
+                         readCourseList(line_scanner));
+ 
+            roles.setAdvisor(a);
+            my_advisors.add(a);
             break;
           case 'S':
+            preferred_courses = readCourses(line_scanner);
             times = readTimes(line_scanner);
-            roles.setStudent(new Student(user_name, user_pass, 
+            Student s = new Student(user_name, user_pass, 
                                     first_name + " " + last_name,
-                                    preferred_courses, times));
+                                    preferred_courses, times);
+            roles.setStudent(s);
+            my_students.add(s);
             
             break;
           case 'T':
+            preferred_courses = readCourses(line_scanner);
             max_credit_load = line_scanner.nextInt();
             current_credit_load = line_scanner.nextInt();
             unpreferred_courses = readCourses(line_scanner);
@@ -258,25 +266,18 @@ public class ScheduleMain {
     return my_users.get(the_username); 
   }
   
-  public void getPreferences() {
-    Set<UserRoleList> users = (HashSet<UserRoleList>) my_users.values();
-    Iterator itr = users.iterator();
-    
-    while(itr.hasNext()) {
-      UserRoleList roles = (UserRoleList) itr.next();
-      if(roles.getAdvisor() != null) {
-        
-      }
-    }
-  }
-  
   public List<Teacher> getTeachers() {
-    List teachers = new ArrayList<Teacher>();
-    
-    
-    return teachers;
+    return my_teachers;
   }
   
+  /**
+   * This method reads the start times of the given blocks of time selected
+   * by a student and loads the corresponding blocks into the students
+   * preferred times.
+   * 
+   * @param the_scanner the scanner containing the data to be read
+   * @return a list of times
+   */
   private List<Time> readTimes(Scanner the_scanner) {
     final List<Time> times = new LinkedList<Time>();
    
@@ -286,8 +287,32 @@ public class ScheduleMain {
     return times;
   }
 
+  /**
+   * This method loads courses from the given user line.
+   * 
+   * @param the_scanner the scanner used to load courses
+   * @return a set of courses
+   */
   private Set<Course> readCourses(Scanner the_scanner) {
-    Set<Course> courses = new HashSet<Course>();
+    final Set<Course> courses = new HashSet<Course>();
+    String course_name = the_scanner.next();
+    
+    while (!course_name.equals("/")) {
+      courses.add(my_course_catalog.get(course_name));
+      course_name = the_scanner.next();
+    }
+    
+    return courses;    
+  }
+  
+  /**
+   * This method loads courses from the given user line.
+   * 
+   * @param the_scanner the scanner used to load courses
+   * @return a set of courses
+   */
+  private List<Course> readCourseList(Scanner the_scanner) {
+    final List<Course> courses = new ArrayList<Course>();
     String course_name = the_scanner.next();
     
     while (!course_name.equals("/")) {

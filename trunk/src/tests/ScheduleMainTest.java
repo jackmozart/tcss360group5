@@ -31,12 +31,43 @@ public class ScheduleMainTest {
    * This field holds a copy of ScheduleMain for testing.
    */
   private ScheduleMain my_scheduler;
+  private Student my_student;
+  private Advisor my_advisor;
+  private Teacher my_teacher;
+  private Advisor my_multi_advisor;
+  private Student my_multi_student;
+  
 
   /**
    * This method sets us the field for testing.
    */
-  public final void startUp(String test_file) {
-    my_scheduler = new ScheduleMain(test_file);
+  public final void startUp(final String the_test_file) {
+    my_scheduler = new ScheduleMain(the_test_file);
+    final Student my_student = new Student("obrother", 
+                                             "234567891", 
+                                             "Ou Brother", 
+                                             new HashSet<Course>(),
+                                             new ArrayList<Time>());
+    final Teacher my_teacher = new Teacher("hseaward", 
+                                             "345678912", 
+                                             "Harold Seaward", 
+                                             new HashSet<Course>(), 25,
+                                             0, new HashSet<Course>(), 
+                                             new int[][]{});
+    final Advisor my_advisor = new Advisor("jsnuffy", 
+                                             "123456789", 
+                                             "Joe Snuffy", 
+                                             new ArrayList<Course>());
+    final Student my_multi_student = new Student("darmstrong",
+                                                        "456789123",
+                                                        "Richard Armstrong",
+                                                        new HashSet<Course>(),
+                                                        new ArrayList<Time>());
+    final Advisor my_multi_advisor = new Advisor("darmstrong",
+                                                       "456789123",
+                                                       "Richard Armstrong",
+                                                       new ArrayList<Course>());
+
   }
   
   /**
@@ -59,13 +90,9 @@ public class ScheduleMainTest {
   @Test
   public void loadUserFileAdvisorTest() {
     startUp("singleAdvisorTestFile.txt");
-    final Advisor test_advisor = new Advisor("jsnuffy", 
-                                             "123456789", 
-                                             "Joe Snuffy", 
-                                             new HashSet<Course>());
 
-    assertEquals("Users should be the same", test_advisor, 
-                                my_scheduler.getUser("jsnuffy").getAdvisor());
+    assertTrue("Users should be the same", my_advisor.equals( 
+                                my_scheduler.getUser("jsnuffy").getAdvisor()));
   }
 
   /**
@@ -75,13 +102,8 @@ public class ScheduleMainTest {
   @Test
   public void loadUserFileStudentTest() {
     startUp("singleStudentTestFile.txt");
-    final Student test_student = new Student("obrother", 
-                                             "234567891", 
-                                             "Ou Brother", 
-                                             new HashSet<Course>(), 
-                                             new ArrayList<Time>());
 
-    assertEquals("Users should be the same", test_student,
+    assertEquals("Users should be the same", my_student,
                          my_scheduler.getUser("obrother").getStudent());
   }
 
@@ -92,14 +114,8 @@ public class ScheduleMainTest {
   @Test
   public void loadUserFileTeacherTest() {
     startUp("singleTeacherTestFile.txt");
-    final Teacher test_teacher = new Teacher("hseaward", 
-                                             "345678912", 
-                                             "Harold Seaward", 
-                                             new HashSet<Course>(), 25,
-                                             0, new HashSet<Course>(),
-                                             new int[][]{});
 
-    assertEquals("Users should be the same", test_teacher, 
+    assertEquals("Users should be the same", my_teacher, 
                          my_scheduler.getUser("hseaward"));
   }
   
@@ -110,21 +126,11 @@ public class ScheduleMainTest {
   @Test
   public void loadSingleMultiRoleUserTest() {
     startUp("singleMultiRoledUserTestFile.txt");
-    final Student multi_role_test_student = new Student("darmstrong",
-                                              "456789123",
-                                              "Richard Armstrong",
-                                              new HashSet<Course>(),
-                                              new LinkedList<Time>());
-    final Advisor multi_role_test_advisor = new Advisor("darmstrong",
-                                             "456789123",
-                                             "Richard Armstrong",
-                                             new HashSet<Course>());
-    
+
     final UserRoleList test_user_list = my_scheduler.getUser("darmstrong");
 
-    assertTrue(test_user_list.getStudent().equals(multi_role_test_student) &&
-                  test_user_list.getAdvisor().equals(multi_role_test_advisor));
-    
+    assertTrue(test_user_list.getStudent().equals(my_multi_student) &&
+                  test_user_list.getAdvisor().equals(my_multi_advisor));
   }
   
   /**
@@ -134,38 +140,13 @@ public class ScheduleMainTest {
   @Test
   public void loadMultipleUsersTest() {
     startUp("multipleUsersTestFile.txt");
-    final Student test_student = new Student("obrother", 
-                                             "234567891", 
-                                             "Ou Brother", 
-                                             new HashSet<Course>(),
-                                             new ArrayList<Time>());
-    final Teacher test_teacher = new Teacher("hseaward", 
-                                             "345678912", 
-                                             "Harold Seaward", 
-                                             new HashSet<Course>(), 25,
-                                             0, new HashSet<Course>(), 
-                                             new int[][]{});
-    final Advisor test_advisor = new Advisor("jsnuffy", 
-                                             "123456789", 
-                                             "Joe Snuffy", 
-                                             new HashSet<Course>());
-    final Student multi_role_test_student = new Student("darmstrong",
-                                                        "456789123",
-                                                        "Richard Armstrong",
-                                                        new HashSet<Course>(),
-                                                        null);
-    final Advisor multi_role_test_advisor = new Advisor("darmstrong",
-                                                       "456789123",
-                                                       "Richard Armstrong",
-                                                       new HashSet<Course>());
-
     final UserRoleList test_user_list = my_scheduler.getUser("darmstrong");
     
-    assertTrue(test_user_list.contains(multi_role_test_student) &&
-               test_user_list.contains(multi_role_test_advisor) && 
-               test_student.equals(my_scheduler.getUser("obrother")) &&
-               test_teacher.equals(my_scheduler.getUser("hseaward")) &&
-               test_advisor.equals(my_scheduler.getUser("jsnuffy")));
+    assertTrue(test_user_list.getStudent().equals(my_multi_student) &&
+               test_user_list.getAdvisor().equals(my_multi_advisor) && 
+               my_student.equals(my_scheduler.getUser("obrother")) &&
+               my_teacher.equals(my_scheduler.getUser("hseaward")) &&
+               my_advisor.equals(my_scheduler.getUser("jsnuffy")));
   }
   
 }

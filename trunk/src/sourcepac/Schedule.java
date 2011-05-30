@@ -80,7 +80,7 @@ public class Schedule {
     for(int i = 0; i < a_student_list.size(); i++)  {
       for(int j = 0; j < a_course_list.size(); j++)  {
 //        for(int k = 0; k < a_student_list.get(i).getPreferedCourses().size(); k++)  {
-          if (a_student_list.get(i).getPreferedCourses().contains(a_course_list.get(j)))  {
+          if (a_student_list.get(i).getPreferredCourses().contains(a_course_list.get(j)))  {
             student_preference_adder[j]++;
 //          }
         }  
@@ -106,7 +106,7 @@ public class Schedule {
      */
     for(int i = 0; i < finished_course_list.size(); i++) {
       for(int j = 0; j < an_advisor_list.size(); j++)  {
-        Iterator<Course> advisor_iter = an_advisor_list.get(j).getPreferedCourses().iterator();
+        Iterator<Course> advisor_iter = an_advisor_list.get(j).getPreferredCourses().iterator();
         while (advisor_iter.hasNext())  {
           Course current = advisor_iter.next();
           if(current != finished_course_list.get(i))  {

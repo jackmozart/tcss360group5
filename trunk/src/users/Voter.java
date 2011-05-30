@@ -38,7 +38,7 @@ public class Voter extends AuthenticatableUser {
    * 
    * @return the preferred courses
    */
-  public Set<Course> getPreferedCourses() {
+  public Set<Course> getPreferredCourses() {
     return my_preferred_courses;
   }
 
