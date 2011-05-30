@@ -219,7 +219,9 @@ public class Teacher extends Voter implements Comparable{
   public Set<CourseCopy> getCourses (){
     return my_courses;
   }
- 
-
+  
+  public int[][] getTimePrefrences() {
+    return my_availability;
+  }
 
 }
