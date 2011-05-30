@@ -67,7 +67,7 @@ public class Constraints {
     for (CourseCopy course : my_courses) {
       index = 1 + my_courses.indexOf(course);
       curr_course = my_courses.get(index);
-      while (course.getStartTime() > curr_course.getEndTime()) {
+      while (course.getTime().getStartTime() > curr_course.getTime().getEndTime()) {
         posible_time_conflicts.add(curr_course);
         curr_course = my_courses.get(index);
         index++;
@@ -80,7 +80,7 @@ public class Constraints {
           error_message.append(course.getTeacher());
           error_message.append(" is teaching " + course.getCourseTitle() + " and " +
                                course_conflicts.getCourseTitle() + "  at the same time (");
-          error_message.append(course.getStartTime() + ")\n");
+          error_message.append(course.getTime().getStartTime() + ")\n");
         }
       }
     }
@@ -141,8 +141,8 @@ public class Constraints {
   public List<Course> checkAdvisorPrefrences(){  
     List<Course> missingCourses = new ArrayList<Course>();
     for(Advisor advisor: my_advisors){
-      for(Course preferedCourse:advisor.getPreferedCourses()){
-        String courseName = preferedCourse.getCourseTitle();
+      for(Course preferredCourse:advisor.getPreferredCourseList()){
+        String courseName = preferredCourse.getCourseTitle();
         boolean courseFound = false;
         for (CourseCopy courses: my_courses){
           if(courses.getCourseTitle().equals(courseName)){
@@ -151,7 +151,7 @@ public class Constraints {
           }     
         }
         if(!courseFound){
-          missingCourses.add(preferedCourse);
+          missingCourses.add(preferredCourse);
         }
       }
     }
