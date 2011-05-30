@@ -58,8 +58,8 @@ public class Constraints {
    * @return Error message for each violation in which a teacher is teaching two
    *         classes at the same time.
    */
-  public String teacherSameTimes() {
-    final StringBuilder error_message = new StringBuilder();
+  public List<CourseCopy> teacherSameTimes() {
+    List<CourseCopy> dissLikedCourses = new ArrayList<CourseCopy>();
     final List<CourseCopy> posible_time_conflicts = new ArrayList<CourseCopy>();
     CourseCopy curr_course = my_courses.get(0);
     int index = 0;
@@ -77,14 +77,11 @@ public class Constraints {
     for (CourseCopy course : my_courses) {
       for (CourseCopy course_conflicts : posible_time_conflicts) {
         if (course.getTeacher().equals(course_conflicts.getTeacher())) {
-          error_message.append(course.getTeacher());
-          error_message.append(" is teaching " + course.getCourseTitle() + " and " +
-                               course_conflicts.getCourseTitle() + "  at the same time (");
-          error_message.append(course.getTime().getStartTime() + ")\n");
+          dissLikedCourses.add(course);
         }
       }
     }
-    return error_message.toString();
+    return dissLikedCourses;
   }
 
   /**
@@ -194,8 +191,7 @@ public class Constraints {
       int[][] preferedTimes = currTeacher.getTimePreferences();
       Set<CourseCopy> coursesSet = currTeacher.getCourses();
       //goes through each course assigned to a teachers 
-      for (CourseCopy course: coursesSet) {
-         boolean [] days = course.getDays();
+      for (CourseCopy course: coursesSet) {         
          
         //if days dont match
         //if time dont match
