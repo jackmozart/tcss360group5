@@ -1,10 +1,12 @@
 
 package users;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
 import sourcepac.Course;
+import sourcepac.CourseCopy;
 
 /**
  * This class represent the data for a teacher's preferences and profile It
@@ -37,6 +39,8 @@ public class Teacher extends Voter implements Comparable{
    * This field holds the number of credits the teacher is currently assigned.
    */
   private int my_current_credit_load;
+  
+  private Set<CourseCopy> my_courses;
   
   /**
    * This constructor creates a Teacher object with the given parameters.
@@ -98,7 +102,7 @@ public class Teacher extends Voter implements Comparable{
     my_current_credit_load = the_curr_credit_load;
     my_unpreferred_courses = the_unpreferred_courses;
     my_availability = the_availability;
-    
+    my_courses = new HashSet<CourseCopy>();
     my_max_credit_load = DEFAULT_MAX_CREDIT_LOAD;
 
   }
@@ -114,7 +118,7 @@ public class Teacher extends Voter implements Comparable{
   }
   
   /**
-   * 
+   * @author Steven Cozart
    * @return
    */
   public int getCurrCredits(){
@@ -122,7 +126,7 @@ public class Teacher extends Voter implements Comparable{
   }
   
   /**
-   * 
+   * @author Steven Cozart
    * @param the_credits
    */
   public void setCurrCredits(int the_credits){
@@ -130,13 +134,17 @@ public class Teacher extends Voter implements Comparable{
   }
   
   /**
-   * 
+   * @author Steven Cozart
    * @return
    */
   public int getMaxCredits(){
     return my_max_credit_load;
   }
   
+  /**
+   * @author Steven Cozart
+   * @param the_credits
+   */
   public void setMaxCredits(int the_credits){
     my_max_credit_load = the_credits;
   }
@@ -189,10 +197,29 @@ public class Teacher extends Voter implements Comparable{
     
   }
 
-  public void setCredits(int i) {
-    // TODO Auto-generated method stub
-    
+  /**
+   * @author Steven Cozart
+   * @param the_course The course to be assigned to the teacher.
+   */
+  public void addCourse(CourseCopy the_course){
+    my_courses.add(the_course);
   }
+  
+  /**
+   * 
+   */
+  public void clearCourses(){
+    my_courses.clear();
+  }
+  
+  /**
+   * @author Steven Cozart
+   * @return All courses taught by the teacher 
+   */
+  public Set<CourseCopy> getCourses (){
+    return my_courses;
+  }
+ 
 
 
 }
