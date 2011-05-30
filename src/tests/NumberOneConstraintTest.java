@@ -74,8 +74,8 @@ public class NumberOneConstraintTest {
       for (int j = i + 1; j < my_schedule_list_one.size(); j++) {
         if (my_schedule_list_one.get(i).getTeacher().equals
            (my_schedule_list_one.get(j).getTeacher())) {
-          if (my_schedule_list_one.get(i).getStartTime() ==
-              my_schedule_list_one.get(j).getStartTime() &&
+          if (my_schedule_list_one.get(i).getTime().getStartTime() ==
+              my_schedule_list_one.get(j).getTime().getStartTime() &&
               my_schedule_list_two.get(i).getDays() ==
                     my_schedule_list_two.get(j).getDays()) {
             fail("The teacher (teacher name here) is teaching" +
@@ -96,8 +96,8 @@ public class NumberOneConstraintTest {
       for (int j = i + 1; j < my_schedule_list_two.size(); j++) {
         if (my_schedule_list_two.get(i).getTeacher()
         	.equals(my_schedule_list_two.get(j).getTeacher())) {
-          if (my_schedule_list_two.get(i).getStartTime() ==
-        	  my_schedule_list_two.get(j).getStartTime() &&
+          if (my_schedule_list_two.get(i).getTime().getStartTime() ==
+        	  my_schedule_list_two.get(j).getTime().getStartTime() &&
         	  my_schedule_list_two.get(i).getDays() ==
               my_schedule_list_two.get(j).getDays()) {
             fail("The teacher " + my_schedule_list_two.get(i).getTeacher() +
