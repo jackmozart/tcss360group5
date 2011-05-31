@@ -29,6 +29,7 @@ public class Display {
     errorMessage.append(getAdvisorPrefrences());
     errorMessage.append(getTeacherSameTimeConflicts());
     errorMessage.append(getTeacherPrefrences());
+    System.out.print(errorMessage);
     return errorMessage.toString();
   }
 
