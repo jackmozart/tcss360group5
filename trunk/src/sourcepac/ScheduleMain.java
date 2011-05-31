@@ -26,6 +26,7 @@ import users.Voter;
  * program.
  * 
  * @author Phillip Bernard comments by Steven Cozart
+ * 
  * @version 6.3 5/30/2011 
  * @version 5.2 5/28/2011 fixed a mysterious bug in loadCourseTimes()
  * @version 4.2 5/23/2011 finished loadUsers()
@@ -90,10 +91,20 @@ public class ScheduleMain {
 
   /**
    * 
-   * @param the_args Unused array of strings.
+   * @param the_args The arguments for file locations.
    */
   public static void main(String[] the_args) {
     ScheduleMain sm = new ScheduleMain();
+    String input_schedule_location = the_args[0];
+    String output_location = the_args[1];
+    ScheduleGenerator sg = new ScheduleGenerator();
+    sg.importSchedule(input_schedule_location);
+    Constraints c = new Constraints(sg.getSchedule().getCourses(),
+                                                    sm.my_students, 
+                                                    sm.my_advisors, 
+                                                    sm.my_teachers);
+    Display d = new Display(c);
+    d.displayConstraitns();
   }
 
   /**
