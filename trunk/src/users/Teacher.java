@@ -14,8 +14,9 @@ import sourcepac.CourseCopy;
  * they are willing to take on, the classes they are willing and unwilling to
  * teach.
  * 
- * @author Phillip Bernard
- * @version 5/15/2011
+ * @author Phillip Bernard  
+ * @author Steven Cozart Many modifications and inclusion of several new methods
+ * @version 5/31/2011
  */
 public class Teacher extends Voter implements Comparable{
   /**
@@ -26,11 +27,13 @@ public class Teacher extends Voter implements Comparable{
    * This field holds the courses the teacher is unwilling to teach.
    */
   private Set<Course> my_unpreferred_courses;
+  
   /**
    * This field holds an availability matrix of the times the teacher is willing
    * and unwilling to teach.
    */
   private int[][] my_availability;
+  
   /**
    * This field holds the maximum credits the teacher is willing to take on.
    */
@@ -40,6 +43,9 @@ public class Teacher extends Voter implements Comparable{
    */
   private int my_current_credit_load;
   
+  /**
+   * Stores all courses taught by a teacher sorted by time.
+   */
   private Set<CourseCopy> my_courses;
   
   /**
@@ -203,10 +209,102 @@ public class Teacher extends Voter implements Comparable{
    */
   public void addCourse(CourseCopy the_course){
     my_courses.add(the_course);
+    sortCourses();
   }
   
   /**
-   * 
+   * @author Steven Cozart
+   * Sorts all courses according to day and time.
+   */
+  private void sortCourses() {
+    if(my_courses.isEmpty()){
+      return;
+    }
+    Set<CourseCopy> allSundayCourses = new HashSet<CourseCopy>();
+    Set<CourseCopy> allMondayCourses = new HashSet<CourseCopy>();
+    Set<CourseCopy> allTuesdayCourses = new HashSet<CourseCopy>();
+    Set<CourseCopy> allWedCourses = new HashSet<CourseCopy>();
+    Set<CourseCopy> allThursCourses = new HashSet<CourseCopy>();
+    Set<CourseCopy> allFridayCourses = new HashSet<CourseCopy>();
+    Set<CourseCopy> allSatCourses = new HashSet<CourseCopy>();
+
+    // go through all courses and sort them by time, (radix type sort)
+    for (CourseCopy course : my_courses) {
+      boolean[] days = course.getDays();
+      if (days[0]) {
+        allSundayCourses.add(course);
+      } else if (days[1]) {
+        allMondayCourses.add(course);
+      } else if (days[2]) {
+        allTuesdayCourses.add(course);
+      } else if (days[3]) {
+        allWedCourses.add(course);
+      } else if (days[4]) {
+        allThursCourses.add(course);
+      } else if (days[5]) {
+        allFridayCourses.add(course);
+      } else {
+        allSatCourses.add(course);
+      }
+    }
+    
+    //sorts all days by times
+    allSundayCourses =  sortTimes(allSundayCourses);
+    allMondayCourses = sortTimes(allMondayCourses);
+    allTuesdayCourses = sortTimes(allTuesdayCourses);
+    allWedCourses = sortTimes(allWedCourses);
+    allThursCourses = sortTimes(allThursCourses);
+    allFridayCourses = sortTimes(allFridayCourses);
+    allSatCourses = sortTimes(allSatCourses);
+    
+    //clears field and places sorted elements in.
+    my_courses.clear();
+    my_courses.addAll(allSundayCourses);
+    my_courses.addAll(allMondayCourses);
+    my_courses.addAll(allTuesdayCourses);
+    my_courses.addAll(allWedCourses);
+    my_courses.addAll(allThursCourses);
+    my_courses.addAll(allFridayCourses);
+    my_courses.addAll(allSatCourses);
+
+  }
+  
+ 
+  /**
+   * Sorts courses according to time.(lowest listed first)
+   * @author Steven Cozart
+   * @param the_Courses The courses to be sorted.
+   */
+  private Set<CourseCopy> sortTimes(Set<CourseCopy> the_Courses) {
+    if (the_Courses.isEmpty()) {
+      return the_Courses;
+    }
+
+    int size = the_Courses.size();
+    CourseCopy[] sortedCourses = (CourseCopy[]) the_Courses.toArray();
+    // yay! bubble sort is most efficient.
+    for (int i = 0; i < size; i++) {
+      for (int j = size - 1; j > i; j--) {
+        // gets neighboring objects and compares start time
+        if (sortedCourses[j - 1].getTime().getStartTime() < sortedCourses[j].getTime()
+            .getStartTime()) {
+          CourseCopy temp = sortedCourses[j - 1];
+          sortedCourses[j - 1] = sortedCourses[j];
+          sortedCourses[j] = temp;
+        }
+      }
+    }
+    Set<CourseCopy> sortedSet = new HashSet<CourseCopy>();
+    for(CourseCopy course: sortedCourses){
+      sortedSet.add(course);
+    }
+    return sortedSet;
+  }
+  
+  
+  
+  /**
+   * Clears all courses from the course list.
    */
   public void clearCourses(){
     my_courses.clear();
