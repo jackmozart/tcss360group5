@@ -32,6 +32,11 @@ public class CourseCopy extends Course {
    * Day of the course.
    */
   private boolean[] my_days;
+
+  /**
+   * The time block assigned to this course.
+   */
+  private int my_block;
   
   /**
    * This constructor creates a course object from the given parameters.
@@ -94,6 +99,14 @@ public class CourseCopy extends Course {
    */
   public Time getTime() {
     return my_time;
+  }
+  
+  /**
+   * 
+   * @return Time block assigned to this course.
+   */
+  public int getBlockNum(){
+    return my_block;
   }
   
   /**

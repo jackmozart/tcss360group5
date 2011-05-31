@@ -1,6 +1,7 @@
 package sourcepac;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -10,7 +11,7 @@ import users.Teacher;
 
 /**
  * 
- * @author Steven Cozart 
+ * @author Steven Cozart
  * 
  * @version 5/28/2011 Adjusted checkCreditLoad to use Teacher's methods -PB
  * @version Last update May 25 2011
@@ -18,11 +19,11 @@ import users.Teacher;
 public class Constraints {
 
   private List<Student> my_students;
-  
+
   private List<CourseCopy> my_courses;
-  
+
   private List<Teacher> my_teachers;
-  
+
   private List<Advisor> my_advisors;
 
   /**
@@ -41,48 +42,81 @@ public class Constraints {
 
   }
 
-  /**
-   * @return A description of all failed tests.  
-   */
-  public String runTests() {
-    final StringBuilder test_results = new StringBuilder();
-    test_results.append(teacherSameTimes());
-    test_results.append(checkCreditLoad());
-    return test_results.toString();
-  }
 
   /**
-   * Tests if a teacher is teaching two classes at the same time.
-   * Error message format (Teacher) is teaching (class1) and (class2) at the same time (start time)".
-   * @pre Requires a sorted list.
+   * Tests if a teacher is teaching two classes at the same time. Error message
+   * format (Teacher) is teaching (class1) and (class2) at the same time (start
+   * time)".
+   * 
+   * @pre Requires course list is a sorted list.
    * @return Error message for each violation in which a teacher is teaching two
    *         classes at the same time.
    */
   public List<CourseCopy> teacherSameTimes() {
     List<CourseCopy> dissLikedCourses = new ArrayList<CourseCopy>();
-    final List<CourseCopy> posible_time_conflicts = new ArrayList<CourseCopy>();
-    CourseCopy curr_course = my_courses.get(0);
-    int index = 0;
-    //reads through each course collection possible conflicts
-    for (CourseCopy course : my_courses) {
-      index = 1 + my_courses.indexOf(course);
-      curr_course = my_courses.get(index);
-      while (course.getTime().getStartTime() > curr_course.getTime().getEndTime()) {
-        posible_time_conflicts.add(curr_course);
-        curr_course = my_courses.get(index);
-        index++;
-      }
-    }
-    //reads through each course comparing it to its possible conflicts 
-    for (CourseCopy course : my_courses) {
-      for (CourseCopy course_conflicts : posible_time_conflicts) {
-        if (course.getTeacher().equals(course_conflicts.getTeacher())) {
-          dissLikedCourses.add(course);
+    
+    for (Teacher teacher : my_teachers) {
+      if (!teacher.getCourses().isEmpty()) { // if teacher has courses
+        Set<CourseCopy> allSundayCourses = new HashSet<CourseCopy>();
+        Set<CourseCopy> allMondayCourses = new HashSet<CourseCopy>();
+        Set<CourseCopy> allTuesdayCourses = new HashSet<CourseCopy>();
+        Set<CourseCopy> allWedCourses = new HashSet<CourseCopy>();
+        Set<CourseCopy> allThursCourses = new HashSet<CourseCopy>();
+        Set<CourseCopy> allFridayCourses = new HashSet<CourseCopy>();
+        Set<CourseCopy> allSatCourses = new HashSet<CourseCopy>();
+
+        // go through all courses and sort them by time, (radix type sort)
+        for (CourseCopy course : my_courses) {
+          boolean[] days = course.getDays();
+          if (days[0]) {
+            allSundayCourses.add(course);
+          } else if (days[1]) {
+            allMondayCourses.add(course);
+          } else if (days[2]) {
+            allTuesdayCourses.add(course);
+          } else if (days[3]) {
+            allWedCourses.add(course);
+          } else if (days[4]) {
+            allThursCourses.add(course);
+          } else if (days[5]) {
+            allFridayCourses.add(course);
+          } else {
+            allSatCourses.add(course);
+          }
         }
+        
+        //sorts all days by times
+        List<Set<CourseCopy>> allDays = new ArrayList<Set<CourseCopy>>();
+        allDays.add(allSundayCourses);
+        allDays.add(allMondayCourses);
+        allDays.add(allTuesdayCourses);
+        allDays.add(allWedCourses);
+        allDays.add(allThursCourses);
+        allDays.add(allFridayCourses);
+        allDays.add(allSatCourses);
+        //goes through each day checking times to ensure there is no overlap
+        for (Set<CourseCopy> day : allDays) {
+          if (!day.isEmpty()) {
+            int i = 1;
+            CourseCopy[] coursesToCompare = (CourseCopy[]) day.toArray();
+            for (CourseCopy course : day) {              
+              for (int j = i ; j < coursesToCompare.length; j++) {
+                if (course.getTime().getEndTime() > coursesToCompare[j].getTime().getStartTime()) {
+                  dissLikedCourses.add(course);
+                }
+              }
+              i++;//push start to ensure i don't double check elements
+            }
+            
+          }
+        }
+
       }
     }
     return dissLikedCourses;
+
   }
+   
 
   /**
    * Checks teacher credit load.
@@ -178,8 +212,9 @@ public class Constraints {
   }
   
   /**
+   * Checks teacher availability.
    * @pre getTimePrefrences() != null, getDayPrefrences() != null
-   * @pre timeBlocks() !=null
+   * @pre timeBlocks() !=null, teachers.getCourses is sorted
    * @return The courses that violate the day or time constraints 
    */
   public List<CourseCopy> checkTeacherTimes(){
@@ -191,11 +226,16 @@ public class Constraints {
       int[][] preferedTimes = currTeacher.getTimePreferences();
       Set<CourseCopy> coursesSet = currTeacher.getCourses();
       //goes through each course assigned to a teachers 
-      for (CourseCopy course: coursesSet) {         
-         
-        //if days dont match
-        //if time dont match
-        
+      for (CourseCopy course: coursesSet) {
+         boolean [] daysTaught = course.getDays();
+         //checks each day of the week
+         for(int i = 0; i < 7; i++){
+           if(daysTaught[i]){
+             if(preferedTimes[i][course.getBlockNum()] == -1){
+               disslikeCoursesTimes.add(course);
+             }
+           }
+         }
       }
 
     }
