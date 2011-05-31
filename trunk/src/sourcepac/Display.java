@@ -24,8 +24,12 @@ public class Display {
   /**
    * Displays all constraints.
    */
-  public void displayConstraitns() {
-
+  public String displayConstraitns() {
+    final StringBuilder errorMessage = new StringBuilder();
+    errorMessage.append(getAdvisorPrefrences());
+    errorMessage.append(getTeacherSameTimeConflicts());
+    errorMessage.append(getTeacherPrefrences());
+    return errorMessage.toString();
   }
 
   /**
@@ -34,7 +38,12 @@ public class Display {
    */
   private String getAdvisorPrefrences() {
     final StringBuilder errorMessage = new StringBuilder();
-    errorMessage.append("");
+    errorMessage
+        .append("The following courses are not included in the schedual and have been requested by an advisor:");
+    List<Course> missingCourses = my_Constraints.checkAdvisorPrefrences();
+    for (Course aCourse : missingCourses){
+      errorMessage.append(aCourse.getCourseTitle() + "\n");
+    }
     return errorMessage.toString();
   }
 
