@@ -61,8 +61,12 @@ public class Display {
     errorMessage
         .append("The following teachers have more credits assinged then their preset limit: ");
     List<Teacher> missingCourses = my_Constraints.checkCreditLoad();
-    for (Teacher aTeacher : missingCourses){
-      errorMessage.append(aTeacher.getName() + "\n");
+    if(missingCourses.isEmpty()){
+      errorMessage.append("None\n");
+    } else {
+      for (Teacher aTeacher : missingCourses) {
+        errorMessage.append(aTeacher.getName() + "\n");
+      }
     }
     return errorMessage.toString();
   }
@@ -76,8 +80,12 @@ public class Display {
     errorMessage
         .append("The following courses are not included in the schedule and have been requested by an advisor: ");
     List<Course> missingCourses = my_Constraints.checkAdvisorPreferences();
-    for (Course aCourse : missingCourses){
-      errorMessage.append(aCourse.getCourseTitle() + "\n");
+    if(missingCourses.isEmpty()){
+      errorMessage.append("None\n");
+    } else {
+      for (Course aCourse : missingCourses) {
+        errorMessage.append(aCourse.getCourseTitle() + "\n");
+      }
     }
     return errorMessage.toString();
   }
@@ -90,8 +98,12 @@ public class Display {
     final StringBuilder errorMessage = new StringBuilder();
     errorMessage.append("The following courses are taught by the same teacher at the same time:\n");
     List<CourseCopy> dissLikedCourses = my_Constraints.teacherSameTimes();
-    for (CourseCopy course : dissLikedCourses) {
-      errorMessage.append(course.getCourseTitle() + "\n");
+    if(dissLikedCourses.isEmpty()){
+      errorMessage.append("None\n");
+    } else {
+      for (CourseCopy course : dissLikedCourses) {
+        errorMessage.append(course.getCourseTitle() + "\n");
+      }
     }
     return errorMessage.toString();
   }
@@ -105,8 +117,12 @@ public class Display {
     final StringBuilder errorMessage = new StringBuilder();
     errorMessage.append("The following courses are taught by a teacher outside of the teachers avaliablity:\n");
     List<CourseCopy> dissLikedCourses = my_Constraints.checkTeacherPreference();
-    for (CourseCopy course : dissLikedCourses) {
-      errorMessage.append(course.getCourseTitle() + "\n");
+    if(dissLikedCourses.isEmpty()){
+      errorMessage.append("None\n");
+    } else {
+      for (CourseCopy course : dissLikedCourses) {
+        errorMessage.append(course.getCourseTitle() + "\n");
+      }
     }
     return errorMessage.toString();
   }
@@ -121,8 +137,12 @@ public class Display {
     errorMessage
         .append("The following courses are taught by teachers who stated they did not wish to teach the course:\n");
     List<CourseCopy> dissLikedCourses = my_Constraints.checkTeacherPreference();
-    for (CourseCopy course : dissLikedCourses) {
-      errorMessage.append(course.getCourseTitle() + "\n");
+    if(dissLikedCourses.isEmpty()){
+      errorMessage.append("None\n");
+    } else {
+      for (CourseCopy course : dissLikedCourses) {
+        errorMessage.append(course.getCourseTitle() + "\n");
+      }
     }
     return errorMessage.toString();
   }
@@ -137,8 +157,12 @@ public class Display {
     errorMessage
         .append("The following courses have been requested by the preset number of students but are not being offered:\n");
     List<Course> dissLikedCourses = my_Constraints.checkStudentCoursePreferences();
-    for (Course course : dissLikedCourses) {
-      errorMessage.append(course.getCourseTitle() + "\n");
+    if(dissLikedCourses.isEmpty()){
+      errorMessage.append("None\n");
+    } else {
+      for (Course course : dissLikedCourses) {
+        errorMessage.append(course.getCourseTitle() + "\n");
+      }
     }
     return errorMessage.toString();
   }

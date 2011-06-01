@@ -140,7 +140,6 @@ public class Constraints {
    */
   public List<Teacher> checkCreditLoad() {
     final List<Teacher> error_message = new ArrayList<Teacher>();
-    Teacher teacher = null;
     
     for (Teacher aTeacher : my_teachers) {
       for(CourseCopy course: aTeacher.getCourses()){
@@ -150,7 +149,7 @@ public class Constraints {
 
     for (Teacher teacher_pref : my_teachers) {
       if (teacher_pref.getMaxCredits() < teacher_pref.getCurrCredits()) {
-        error_message.add(teacher);
+        error_message.add(teacher_pref);
        }
      }
      return error_message;
@@ -218,15 +217,18 @@ public class Constraints {
       Set<CourseCopy> coursesSet = currTeacher.getCourses();
       //goes through each course assigned to a teachers 
       for (CourseCopy course: coursesSet) {
-         boolean [] daysTaught = course.getDays();
-         //checks each day of the week
-         for(int i = 0; i < 7; i++){
-           if(daysTaught[i]){
-             if(preferedTimes[i][course.getBlockNum()] == -1){
-               disslikeCoursesTimes.add(course);
-             }
-           }
-         }
+        if(course.getBlockNum() == -1){
+          boolean [] daysTaught = course.getDays();
+          //checks each day of the week
+          for(int i = 0; i < 7; i++){
+            if(daysTaught[i]){
+              if(preferedTimes[i][course.getBlockNum()] == -1){
+                disslikeCoursesTimes.add(course);
+              }
+            }
+          }
+        }
+
       }
 
     }

@@ -106,7 +106,7 @@ public class MainConstraintTest {
     teachers.add(testTeacher);
     Constraints testing = new Constraints(null, null, null, teachers);
     List<Teacher> the_teacher = testing.checkCreditLoad();
-    assertEquals("The list of teachers should have a single elment.", testTeacher ,the_teacher.get(0) );
+    assertEquals("The list of teachers should have a single elment.", testTeacher.getName() ,the_teacher.get(0).getName() );
   }
 
   /**
