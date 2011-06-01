@@ -153,8 +153,7 @@ public class CourseCopy extends Course {
         block = 4;
         break;
       default:
-        throw new IllegalArgumentException("Invalid time " + 
-                                             my_time.getStartTime());
+        block = -1;
     }
     my_block = block;
   }
