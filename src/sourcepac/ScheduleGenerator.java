@@ -2,6 +2,7 @@ package sourcepac;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
@@ -125,9 +126,27 @@ public class ScheduleGenerator {
     } catch (FileNotFoundException e) {
       System.err.println("Bad File name");
     }
+    
     out.print(the_constraints);
     out.close();
   }
+
+  private static void output(String out) {
+    FileOutputStream aFileOutStream;
+    PrintStream aPrintStream;
+    try
+    {
+    aFileOutStream = new FileOutputStream("constraints.txt");
+    aPrintStream = new PrintStream( aFileOutStream );
+    aPrintStream.format(out);
+    aPrintStream.close();
+    }
+    catch (Exception e)
+    {
+    System.err.println ("Error writing to file");
+    }
+
+    }
 
   /**
    * Getter method for the Schedule being generated.  Contains no
