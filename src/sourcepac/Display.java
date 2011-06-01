@@ -16,8 +16,8 @@ public class Display {
   private Constraints my_Constraints;
 
   /**
-   * 
-   * @param the_constraint
+   * Formats all lists of violations into a printable string.   
+   * @param the_constraint The constraint object to run tests on.
    */
   public Display(Constraints the_constraint) {
     my_Constraints = the_constraint;
@@ -34,7 +34,6 @@ public class Display {
     errorMessage.append(getTeacherCreditload());
     errorMessage.append(getStudentCourses());
     errorMessage.append(getStudentTime());
-    System.out.print(errorMessage);
     return errorMessage.toString();
   }
   
@@ -49,7 +48,6 @@ public class Display {
     errorMessage.append(getStudentCourses());
     errorMessage.append(getStudentTime());
     errorMessage.append(getTeacherCreditload());
-    System.out.print(errorMessage);
     return errorMessage.toString();
   }
   
