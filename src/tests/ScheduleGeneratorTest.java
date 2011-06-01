@@ -2,7 +2,6 @@ package tests;
 
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import java.util.List;
 
@@ -42,14 +41,9 @@ public class ScheduleGeneratorTest {
    * @throws Exception IOException
    * @author Lasse Koskela with changes by Chris Davidson
    */
-  @Test
-  public void loadImproperScheduleTest() throws Exception {
-    try {
-      my_generator.importSchedule("IDontExist.csv");
-      fail("IO should have messed up. Find out why it's working.");
-    } catch (Exception expected) {
-      // Test passes
-    }
+  @Test (expected = NullPointerException.class)
+  public void loadImproperScheduleTest(){
+    my_generator.importSchedule("IDontExist.csv");
   }
   
   /**
@@ -60,8 +54,9 @@ public class ScheduleGeneratorTest {
   public void loadsCorrectScheduleTest() {
     my_generator.importSchedule("OneCourse.csv");
     Schedule compare = new Schedule("Test Schedule");
-    compare.addCourse(new CourseCopy("TCSS360", "jtenenbg",5,
-                                     1615, 1820));
+    compare.addCourse(new CourseCopy("TCSS360", "A","Fun Class", 5,
+                                     1615, 1820, "Josh Tenenberg",
+                                     new boolean[7]));
     assertEquals((List<CourseCopy>) my_generator.
                  getSchedule().getCourses(), 
                  (List<CourseCopy>) compare.getCourses());
