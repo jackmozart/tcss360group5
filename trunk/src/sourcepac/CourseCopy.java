@@ -3,6 +3,7 @@ package sourcepac;
 
 /**
  * Course copy stores a inputed course assigned to a teacher and time.  
+ * 
  * @author Steven Cozart, Chris Davidson (constructor changes)
  * @version 1.0 5/16/11
  */

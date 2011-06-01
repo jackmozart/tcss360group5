@@ -104,7 +104,7 @@ public class ScheduleMain {
                                                     sm.my_advisors, 
                                                     sm.my_teachers);
     Display d = new Display(c);
-    d.displayConstraitns();
+    d.displayConstraints();
   }
 
   /**

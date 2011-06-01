@@ -1,6 +1,7 @@
 
 package users;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -34,9 +35,11 @@ public class Student extends Voter {
     super(the_username, the_password, the_name, the_courses);
     my_course = the_courses;
     my_times = the_times;
-
   }
   
+  public Set<Course> getCourses() {
+    return Collections.unmodifiableSet(my_course);
+  }
   
 
 }
