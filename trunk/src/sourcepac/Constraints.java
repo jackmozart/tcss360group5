@@ -258,8 +258,9 @@ public class Constraints {
   }
   
   /**
+   * This method
    * 
-   * @param schedule
+   * @param 
    * @return
    * @author Phillip Bernard
    */

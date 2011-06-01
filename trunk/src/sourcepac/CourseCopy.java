@@ -1,6 +1,10 @@
 
 package sourcepac;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Course copy stores a inputed course assigned to a teacher and time.  
  * 
@@ -52,6 +56,7 @@ public class CourseCopy extends Course {
     my_section = "A";
     my_time = new Time(0,0);
     my_days = new boolean[7];
+    setBlock();
   }
 
   /**
@@ -70,6 +75,7 @@ public class CourseCopy extends Course {
     my_section = "A";
     my_time = new Time(the_start, the_end);
     my_days = new boolean[7];
+    setBlock();
   }
 
   /**
@@ -92,6 +98,7 @@ public class CourseCopy extends Course {
     my_teacher = the_teacher;
     my_time = new Time(the_start, the_end);
     my_days = the_days;
+    setBlock();
   }
 
 
@@ -125,10 +132,15 @@ public class CourseCopy extends Course {
   }
 
   public void setBlock() {
-    switch(my_time.getStartTime()) {
-      //case ;//
-      
+    int block = 0;
+    List<Time> times = new ArrayList<Time>(ScheduleMain.my_course_times.values());
+    Collections.sort(times);
+    
+    while(!times.get(block).equals(my_time) && block < times.size()){
+      block++;
     }
+   
+    my_block = block;
   }
 
 }

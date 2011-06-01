@@ -2,7 +2,7 @@
 package sourcepac;
 /**
  * Will add comments later need sleep
- * @author Phillip
+ * @author Phillip Bernard;
  * @version 1.0 5/21/2011
  */
 public class Time implements Comparable{

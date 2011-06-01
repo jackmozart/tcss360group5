@@ -57,7 +57,7 @@ public class ScheduleMain {
   /**
    * All possible time blocks courses can be offered.
    */
-  private Map<Integer, Time> my_course_times;
+  public static  Map<Integer, Time> my_course_times;
   /**
    * List of all users.  
    */
