@@ -1,11 +1,12 @@
 The following courses are not included in the schedule and have been requested by an advisor: TCSS325
 The following courses are taught by the same teacher at the same time:
-None
+TCSS142
+TCSS422
 The following courses are taught by teachers who stated they did not wish to teach the course:
-None
+Peter Horak TCSS142
 The following courses have been requested by 0.1 of all students but are not being offered:
 None
 The following courses have been requested by 0.1 of all students but are not being offered at the desired times:
 None
-The following teachers have more credits assinged then their preset limit: 
+The following teachers have more credits assigned then their preset limit: 
 None

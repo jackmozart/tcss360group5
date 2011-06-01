@@ -56,7 +56,7 @@ public class Display {
    * 
    * @return The list of all teachers who exceed their credit set load.  
    */
-  private Object getTeacherCreditload() {
+  private String getTeacherCreditload() {
     final StringBuilder errorMessage = new StringBuilder();
     errorMessage
         .append("The following teachers have more credits assigned then their preset limit: ");
