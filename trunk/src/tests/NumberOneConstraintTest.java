@@ -24,7 +24,7 @@ public class NumberOneConstraintTest {
  /**
   * Start time at 8.
   */
-  public static final int START_TIME_ONE = 8;
+  public static final int START_TIME_ONE = 800;
 
  /**
   * First teacher name.
@@ -34,7 +34,7 @@ public class NumberOneConstraintTest {
  /**
   * End time at 10.
   */
-  public static final int END_TIME_ONE = 10;
+  public static final int END_TIME_ONE = 1000;
 
   /**
    * A list of CourseCopy.
