@@ -8,7 +8,9 @@ import java.util.List;
 import org.junit.Test;
 
 import sourcepac.Constraints;
+import sourcepac.Course;
 import sourcepac.CourseCopy;
+import users.Advisor;
 import users.Teacher;
 
 /**
@@ -33,10 +35,10 @@ public class MainConstraintTest {
                                       null);
     days[1] = true;
     CourseCopy first = new CourseCopy("TCSS360", "A","Fun Class", 5,
-                                      1615, 1820, "Josh Tenenberg",
+                                      1020, 1820, "Josh Tenenberg",
                                       days);
     CourseCopy second = new CourseCopy("TCSS360", "A","Fun Class", 5,
-                                      1700, 1820, "Josh Tenenberg",
+                                      1020, 1820, "Josh Tenenberg",
                                       days);
     courses.add(first);
     courses.add(second);
@@ -50,6 +52,7 @@ public class MainConstraintTest {
   /**
    * Tests checkCreditLoad, should return an empty list because
    * no credit loads were violated.
+   * @author Chris Davidson
    */
   @Test
   public void checkCreditLoadTest() {
@@ -61,10 +64,10 @@ public class MainConstraintTest {
                                       null);
     days[1] = true;
     CourseCopy first = new CourseCopy("TCSS360", "A","Fun Class", 5,
-                                      1615, 1820, "Josh Tenenberg",
+                                      1020, 1820, "Josh Tenenberg",
                                       days);
     CourseCopy second = new CourseCopy("TCSS360", "A","Fun Class", 5,
-                                      1700, 1820, "Josh Tenenberg",
+                                      1020, 1820, "Josh Tenenberg",
                                       days);
     courses.add(first);
     courses.add(second);
@@ -75,4 +78,22 @@ public class MainConstraintTest {
     assertTrue("The list of teachers should have been empty becauce no violations were made",testing.checkCreditLoad().isEmpty() );
   }
 
+  @Test
+  public void checkAdvisorPreferencesTest() {
+    List<Course> advisorPrefs = new ArrayList<Course>();
+    Course pref = new Course("TCSS360", "Awesome Class", 5);
+    advisorPrefs.add(pref);
+    Advisor testAdvisor = new Advisor("I Give Advice", "1234", "Paris Hilton",
+                                      advisorPrefs);
+    List<Advisor> advisors = new ArrayList<Advisor>();
+    advisors.add(testAdvisor);
+    List<CourseCopy> schedule = new ArrayList<CourseCopy>();
+    CourseCopy course = new CourseCopy("TCSS365", "A", "Wrong Class", 5,
+                                      1615, 1820, "Josh Tenenberg",
+                                      new boolean[7]);
+    schedule.add(course);
+    Constraints testing = new Constraints(schedule, null, advisors, null);
+    advisorPrefs = testing.checkAdvisorPreferences();
+    assertEquals(pref, advisorPrefs.get(0));
+  }
 }
