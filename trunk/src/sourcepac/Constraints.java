@@ -112,10 +112,10 @@ public class Constraints {
         //goes through each day checking times to ensure there is no overlap
         for (Set<CourseCopy> day : allDays) {
           if (!day.isEmpty()) {
-            int i = 1;
+            int i = 0;
             Object[] coursesToCompare =  day.toArray();
             for (CourseCopy course : day) {              
-              for (int j = i ; j < coursesToCompare.length; j++) {
+              for (int j = i + 1 ; j < coursesToCompare.length; j++) {
                 if (course.getTime().getEndTime() > ((CourseCopy) coursesToCompare[j]).getTime().getStartTime() && !course.equals(coursesToCompare[j])) {
                   dissLikedCourses.add(course);
                   dissLikedCourses.add((CourseCopy) coursesToCompare[j]);
