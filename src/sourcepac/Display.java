@@ -59,7 +59,7 @@ public class Display {
   private Object getTeacherCreditload() {
     final StringBuilder errorMessage = new StringBuilder();
     errorMessage
-        .append("The following teachers have more credits assinged then their preset limit: ");
+        .append("The following teachers have more credits assigned then their preset limit: ");
     List<Teacher> missingCourses = my_Constraints.checkCreditLoad();
     if(missingCourses.isEmpty()){
       errorMessage.append("\nNone");

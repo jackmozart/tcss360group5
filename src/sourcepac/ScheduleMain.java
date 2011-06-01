@@ -61,7 +61,7 @@ public class ScheduleMain {
   /**
    * List of all users.  
    */
-  private Map<String, UserRoleList> my_users;  
+  private static Map<String, UserRoleList> my_users;  
   private List<Student> my_students; 
   private List<Advisor> my_advisors;
   private List<Teacher> my_teachers; //is this what you want Steven?
@@ -96,6 +96,7 @@ public class ScheduleMain {
     String output_location = the_args[1];
     ScheduleGenerator sg = new ScheduleGenerator();
     sg.importSchedule(input_schedule_location);
+    addCoursesToTeachers(sg.getSchedule());
     Constraints c = new Constraints(sg.getSchedule().getCourses(),
                                                     sm.my_students, 
                                                     sm.my_advisors, 
@@ -206,8 +207,8 @@ public class ScheduleMain {
       String user_type;
       String user_name = "";
       String user_pass;
-      String first_name;
-      String last_name;
+      String first_name = "";
+      String last_name = "";
       int max_credit_load;
       int current_credit_load;
       Set<Course> preferred_courses = new HashSet<Course>();
@@ -267,18 +268,33 @@ public class ScheduleMain {
                                                                          linenumber);
         } 
       }
-      users.put(user_name, roles);
-      linenumber++;
+      users.put(first_name + " " + last_name, roles);//stores users by their full name could be changed to
+      linenumber++;               // username to implement a login system.
     }
     return users;
   }
   
-  public UserRoleList getUser(String the_username) {
-    return my_users.get(the_username); 
+  public static UserRoleList getUser(String the_name) {
+    return my_users.get(the_name); 
   }
   
   public List<Teacher> getTeachers() {
     return my_teachers;
+  }
+  
+  private static void addCoursesToTeachers(Schedule the_schedule) {
+    if(the_schedule != null) {
+      for(CourseCopy coursecopy : the_schedule.getCourses()){
+        String teacher_name = coursecopy.getTeacher();
+        if(!teacher_name.equals("TBA")) {
+          UserRoleList ur = getUser(teacher_name);
+          
+          if (ur!= null && ur.getTeacher()!= null) {
+            ur.getTeacher().addCourse(coursecopy);
+          }
+        }
+      }
+    }
   }
   
   /**

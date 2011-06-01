@@ -12,7 +12,8 @@ import sourcepac.Time;
  * This class holds the preference data for a Student.
  * 
  * @author Phillip Bernard
- * @version 5/10/2011
+ * @version 2.0 5/31/2011 Equals method and comments
+ * @version 1.0 5/11/2011
  */
 public class Student extends Voter {
   /**
@@ -36,15 +37,27 @@ public class Student extends Voter {
     my_course = the_courses;
     my_times = the_times;
   }
-  
+  /**
+   * Gets a set of courses that the student wants to take.
+   * 
+   * @return a set of courses
+   */
   public Set<Course> getCourses() {
     return Collections.unmodifiableSet(my_course);
   }
   
+  /**
+   * Gets a list of times that the student chose for classes.
+   * 
+   * @return a list of times
+   */
   public List<Time> getTimes() {
     return Collections.unmodifiableList(my_times);
   }
   
+  /**
+   * {@inheritDoc}
+   */
   public boolean equals(Object the_object) {
     boolean result = false;
     if(this == the_object){

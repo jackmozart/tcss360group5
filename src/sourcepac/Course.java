@@ -112,4 +112,8 @@ public class Course implements Comparable{
     }
     return result;
   }
+  
+  public int hashCode(){
+    return my_course_description.hashCode();
+  }
 }

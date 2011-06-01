@@ -15,7 +15,7 @@ import users.Teacher;
  * 
  * @author Steven Cozart
  * 
- * @version 5/31/2011 Added checkStudentCourse and Time Preference
+ * @version 5/31/2011 Added checkStudentCourse and Time Preference -PB
  * @version 5/28/2011 Adjusted checkCreditLoad to use Teacher's methods -PB
  * @version Last update May 25 2011
  */
@@ -68,8 +68,8 @@ public class Constraints {
    *         classes at the same time.
    */
   public List<CourseCopy> teacherSameTimes() {
-    List<CourseCopy> dissLikedCourses = new ArrayList<CourseCopy>();
-    
+    //List<CourseCopy> dissLikedCourses = new ArrayList<CourseCopy>();
+    Set<CourseCopy> dissLikedCourses = new HashSet<CourseCopy>();
     for (Teacher teacher : my_teachers) {
       if (!teacher.getCourses().isEmpty()) { // if teacher has courses
         Set<CourseCopy> allSundayCourses = new HashSet<CourseCopy>();
@@ -128,7 +128,7 @@ public class Constraints {
 
       }
     }
-    return dissLikedCourses;
+    return new ArrayList<CourseCopy>(dissLikedCourses);
 
   }
    
