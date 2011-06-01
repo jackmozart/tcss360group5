@@ -40,27 +40,27 @@ public class ScheduleMainTest {
    */
   public final void startUp(final String the_test_file) {
     my_scheduler = new ScheduleMain(the_test_file);
-    final Student my_student = new Student("obrother", 
+    my_student = new Student("obrother", 
                                              "234567891", 
                                              "Ou Brother", 
                                              new HashSet<Course>(),
                                              new ArrayList<Time>());
-    final Teacher my_teacher = new Teacher("hseaward", 
+    my_teacher = new Teacher("hseaward", 
                                              "345678912", 
                                              "Harold Seaward", 
                                              new HashSet<Course>(), 25,
                                              0, new HashSet<Course>(), 
                                              new int[][]{});
-    final Advisor my_advisor = new Advisor("jsnuffy", 
+    my_advisor = new Advisor("jsnuffy", 
                                              "123456789", 
                                              "Joe Snuffy", 
                                              new ArrayList<Course>());
-    final Student my_multi_student = new Student("darmstrong",
+    my_multi_student = new Student("darmstrong",
                                                         "456789123",
                                                         "Richard Armstrong",
                                                         new HashSet<Course>(),
                                                         new ArrayList<Time>());
-    final Advisor my_multi_advisor = new Advisor("darmstrong",
+    my_multi_advisor = new Advisor("darmstrong",
                                                        "456789123",
                                                        "Richard Armstrong",
                                                        new ArrayList<Course>());
@@ -87,9 +87,8 @@ public class ScheduleMainTest {
   @Test
   public void loadUserFileAdvisorTest() {
     startUp("singleAdvisorTestFile.txt");
-
-    assertTrue("Users should be the same", my_advisor.equals( 
-                                my_scheduler.getUser("jsnuffy").getAdvisor()));
+    assertTrue("Users should be the same", 
+          my_scheduler.getUser("jsnuffy").getAdvisor().equals(my_advisor));
   }
 
   /**
@@ -112,8 +111,8 @@ public class ScheduleMainTest {
   public void loadUserFileTeacherTest() {
     startUp("singleTeacherTestFile.txt");
 
-    assertEquals("Users should be the same", my_teacher, 
-                         my_scheduler.getUser("hseaward"));
+    assertEquals("Users should be the same", 
+                 my_teacher.equals(my_scheduler.getUser("hseaward")));
   }
   
   /**

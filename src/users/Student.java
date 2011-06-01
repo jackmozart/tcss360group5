@@ -45,4 +45,28 @@ public class Student extends Voter {
     return Collections.unmodifiableList(my_times);
   }
   
+  public boolean equals(Object the_object) {
+    boolean result = false;
+    if(this == the_object){
+      result = true;
+    }else if (the_object != null && the_object.getClass() == getClass()){
+      Student other_student = (Student) the_object;
+      
+      if(this.getName().equals(other_student.getName()) && 
+          this.getUsername().equals(other_student.getUsername()) &&
+          this.getPassword().equals(other_student.getPassword())) {
+        
+        Set<Course> other_courses = other_student.getPreferredCourses();
+        if(other_courses.size() == getPreferredCourses().size() && 
+                          other_courses.containsAll(getPreferredCourses())) {
+          if(other_student.getTimes().size() == getPreferredCourses().size() && 
+              other_student.getTimes().containsAll(getPreferredCourses())) {
+          
+            result = true;
+          }
+        }
+      }
+    }
+    return result;
+  }
 }
