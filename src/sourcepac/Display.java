@@ -24,7 +24,7 @@ public class Display {
   /**
    * Displays all constraints.
    */
-  public String displayConstraitns() {
+  public String displayConstraints() {
     final StringBuilder errorMessage = new StringBuilder();
     errorMessage.append(getAdvisorPrefrences());
     errorMessage.append(getTeacherSameTimeConflicts());

@@ -2,8 +2,11 @@ package sourcepac;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 import users.Advisor;
 import users.Student;
@@ -13,11 +16,18 @@ import users.Teacher;
  * 
  * @author Steven Cozart
  * 
+ * @version 5/31/2011 Added checkStudentCourse and Time Preference
  * @version 5/28/2011 Adjusted checkCreditLoad to use Teacher's methods -PB
  * @version Last update May 25 2011
  */
 public class Constraints {
 
+  /**
+   * This constant hold the percentage of votes from the entire student
+   * body that is needed for a course to be considered a preference. 
+   */
+  public static final double COURSE_PREFERENCE_THRESHOLD = .1;
+    
   private List<Student> my_students;
 
   private List<CourseCopy> my_courses;
@@ -241,5 +251,47 @@ public class Constraints {
     }
     return disslikeCoursesTimes;
   }
-
+  
+  /**
+   * 
+   * @param schedule
+   * @return
+   * @author Phillip Bernard
+   */
+  public List<Course> checkStudentCoursePreferences(List<Course> schedule) {
+    Set<Course> missed_courses = new HashSet<Course>();
+    Map<Course, Integer> tally = new TreeMap<Course, Integer>();
+    
+    int min_needed_votes = (int) (my_students.size() * COURSE_PREFERENCE_THRESHOLD);
+    /*
+     * This loop tallies the votes for courses from student preferences.
+     */
+    for(Student s: my_students) {
+      HashSet<Course> courses = (HashSet<Course>) s.getCourses();
+      
+      for(Course course : courses) {
+        if (tally.containsKey(course)) {
+          int num = tally.get(course);
+          tally.put(course, num + 1); //puts the course back with an extra vote added
+        } else {
+          tally.put(course, 1);
+        }
+      }
+    }
+    
+    /*
+     * This portion iterates though the tallied votes and checks if those courses
+     * are in the schedule.
+     */
+    for (Course course : tally.keySet()) {
+      
+      if (tally.get(course) >= min_needed_votes) {
+        if(!schedule.contains(course)) {
+          missed_courses.add(course);
+        }
+      }
+    }
+    
+    return new ArrayList<Course>(missed_courses);
+  }
 }
