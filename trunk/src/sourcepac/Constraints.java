@@ -234,12 +234,11 @@ public class Constraints {
     }
     return disslikeCoursesTimes;
   }
-  
+
   /**
-   * This method
    * 
-   * @param 
-   * @return
+   * @return List of courses not being offered and have been requested by a
+   *         number of students greater then the preference threshold.
    * @author Phillip Bernard
    */
   public List<Course> checkStudentCoursePreferences() {
@@ -284,8 +283,10 @@ public class Constraints {
   
   /**
    * 
-   * @return
+   * @return The list of all courses not courses that are not offered at the
+   *         desired time but are offered elsewhere.
    * @author Phillip Bernard
+   * @author Steven Cozart (comments only)
    */
   public List<Course> checkStudentTimePreferences() {
     Set<CourseCopy> missed_courses = new HashSet<CourseCopy>();

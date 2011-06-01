@@ -31,8 +31,9 @@ public class Display {
     errorMessage.append(getAdvisorPreferences());
     errorMessage.append(getTeacherSameTimeConflicts());
     errorMessage.append(getTeacherPreferences());
-    errorMessage.append(getStudentCourses());
     errorMessage.append(getTeacherCreditload());
+    errorMessage.append(getStudentCourses());
+    errorMessage.append(getStudentTime());
     System.out.print(errorMessage);
     return errorMessage.toString();
   }
@@ -45,8 +46,9 @@ public class Display {
     errorMessage.append(getAdvisorPreferences());
     errorMessage.append(getTeacherSameTimeConflicts());
     errorMessage.append(getTeacherPreferences());
-    errorMessage.append(getStudentCourses());
     errorMessage.append(getTeacherCreditload());
+    errorMessage.append(getStudentCourses());
+    errorMessage.append(getStudentTime());
     System.out.print(errorMessage);
     return errorMessage.toString();
   }
@@ -149,13 +151,12 @@ public class Display {
   
   /**
    * 
-   * @return List of all courses that are being taught by teachers who had the
-   *         courses on their dislike list.
+   * @return List courses requested by students but not offered.
    */
   private String getStudentCourses(){
     final StringBuilder errorMessage = new StringBuilder();
     errorMessage
-        .append("The following courses have been requested by the preset number of students but are not being offered:\n");
+        .append("The following courses have been requested by "+ Constraints.COURSE_PREFERENCE_THRESHOLD +" of all students but are not being offered:\n");
     List<Course> dissLikedCourses = my_Constraints.checkStudentCoursePreferences();
     if(dissLikedCourses.isEmpty()){
       errorMessage.append("None\n");
@@ -166,4 +167,25 @@ public class Display {
     }
     return errorMessage.toString();
   }
+  
+  /**
+   * 
+   * @return List of all courses offered but not at the student requested times. 
+   */
+  private String getStudentTime(){
+    final StringBuilder errorMessage = new StringBuilder();
+    errorMessage
+        .append("The following courses have been requested by "+ Constraints.TIME_PREFERENCE_THRESHOLD +" of all students but are not being offered at the desired times:\n");
+    List<Course> dissLikedCourses = my_Constraints.checkStudentTimePreferences();
+    if(dissLikedCourses.isEmpty()){
+      errorMessage.append("None\n");
+    } else {
+      for (Course course : dissLikedCourses) {
+        errorMessage.append(course.getCourseTitle() + "\n");
+      }
+    }
+    return errorMessage.toString();
+  }
+  
+  
 }
