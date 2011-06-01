@@ -138,46 +138,22 @@ public class Constraints {
    * 
    * @return Error message in form (teacher) exceeds credit load by (amount) credits.
    */
-  public String checkCreditLoad() {
-    final StringBuilder error_message = new StringBuilder();
+  public List<Teacher> checkCreditLoad() {
+    final List<Teacher> error_message = new ArrayList<Teacher>();
     Teacher teacher = null;
     
-    for (CourseCopy course : my_courses) {
-      String teacherName = course.getTeacher();
-      int i = 0;
-      boolean matchFound = false;
-      int numTeachers = my_teachers.size();
-      
-      do{
-        teacher = my_teachers.get(i);
-        matchFound = !my_teachers.get(i).getName().equals(teacherName);
-        i ++;
-        //if used to ensure that the list does not go beyond size of list in case of a missing teacher.
-        if(
-            i > numTeachers){
-          Teacher missingTeacher = new Teacher(teacherName, teacherName, teacherName, null, numTeachers, null, null);
-          my_teachers.add(missingTeacher);
-          teacher = missingTeacher;
-          matchFound = false;
-        }
+    for (Teacher aTeacher : my_teachers) {
+      for(CourseCopy course: aTeacher.getCourses()){
+       aTeacher.setCurrCredits(aTeacher.getCurrCredits() + course.getCredit());
       }
-      while (matchFound);
-      
-      teacher.setCurrCredits(  course.getCredit() + teacher.getCurrCredits());
-      
     }
-    
-    for(Teacher teacher_pref : my_teachers){
-      if(teacher_pref.getMaxCredits() < teacher.getCurrCredits()){
-        //appends error message (teacher) exceeds credit load by (amount) credits.
-        error_message.append(teacher_pref.getName());
-        error_message.append(" exceeds credit load by ");
-        error_message.append(teacher.getCurrCredits()- //PB I adjust this code so that it compiles and  
-                                           teacher_pref.getMaxCredits()); //uses the methods already in Teacher
-        error_message.append(" credits.\n ");
+
+    for (Teacher teacher_pref : my_teachers) {
+      if (teacher_pref.getMaxCredits() < teacher_pref.getCurrCredits()) {
+        error_message.add(teacher);
        }
      }
-     return error_message.toString();
+     return error_message;
   }
   
   /**

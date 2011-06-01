@@ -1,5 +1,6 @@
 package tests;
 
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +48,7 @@ public class MainConstraintTest {
   }
   
   /**
-   * Tests checkCreditLoad, should return an empty string because
+   * Tests checkCreditLoad, should return an empty list because
    * no credit loads were violated.
    */
   @Test
@@ -68,10 +69,10 @@ public class MainConstraintTest {
     courses.add(first);
     courses.add(second);
     testTeacher.addCourse(first);
+    testTeacher.addCourse(second);
     teachers.add(testTeacher);
-    Constraints testing = new Constraints(courses, null, null, teachers);
-    String credits = testing.checkCreditLoad();
-    assertEquals("", credits);
+    Constraints testing = new Constraints(null, null, null, teachers);
+    assertTrue("The list of teachers should have been empty becauce no violations were made",testing.checkCreditLoad().isEmpty() );
   }
 
 }

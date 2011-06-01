@@ -3,6 +3,8 @@ package sourcepac;
 
 import java.util.List;
 
+import users.Teacher;
+
 /**
  * Generates all strings for constraint class.  
  * @author Steven Cozart
@@ -30,7 +32,7 @@ public class Display {
     errorMessage.append(getTeacherSameTimeConflicts());
     errorMessage.append(getTeacherPreferences());
     errorMessage.append(getStudentCourses());
-   // errorMessage.append(getStudentCourses());
+    errorMessage.append(getTeacherCreditload());
     System.out.print(errorMessage);
     return errorMessage.toString();
   }
@@ -44,13 +46,30 @@ public class Display {
     errorMessage.append(getTeacherSameTimeConflicts());
     errorMessage.append(getTeacherPreferences());
     errorMessage.append(getStudentCourses());
+    errorMessage.append(getTeacherCreditload());
     System.out.print(errorMessage);
+    return errorMessage.toString();
+  }
+  
+  
+  /**
+   * 
+   * @return The list of all teachers who exceed their credit set load.  
+   */
+  private Object getTeacherCreditload() {
+    final StringBuilder errorMessage = new StringBuilder();
+    errorMessage
+        .append("The following teachers have more credits assinged then their preset limit: ");
+    List<Teacher> missingCourses = my_Constraints.checkCreditLoad();
+    for (Teacher aTeacher : missingCourses){
+      errorMessage.append(aTeacher.getName() + "\n");
+    }
     return errorMessage.toString();
   }
 
   /**
    * 
-   * @return
+   * @return Al courses being suggested by an advisor but not offered.  
    */
   private String getAdvisorPreferences() {
     final StringBuilder errorMessage = new StringBuilder();
@@ -65,7 +84,7 @@ public class Display {
 
   /**
    * 
-   * @return
+   * @return The List of all courses that are being taught by the same teacher at the same time.
    */
   private String getTeacherSameTimeConflicts() {
     final StringBuilder errorMessage = new StringBuilder();
