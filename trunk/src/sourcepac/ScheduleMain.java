@@ -4,11 +4,9 @@ package sourcepac;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +17,6 @@ import java.util.TreeMap;
 import users.Advisor;
 import users.Student;
 import users.Teacher;
-import users.Voter;
 
 /**
  * This class is the holds the data types needed for running the Scheduling
