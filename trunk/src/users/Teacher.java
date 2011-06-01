@@ -193,6 +193,9 @@ public class Teacher extends Voter implements Comparable{
     return result;
   }
   
+  /**
+   * {@inheritDoc}
+   */
   public boolean equals(Object other_object){
     boolean result = false;
     
