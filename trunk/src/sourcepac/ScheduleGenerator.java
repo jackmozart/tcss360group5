@@ -2,6 +2,7 @@ package sourcepac;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.util.Scanner;
 
 /**
@@ -28,10 +29,10 @@ public class ScheduleGenerator {
    * @pre fileName represents a valid, existing file containing 
    *      a correctly formatted schedule.
    * @post A Schedule in the format readable by the program. 
-   * @param fileName The name of the file for importing.
+   * @param the_file_name The name of the file for importing.
    */
-  public void importSchedule(String fileName) {
-    final File inputSchedule = new File(fileName);
+  public void importSchedule(String the_file_name) {
+    final File inputSchedule = new File(the_file_name);
     Scanner in = null;
     String current = "";
     String[] line = new String[8];
@@ -69,17 +70,17 @@ public class ScheduleGenerator {
    * @pre days represents days of the week in the format specified
    *      and contains "TBA" if no days are presently scheduled.
    * @post A representation of the days the given course is taught.
-   * @param days The String representing the days taught.
+   * @param the_days The String representing the days taught.
    * @return A boolean[] with appropriate values for the
    *         days taught.
    */
-  private boolean[] parseDays(String days) {
+  private boolean[] parseDays(String the_days) {
     boolean[] week = new boolean[7];
-    if(days.contains("TBA")) {
+    if(the_days.contains("TBA")) {
       return week;
     } else {
-      for(int i = 0; i < days.length(); i++) {
-        switch(days.charAt(i)) {
+      for(int i = 0; i < the_days.length(); i++) {
+        switch(the_days.charAt(i)) {
           case 'N':
             week[0] = true;
             break;
@@ -104,6 +105,28 @@ public class ScheduleGenerator {
       }
       return week;
     }
+  }
+  
+  /**
+   * This prints the calculated constraint violations to a text
+   * file.
+   * @pre the_file_name is a valid file name and the_constraints have
+   * been computed.
+   * @post A file containing the violated constraints.
+   * @param the_file_name The name of the output file
+   * @param the_constraints The representation of violated constraints
+   */
+  public void outputConstraintViolations(String the_file_name,
+                                String the_constraints) {
+    final File output = new File(the_file_name);
+    PrintStream out = null;
+    try {
+      out = new PrintStream(output);
+    } catch (FileNotFoundException e) {
+      System.err.println("Bad File name");
+    }
+    out.print(the_constraints);
+    out.close();
   }
 
   /**
