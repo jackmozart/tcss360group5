@@ -136,13 +136,15 @@ public class CourseCopy extends Course {
 
   public void setBlock() {
     int block = 0;
-    List<Time> times = new ArrayList<Time>(ScheduleMain.my_course_times.values());
-    Collections.sort(times);
     
-    while(!times.get(block).equals(my_time) && block < (times.size() - 1)){
-      block++;
+    if (ScheduleMain.my_course_times.values() != null) {
+      List<Time> times = new ArrayList<Time>(ScheduleMain.my_course_times.values());
+      Collections.sort(times);
+    
+      while(!times.get(block).equals(my_time) && block < (times.size() - 1)){
+        block++;
+      }
     }
-   
     my_block = block;
   }
 
