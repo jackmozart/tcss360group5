@@ -9,7 +9,10 @@ import java.util.List;
  * Course copy stores a inputed course assigned to a teacher and time.  
  * 
  * @author Steven Cozart, Chris Davidson (constructor changes)
- * @version 1.0 5/16/11
+ * @author Phillip Bernard setBlock()
+ * 
+ * @version 2.1 6/1/2011
+ * @version 1.0 5/16/2011
  */
 public class CourseCopy extends Course {
 
@@ -136,7 +139,7 @@ public class CourseCopy extends Course {
     List<Time> times = new ArrayList<Time>(ScheduleMain.my_course_times.values());
     Collections.sort(times);
     
-    while(!times.get(block).equals(my_time) && block < times.size()){
+    while(!times.get(block).equals(my_time) && block < (times.size() - 1)){
       block++;
     }
    
