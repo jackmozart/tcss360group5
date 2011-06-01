@@ -69,39 +69,56 @@ public class TeacherTest {
   }
   
   /**
-   * 
+   * Tests a unsorted assignment of classes and sees if they are sorted.
    */
   @Test
   public void courseSortTest(){
     boolean [] daysTaught = new boolean [7];
     daysTaught[1] = true;
     daysTaught[3] = true;
-    
-    my_teacher.addCourse(new CourseCopy("TCSS 343", "A", "A TCSS class", 5,
-                                        NumberOneConstraintTest.START_TIME_ONE, NumberOneConstraintTest.END_TIME_ONE, NumberOneConstraintTest.TEACHER_NAME_ONE, daysTaught));
-    my_teacher.addCourse(new CourseCopy("TCSS 342", "A", "A TCSS class", 5,
-                                        1230, 12400, NumberOneConstraintTest.TEACHER_NAME_ONE, daysTaught));
-    my_teacher.addCourse(new CourseCopy("TCSS 342", "A", "A TCSS class", 5,
-                                        1000, 1200, NumberOneConstraintTest.TEACHER_NAME_ONE, daysTaught));
-    my_teacher.addCourse(new CourseCopy("TCSS 342", "A", "A TCSS class", 5,
-                                        13, 1500, NumberOneConstraintTest.TEACHER_NAME_ONE, daysTaught));
-    CourseCopy[] actual = my_teacher.getCourses().toArray();
-    
+
+    my_teacher.addCourse(new CourseCopy("TCSS 343", "A", "A TCSS class", 5, 800, 1000,
+                                        NumberOneConstraintTest.TEACHER_NAME_ONE, daysTaught));
+    my_teacher.addCourse(new CourseCopy("TCSS 360", "A", "A TCSS class", 5, 1230, 12400,
+                                        NumberOneConstraintTest.TEACHER_NAME_ONE, daysTaught));
+    my_teacher.addCourse(new CourseCopy("TCSS 342", "A", "A TCSS class", 5, 1000, 1200,
+                                        NumberOneConstraintTest.TEACHER_NAME_ONE, daysTaught));
+    my_teacher.addCourse(new CourseCopy("TCSS 332", "A", "A TCSS class", 5, 1300, 1500,
+                                        NumberOneConstraintTest.TEACHER_NAME_ONE, daysTaught));
+
     Set<CourseCopy> expected = new HashSet<CourseCopy>();
-    expected.add(new CourseCopy("TCSS 343", "A", "A TCSS class", 5,
-                                800, 1000, NumberOneConstraintTest.TEACHER_NAME_ONE, daysTaught));
-    expected.add(new CourseCopy("TCSS 342", "A", "A TCSS class", 5,
-                                1000, 1200, NumberOneConstraintTest.TEACHER_NAME_ONE, daysTaught));
-    expected.add(new CourseCopy("TCSS 342", "A", "A TCSS class", 5,
-                                        1230, 12400, NumberOneConstraintTest.TEACHER_NAME_ONE, daysTaught));
-    expected.add(new CourseCopy("TCSS 342", "A", "A TCSS class", 5,
-                                        13, 1500, NumberOneConstraintTest.TEACHER_NAME_ONE, daysTaught));
-    
-    for
-    for(CourseCopy courseExpected:expected){
-      
-      assertEquals("The courses are out of order.",course ,);
-    }
+    expected.add(new CourseCopy("TCSS 343", "A", "A TCSS class", 5, 800, 1000,
+                                NumberOneConstraintTest.TEACHER_NAME_ONE, daysTaught));
+    expected.add(new CourseCopy("TCSS 342", "A", "A TCSS class", 5, 1000, 1200,
+                                NumberOneConstraintTest.TEACHER_NAME_ONE, daysTaught));
+    expected.add(new CourseCopy("TCSS 360", "A", "A TCSS class", 5, 1230, 1240,
+                                NumberOneConstraintTest.TEACHER_NAME_ONE, daysTaught));
+    expected.add(new CourseCopy("TCSS 332", "A", "A TCSS class", 5, 1300, 1500,
+                                NumberOneConstraintTest.TEACHER_NAME_ONE, daysTaught));
+
+    assertEquals("The courses are out of order.", expected, my_teacher.getCourses());
+
+  }
   
+  /**
+   * Tests a unsorted assignment of classes and sees if they are sorted.
+   */
+  @Test
+  public void clearCoursesTest(){
+    boolean [] daysTaught = new boolean [7];
+    daysTaught[1] = true;
+    daysTaught[3] = true;
+
+    my_teacher.addCourse(new CourseCopy("TCSS 343", "A", "A TCSS class", 5, 800, 1000,
+                                        NumberOneConstraintTest.TEACHER_NAME_ONE, daysTaught));
+    my_teacher.addCourse(new CourseCopy("TCSS 360", "A", "A TCSS class", 5, 1230, 12400,
+                                        NumberOneConstraintTest.TEACHER_NAME_ONE, daysTaught));
+    my_teacher.addCourse(new CourseCopy("TCSS 342", "A", "A TCSS class", 5, 1000, 1200,
+                                        NumberOneConstraintTest.TEACHER_NAME_ONE, daysTaught));
+    my_teacher.addCourse(new CourseCopy("TCSS 332", "A", "A TCSS class", 5, 1300, 1500,
+                                        NumberOneConstraintTest.TEACHER_NAME_ONE, daysTaught));
+    my_teacher.clearCourses();
+    assertTrue("The courses were not cleared.", my_teacher.getCourses().isEmpty());
+
   }
 }
