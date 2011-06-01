@@ -1,12 +1,16 @@
 package tests;
 
+import static org.junit.Assert.*;
+
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
 import org.junit.Before;
+import org.junit.Test;
 
 import sourcepac.Course;
+import sourcepac.CourseCopy;
 import users.Teacher;
 
 /**
@@ -60,5 +64,44 @@ public class TeacherTest {
     my_teacher =
         new Teacher("jten", "345678912", "Josh Ten", desiredCourses, 25, 0, unDesiredCourses,
                     dayBlock);
+    
+
+  }
+  
+  /**
+   * 
+   */
+  @Test
+  public void courseSortTest(){
+    boolean [] daysTaught = new boolean [7];
+    daysTaught[1] = true;
+    daysTaught[3] = true;
+    
+    my_teacher.addCourse(new CourseCopy("TCSS 343", "A", "A TCSS class", 5,
+                                        NumberOneConstraintTest.START_TIME_ONE, NumberOneConstraintTest.END_TIME_ONE, NumberOneConstraintTest.TEACHER_NAME_ONE, daysTaught));
+    my_teacher.addCourse(new CourseCopy("TCSS 342", "A", "A TCSS class", 5,
+                                        1230, 12400, NumberOneConstraintTest.TEACHER_NAME_ONE, daysTaught));
+    my_teacher.addCourse(new CourseCopy("TCSS 342", "A", "A TCSS class", 5,
+                                        1000, 1200, NumberOneConstraintTest.TEACHER_NAME_ONE, daysTaught));
+    my_teacher.addCourse(new CourseCopy("TCSS 342", "A", "A TCSS class", 5,
+                                        13, 1500, NumberOneConstraintTest.TEACHER_NAME_ONE, daysTaught));
+    CourseCopy[] actual = my_teacher.getCourses().toArray();
+    
+    Set<CourseCopy> expected = new HashSet<CourseCopy>();
+    expected.add(new CourseCopy("TCSS 343", "A", "A TCSS class", 5,
+                                800, 1000, NumberOneConstraintTest.TEACHER_NAME_ONE, daysTaught));
+    expected.add(new CourseCopy("TCSS 342", "A", "A TCSS class", 5,
+                                1000, 1200, NumberOneConstraintTest.TEACHER_NAME_ONE, daysTaught));
+    expected.add(new CourseCopy("TCSS 342", "A", "A TCSS class", 5,
+                                        1230, 12400, NumberOneConstraintTest.TEACHER_NAME_ONE, daysTaught));
+    expected.add(new CourseCopy("TCSS 342", "A", "A TCSS class", 5,
+                                        13, 1500, NumberOneConstraintTest.TEACHER_NAME_ONE, daysTaught));
+    
+    for
+    for(CourseCopy courseExpected:expected){
+      
+      assertEquals("The courses are out of order.",course ,);
+    }
+  
   }
 }

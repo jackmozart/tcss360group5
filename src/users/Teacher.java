@@ -284,22 +284,22 @@ public class Teacher extends Voter implements Comparable{
     }
 
     int size = the_Courses.size();
-    CourseCopy[] sortedCourses = (CourseCopy[]) the_Courses.toArray();
+    Object[] sortedCourses =  the_Courses.toArray();
     // yay! bubble sort is most efficient.
     for (int i = 0; i < size; i++) {
       for (int j = size - 1; j > i; j--) {
         // gets neighboring objects and compares start time
-        if (sortedCourses[j - 1].getTime().getStartTime() < sortedCourses[j].getTime()
+        if (((CourseCopy) sortedCourses[j - 1]).getTime().getStartTime() < ((CourseCopy) sortedCourses[j]).getTime()
             .getStartTime()) {
-          CourseCopy temp = sortedCourses[j - 1];
+          CourseCopy temp = (CourseCopy) sortedCourses[j - 1];
           sortedCourses[j - 1] = sortedCourses[j];
           sortedCourses[j] = temp;
         }
       }
     }
     Set<CourseCopy> sortedSet = new HashSet<CourseCopy>();
-    for(CourseCopy course: sortedCourses){
-      sortedSet.add(course);
+    for(Object course: sortedCourses){
+      sortedSet.add((CourseCopy) course);
     }
     return sortedSet;
   }

@@ -113,10 +113,10 @@ public class Constraints {
         for (Set<CourseCopy> day : allDays) {
           if (!day.isEmpty()) {
             int i = 1;
-            CourseCopy[] coursesToCompare = (CourseCopy[]) day.toArray();
+            Object[] coursesToCompare =  day.toArray();
             for (CourseCopy course : day) {              
               for (int j = i ; j < coursesToCompare.length; j++) {
-                if (course.getTime().getEndTime() > coursesToCompare[j].getTime().getStartTime()) {
+                if (course.getTime().getEndTime() > ((CourseCopy) coursesToCompare[j]).getTime().getStartTime()) {
                   dissLikedCourses.add(course);
                 }
               }
