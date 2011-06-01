@@ -1,0 +1,6 @@
+% Generated: 5/31/2011,,,,,,,
+% Day of week abbreviations: MTWRFSN,,,,,,,
+% checks handling an duplicates classes for 3 sections,,,,,,,
+Test Schedule,,,,,,,
+COURSE_ID,SECTION,CLASS_TITLE,INSTRUCTOR,DAYS,START_TIME,END_TIME,CREDITS
+TCSS360,A,Fun Class,Josh Tenenberg,TBA,1615,1820,5
