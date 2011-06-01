@@ -66,7 +66,7 @@ public class Display {
         .append("The following teachers have more credits assigned then their preset limit: ");
     List<Teacher> missingCourses = my_Constraints.checkCreditLoad();
     if(missingCourses.isEmpty()){
-      errorMessage.append("\nNone");
+      errorMessage.append("\nNone\n");
     } else {
       for (Teacher aTeacher : missingCourses) {
         errorMessage.append(aTeacher.getName() + "\n");
@@ -82,7 +82,7 @@ public class Display {
   private String getNoTeacherCredit() {
     final StringBuilder errorMessage = new StringBuilder();
     errorMessage
-        .append("The following teachers have no courses: ");
+        .append("The following teachers have no courses: \n");
     List<Teacher> missingCourses = my_Constraints.checkNoCredits();
     if(missingCourses.isEmpty()){
       errorMessage.append("\nNone");
