@@ -109,7 +109,7 @@ public class Teacher extends Voter implements Comparable{
     my_unpreferred_courses = the_unpreferred_courses;
     my_availability = the_availability;
     my_courses = new HashSet<CourseCopy>();
-    my_max_credit_load = DEFAULT_MAX_CREDIT_LOAD;
+    my_max_credit_load = the_max_credit_load;
 
   }
   
