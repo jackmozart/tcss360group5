@@ -111,7 +111,7 @@ public class ScheduleMainTest {
   public void loadUserFileTeacherTest() {
     startUp("singleTeacherTestFile.txt");
 
-    assertEquals("Users should be the same", 
+    assertTrue("Users should be the same", 
                  my_teacher.equals(my_scheduler.getUser("hseaward")));
   }
   
@@ -144,5 +144,4 @@ public class ScheduleMainTest {
                my_teacher.equals(my_scheduler.getUser("hseaward")) &&
                my_advisor.equals(my_scheduler.getUser("jsnuffy")));
   }
-  
 }
