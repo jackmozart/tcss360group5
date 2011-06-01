@@ -4,9 +4,9 @@ package sourcepac;
 import java.util.List;
 
 /**
- * 
+ * Generates all strings for constraint class.  
  * @author Steven Cozart
- * @version 5/30/2011
+ * @version 5/31/2011
  * 
  */
 public class Display {
@@ -21,6 +21,20 @@ public class Display {
     my_Constraints = the_constraint;
   }
 
+  /**
+   * Displays all constraints.
+   */
+  public String toString() {
+    final StringBuilder errorMessage = new StringBuilder();
+    errorMessage.append(getAdvisorPrefrences());
+    errorMessage.append(getTeacherSameTimeConflicts());
+    errorMessage.append(getTeacherPrefrences());
+    errorMessage.append(getStudentCourses());
+    errorMessage.append(getStudentCourses());
+    System.out.print(errorMessage);
+    return errorMessage.toString();
+  }
+  
   /**
    * Displays all constraints.
    */
@@ -87,6 +101,22 @@ public class Display {
     errorMessage
         .append("The following courses are taught by teachers who stated they did not wish to teach the course:\n");
     List<CourseCopy> dissLikedCourses = my_Constraints.checkTeacherPreference();
+    for (CourseCopy course : dissLikedCourses) {
+      errorMessage.append(course.getCourseTitle() + "\n");
+    }
+    return errorMessage.toString();
+  }
+  
+  /**
+   * 
+   * @return List of all courses that are being taught by teachers who had the
+   *         courses on their dislike list.
+   */
+  private String getStudentCourses(){
+    final StringBuilder errorMessage = new StringBuilder();
+    errorMessage
+        .append("The following courses have been requested by the  preset number of students but are not beging offered:\n");
+    List<CourseCopy> dissLikedCourses = my_Constraints.checkStudentCoursePreferences();
     for (CourseCopy course : dissLikedCourses) {
       errorMessage.append(course.getCourseTitle() + "\n");
     }
