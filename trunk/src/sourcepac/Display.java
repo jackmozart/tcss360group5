@@ -116,7 +116,7 @@ public class Display {
   private String getStudentCourses(){
     final StringBuilder errorMessage = new StringBuilder();
     errorMessage
-        .append("The following courses have been requested by the  preset number of students but are not beging offered:\n");
+        .append("The following courses have been requested by the preset number of students but are not being offered:\n");
     List<Course> dissLikedCourses = my_Constraints.checkStudentCoursePreferences();
     for (Course course : dissLikedCourses) {
       errorMessage.append(course.getCourseTitle() + "\n");
