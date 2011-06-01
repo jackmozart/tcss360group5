@@ -52,7 +52,8 @@ public class MainConstraintTest {
   /**
    * Tests checkCreditLoad, should return an empty list because
    * no credit loads were violated.
-   * @author Chris Davidson
+   * @author Chris Davidson 
+   * @author Steven Cozart Modified for version 2 
    */
   @Test
   public void checkCreditLoadTest() {
@@ -77,7 +78,41 @@ public class MainConstraintTest {
     Constraints testing = new Constraints(null, null, null, teachers);
     assertTrue("The list of teachers should have been empty becauce no violations were made",testing.checkCreditLoad().isEmpty() );
   }
+  
+  /**
+   * Tests checkCreditLoad, should return an teacher because
+   * credit loads were violated.
+   * @author Steven Cozart code stolen from Chris
+   */
+  @Test
+  public void checkCreditLoadFailTest() {
+    boolean[] days = new boolean[7];
+    List<CourseCopy> courses = new ArrayList<CourseCopy>();
+    List<Teacher> teachers = new ArrayList<Teacher>();
+    Teacher testTeacher = new Teacher("jten", "345678912", 
+                                      "Josh Tenenberg", null, 5, 0, null,
+                                      null);
+    days[1] = true;
+    CourseCopy first = new CourseCopy("TCSS360", "A","Fun Class", 5,
+                                      1020, 1820, "Josh Tenenberg",
+                                      days);
+    CourseCopy second = new CourseCopy("TCSS360", "A","Fun Class", 5,
+                                      1020, 1820, "Josh Tenenberg",
+                                      days);
+    courses.add(first);
+    courses.add(second);
+    testTeacher.addCourse(first);
+    testTeacher.addCourse(second);
+    teachers.add(testTeacher);
+    Constraints testing = new Constraints(null, null, null, teachers);
+    List<Teacher> the_teacher = testing.checkCreditLoad();
+    assertEquals("The list of teachers should have a single elment.", testTeacher ,the_teacher.get(0) );
+  }
 
+  /**
+   * 
+   * @author Chris Davidson 
+   */
   @Test
   public void checkAdvisorPreferencesTest() {
     List<Course> advisorPrefs = new ArrayList<Course>();
