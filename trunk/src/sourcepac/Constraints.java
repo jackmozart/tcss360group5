@@ -68,8 +68,8 @@ public class Constraints {
    *         classes at the same time.
    */
   public List<CourseCopy> teacherSameTimes() {
-    //List<CourseCopy> dissLikedCourses = new ArrayList<CourseCopy>();
-    Set<CourseCopy> dissLikedCourses = new HashSet<CourseCopy>();
+    //List<CourseCopy> dissLikedCourses = new ArrayList<CourseCopy>(); 
+    Set<CourseCopy> dissLikedCourses = new HashSet<CourseCopy>(); //to eliminate duplicates
     for (Teacher teacher : my_teachers) {
       if (!teacher.getCourses().isEmpty()) { // if teacher has courses
         Set<CourseCopy> allSundayCourses = new HashSet<CourseCopy>();
@@ -81,7 +81,7 @@ public class Constraints {
         Set<CourseCopy> allSatCourses = new HashSet<CourseCopy>();
 
         // go through all courses and sort them by time, (radix type sort)
-        for (CourseCopy course : my_courses) {
+        for (CourseCopy course : teacher.getCourses()) {
           boolean[] days = course.getDays();
           if (days[0]) {
             allSundayCourses.add(course);
@@ -116,7 +116,7 @@ public class Constraints {
             Object[] coursesToCompare =  day.toArray();
             for (CourseCopy course : day) {              
               for (int j = i ; j < coursesToCompare.length; j++) {
-                if (course.getTime().getEndTime() > ((CourseCopy) coursesToCompare[j]).getTime().getStartTime()) {
+                if (course.getTime().getEndTime() > ((CourseCopy) coursesToCompare[j]).getTime().getStartTime() && !course.equals(coursesToCompare[j])) {
                   dissLikedCourses.add(course);
                 }
               }
