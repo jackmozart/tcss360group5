@@ -46,9 +46,9 @@ public class Display {
     errorMessage.append(getAdvisorPreferences());
     errorMessage.append(getTeacherSameTimeConflicts());
     errorMessage.append(getTeacherPreferences());
-    errorMessage.append(getTeacherCreditload());
     errorMessage.append(getStudentCourses());
     errorMessage.append(getStudentTime());
+    errorMessage.append(getTeacherCreditload());
     System.out.print(errorMessage);
     return errorMessage.toString();
   }
