@@ -274,17 +274,17 @@ public class Teacher extends Voter implements Comparable{
   
  
   /**
-   * Sorts courses according to time.(lowest listed first)
-   * @author Steven Cozart
-   * @param the_Courses The courses to be sorted.
-   */
+  * Sorts courses according to time.(lowest listed first)
+  * @author Steven Cozart
+  * @param the_Courses The courses to be sorted.
+  */
   private Set<CourseCopy> sortTimes(Set<CourseCopy> the_Courses) {
     if (the_Courses.isEmpty()) {
       return the_Courses;
     }
 
     int size = the_Courses.size();
-    Object[] sortedCourses =  the_Courses.toArray();
+    Object[] sortedCourses = the_Courses.toArray();
     // yay! bubble sort is most efficient.
     for (int i = 0; i < size; i++) {
       for (int j = size - 1; j > i; j--) {
@@ -303,6 +303,7 @@ public class Teacher extends Voter implements Comparable{
     }
     return sortedSet;
   }
+
   
   
   
