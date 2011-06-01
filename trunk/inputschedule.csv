@@ -1,5 +1,5 @@
 % Generated: 5/23/2011,,,,,,,
-"% Day of week abbreviations: M = Mon, T = Tues, W = Wed, R = Thurs, F = Fri, S = Sat, and N = Sun",,,,,,,
+% Day of week abbreviations: M = Mon; T = Tues; W = Wed; R = Thurs; F = Fri; S = Sat; and N = Sun,,,,,,,
 % checks handling an duplicates classes for 3 sections,,,,,,,
 Fall 2011 Schedule,,,,,,,
 COURSE_ID,SECTION,CLASS_TITLE,INSTRUCTOR,DAYS,START_TIME,END_TIME,CREDITS

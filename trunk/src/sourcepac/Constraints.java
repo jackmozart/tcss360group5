@@ -179,7 +179,7 @@ public class Constraints {
    * 
    * @return List of all courses suggested by advisor but not offered.
    */
-  public List<Course> checkAdvisorPrefrences(){  
+  public List<Course> checkAdvisorPreferences(){  
     List<Course> missingCourses = new ArrayList<Course>();
     for(Advisor advisor: my_advisors){
       for(Course preferredCourse:advisor.getPreferredCourseList()){
@@ -203,7 +203,7 @@ public class Constraints {
    * Collects all courses assigned to a teacher that does not wish to teach it.   
    * @return All courses that a teacher was assigned and is on the teacher disliked list.
    */
-  public List<CourseCopy> checkTeacherPrefrence() {
+  public List<CourseCopy> checkTeacherPreference() {
     List<CourseCopy> dissLikeCourses = new ArrayList<CourseCopy>();
     // goes through each teacher
     for(Teacher currTeacher: my_teachers) {
