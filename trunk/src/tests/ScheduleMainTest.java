@@ -88,7 +88,7 @@ public class ScheduleMainTest {
   public void loadUserFileAdvisorTest() {
     startUp("singleAdvisorTestFile.txt");
     assertTrue("Users should be the same", 
-          my_scheduler.getUser("jsnuffy").getAdvisor().equals(my_advisor));
+          my_scheduler.getUser("Joe Snuffy").getAdvisor().equals(my_advisor));
   }
 
   /**
@@ -100,7 +100,7 @@ public class ScheduleMainTest {
     startUp("singleStudentTestFile.txt");
 
     assertEquals("Users should be the same", my_student,
-                         my_scheduler.getUser("obrother").getStudent());
+                         my_scheduler.getUser("Ou Brother").getStudent());
   }
 
   /**
@@ -112,7 +112,7 @@ public class ScheduleMainTest {
     startUp("singleTeacherTestFile.txt");
 
     assertTrue("Users should be the same", 
-                 my_teacher.equals(my_scheduler.getUser("hseaward").getTeacher()));
+                 my_teacher.equals(my_scheduler.getUser("Harold Seaward").getTeacher()));
   }
   
   /**
@@ -123,7 +123,7 @@ public class ScheduleMainTest {
   public void loadSingleMultiRoleUserTest() {
     startUp("singleMultiRoledUserTestFile.txt");
 
-    final UserRoleList test_user_list = my_scheduler.getUser("darmstrong");
+    final UserRoleList test_user_list = my_scheduler.getUser("Richard Armstrong");
     assertTrue(test_user_list.getStudent().equals(my_multi_student) &&
                   test_user_list.getAdvisor().equals(my_multi_advisor));
   }
@@ -135,12 +135,12 @@ public class ScheduleMainTest {
   @Test
   public void loadMultipleUsersTest() {
     startUp("multipleUsersTestFile.txt");
-    final UserRoleList test_user_list = my_scheduler.getUser("darmstrong");
+    final UserRoleList test_user_list = my_scheduler.getUser("Richard Armstrong");
     
     assertTrue(test_user_list.getStudent().equals(my_multi_student) &&
                test_user_list.getAdvisor().equals(my_multi_advisor) && 
-               my_student.equals(my_scheduler.getUser("obrother").getStudent()) &&
-               my_teacher.equals(my_scheduler.getUser("hseaward").getTeacher()) &&
-               my_advisor.equals(my_scheduler.getUser("jsnuffy").getAdvisor()));
+               my_student.equals(my_scheduler.getUser("Ou Brother").getStudent()) &&
+               my_teacher.equals(my_scheduler.getUser("Harold Seaward").getTeacher()) &&
+               my_advisor.equals(my_scheduler.getUser("Joe Snuffy").getAdvisor()));
   }
 }

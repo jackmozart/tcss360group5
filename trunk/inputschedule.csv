@@ -3,19 +3,21 @@
 % checks handling an duplicates classes for 3 sections,,,,,,,
 Fall 2011 Schedule,,,,,,,
 COURSE_ID,SECTION,CLASS_TITLE,INSTRUCTOR,DAYS,START_TIME,END_TIME,CREDITS
-TCSS142,A,Introduction to Object-Oriented Programming,FOWLER,MW,830,1035,5
-TCSS481,A,Computer Security,MOBUS,MW,830,1035,5
-TCSS422,A,Computer Operating Systems,DARWIN,MW,830,1035,5
-TCSS143,A,Fundamentals of OOP Theory and Application,MAYER,MW,1020,1225,5
-TCSS322,A,Discrete Structures II,ALDEN,MW,1020,1225,5
+TCSS142,A,Introduction to Object-Oriented Programming,Alan Fowler,MW,800,1005,5
+TCSS481,A,Computer Security,George Mobus,MW,800,1005,5
+TCSS422,A,Computer Operating Systems,Alan Fowler,MW,800,1005,5
+TCSS143,A,Fundamentals of OOP Theory and Application,John Mayer,MW,1020,1225,5
+TCSS322,A,Discrete Structures II,Matthew Alden,MW,1020,1225,5
 TCSS321,B,Discrete Structures I,TBA,MW,1020,1225,5
-TCSS343,A,Design and Analysis of Algorithms,CHINN,MW,1615,1820,5
-TCSS342,A,Data Structures,FOWLER,MW,1830,2035,5
-TCSS142,A,Introduction to Object-Oriented Programming,FOWLER,TR,1230,1435,5
-TCSS143,B,Fundamentals of OOP Theory and Application,MAYER,TR,1020,1225,5
-TCSS371,A,Machine Organization,MAYER,TR,1420,1625,5
-TCSS143,C,Fundamentals of OOP Theory and Application,ALDEN,F,1300,1600,5
-TCSS305,B,Programming Practicum,ZIMMERMAN,TR,1830,2035,5
-TCSS440,A,Formal Models in Computer Science,MEERDINK,T,800,1300,5
+TCSS343,A,Design and Analysis of Algorithms,Donald Chinn,MW,1615,1820,5
+TCSS342,A,Data Structures,Alan Fowler,MW,1840,2040,5
+TCSS142,C,Introduction to Object-Oriented Programming,Peter Horak,MW,1840,2040,5
+TCSS142,B,Introduction to Object-Oriented Programming,Alan Fowler,TR,1330,1330,5
+TCSS143,B,Fundamentals of OOP Theory and Application,John Mayer,TR,1020,1225,5
+TCSS371,A,Machine Organization,John Mayer,TR,1330,1330,5
+TCSS143,C,Fundamentals of OOP Theory and Application,Matthew Alden,F,1330,1535,5
+TCSS305,B,Programming Practicum,Dan Zimmerman,TR,1835,2040,5
+TCSS440,A,Formal Models in Computer Science,Ken Meerdink,T,800,1005,5
 TCSS498,A,Directed Readings in Computing and Software Systems,TBA,W,1020,1225,1
+TCSS437,A,Mobile Robotics,TBA,R,1330,1535,5
 TCSS437,A,Mobile Robotics,TBA,R,1330,1535,5
