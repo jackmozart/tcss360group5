@@ -112,7 +112,7 @@ public class ScheduleMainTest {
     startUp("singleTeacherTestFile.txt");
 
     assertTrue("Users should be the same", 
-                 my_teacher.equals(my_scheduler.getUser("hseaward")));
+                 my_teacher.equals(my_scheduler.getUser("hseaward").getTeacher()));
   }
   
   /**
@@ -124,7 +124,6 @@ public class ScheduleMainTest {
     startUp("singleMultiRoledUserTestFile.txt");
 
     final UserRoleList test_user_list = my_scheduler.getUser("darmstrong");
-
     assertTrue(test_user_list.getStudent().equals(my_multi_student) &&
                   test_user_list.getAdvisor().equals(my_multi_advisor));
   }
@@ -140,8 +139,8 @@ public class ScheduleMainTest {
     
     assertTrue(test_user_list.getStudent().equals(my_multi_student) &&
                test_user_list.getAdvisor().equals(my_multi_advisor) && 
-               my_student.equals(my_scheduler.getUser("obrother")) &&
-               my_teacher.equals(my_scheduler.getUser("hseaward")) &&
-               my_advisor.equals(my_scheduler.getUser("jsnuffy")));
+               my_student.equals(my_scheduler.getUser("obrother").getStudent()) &&
+               my_teacher.equals(my_scheduler.getUser("hseaward").getTeacher()) &&
+               my_advisor.equals(my_scheduler.getUser("jsnuffy").getAdvisor()));
   }
 }
