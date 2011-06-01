@@ -1,0 +1,32 @@
+The following courses are not included in the schedule and have been requested by an advisor: 
+TCSS325
+The following courses are taught by the same teacher at the same time:
+TCSS142
+TCSS422
+The following courses are taught by teachers who stated they did not wish to teach the course:
+Peter Horak TCSS142
+The following courses are taught by a teacher outside of the teachers avaliablity:
+TCSS142
+The following courses have been requested by 10.0% of all students but are not being offered:
+TCSS360
+TCSS431
+TCSS545
+TCSS555
+TCSS566
+TCSS470
+TCSS372
+TCSS325
+TCSS560
+The following courses have been requested by 10.0% of all students but are not being offered at the desired times:
+None
+The following teachers have more credits assigned then their preset limit: 
+Dan Zimmerman
+Alan Fowler
+The following teachers have no courses: 
+Josh Tenenberg
+Larry Wear
+Andrew Fry
+Ankur Teredesai
+Yan Bai
+Sam Chung
+Eric Larson
