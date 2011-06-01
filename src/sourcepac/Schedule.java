@@ -55,8 +55,8 @@ public class Schedule {
   }
   
   /**
-   //Check random and array initialization to determine if
-   //array out of bounds error will occur.
+   * Check random and array initialization to determine if
+   * array out of bounds error will occur.
    * 
    * Generates a schedule based on the input param and outputs the schedule.
    * 

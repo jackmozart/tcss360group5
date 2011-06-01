@@ -64,7 +64,7 @@ public class Display {
         .append("The following teachers have more credits assinged then their preset limit: ");
     List<Teacher> missingCourses = my_Constraints.checkCreditLoad();
     if(missingCourses.isEmpty()){
-      errorMessage.append("None\n");
+      errorMessage.append("\nNone");
     } else {
       for (Teacher aTeacher : missingCourses) {
         errorMessage.append(aTeacher.getName() + "\n");

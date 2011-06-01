@@ -109,8 +109,10 @@ public class MainConstraintTest {
     assertEquals("The list of teachers should have a single elment.", testTeacher.getName() ,the_teacher.get(0).getName() );
   }
 
+
   /**
-   * 
+   * Ensures that checkAdvisorPreferences returns a course that an advisor does
+   * not prefer.
    * @author Chris Davidson 
    */
   @Test
