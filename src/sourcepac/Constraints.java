@@ -118,6 +118,7 @@ public class Constraints {
               for (int j = i ; j < coursesToCompare.length; j++) {
                 if (course.getTime().getEndTime() > ((CourseCopy) coursesToCompare[j]).getTime().getStartTime() && !course.equals(coursesToCompare[j])) {
                   dissLikedCourses.add(course);
+                  dissLikedCourses.add((CourseCopy) coursesToCompare[j]);
                 }
               }
               i++;//push start to ensure i don't double check elements

@@ -141,7 +141,7 @@ public class Display {
       errorMessage.append("None\n");
     } else {
       for (CourseCopy course : dissLikedCourses) {
-        errorMessage.append(course.getCourseTitle() + "\n");
+        errorMessage.append(course.getTeacher()+" "+course.getCourseTitle() + "\n");
       }
     }
     return errorMessage.toString();
