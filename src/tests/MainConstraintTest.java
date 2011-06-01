@@ -32,8 +32,8 @@ public class MainConstraintTest {
                                       null);
     days[1] = true;
     CourseCopy first = new CourseCopy("TCSS360", "A","Fun Class", 5,
-                   1615, 1820, "Josh Tenenberg",
-                   days);
+                                      1615, 1820, "Josh Tenenberg",
+                                      days);
     CourseCopy second = new CourseCopy("TCSS360", "A","Fun Class", 5,
                                       1700, 1820, "Josh Tenenberg",
                                       days);
@@ -44,6 +44,34 @@ public class MainConstraintTest {
     Constraints testing = new Constraints(courses, null, null, teachers);
     courses = testing.teacherSameTimes();
     assertEquals(courses.get(0), first);
+  }
+  
+  /**
+   * Tests checkCreditLoad, should return an empty string because
+   * no credit loads were violated.
+   */
+  @Test
+  public void checkCreditLoadTest() {
+    boolean[] days = new boolean[7];
+    List<CourseCopy> courses = new ArrayList<CourseCopy>();
+    List<Teacher> teachers = new ArrayList<Teacher>();
+    Teacher testTeacher = new Teacher("jten", "345678912", 
+                                      "Josh Tenenberg", null, 25, 0, null,
+                                      null);
+    days[1] = true;
+    CourseCopy first = new CourseCopy("TCSS360", "A","Fun Class", 5,
+                                      1615, 1820, "Josh Tenenberg",
+                                      days);
+    CourseCopy second = new CourseCopy("TCSS360", "A","Fun Class", 5,
+                                      1700, 1820, "Josh Tenenberg",
+                                      days);
+    courses.add(first);
+    courses.add(second);
+    testTeacher.addCourse(first);
+    teachers.add(testTeacher);
+    Constraints testing = new Constraints(courses, null, null, teachers);
+    String credits = testing.checkCreditLoad();
+    assertEquals("", credits);
   }
 
 }
