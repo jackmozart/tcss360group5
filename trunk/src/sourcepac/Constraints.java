@@ -143,6 +143,7 @@ public class Constraints {
     final List<Teacher> error_message = new ArrayList<Teacher>();
     
     for (Teacher aTeacher : my_teachers) {
+      aTeacher.setCurrCredits(0);
       for(CourseCopy course: aTeacher.getCourses()){
        aTeacher.setCurrCredits(aTeacher.getCurrCredits() + course.getCredit());
       }
@@ -332,5 +333,29 @@ public class Constraints {
       
     }
     return new ArrayList<Course>(missed_courses);
+  }
+
+
+  /**
+   * 
+   * @return All teachers who have been assigned no credits
+   */
+  public List<Teacher> checkNoCredits() {
+    final List<Teacher> error_message = new ArrayList<Teacher>();
+
+    for (Teacher aTeacher : my_teachers) {
+      aTeacher.setCurrCredits(0);
+      for (CourseCopy course : aTeacher.getCourses()) {
+        aTeacher.setCurrCredits(aTeacher.getCurrCredits() + course.getCredit());
+      }
+    }
+
+    for (Teacher teacher_pref : my_teachers) {
+      if (0 ==  teacher_pref.getCurrCredits()) {
+        error_message.add(teacher_pref);
+      }
+    }
+    return error_message;
+
   }
 }

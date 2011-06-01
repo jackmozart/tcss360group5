@@ -31,7 +31,9 @@ public class Display {
     errorMessage.append(getAdvisorPreferences());
     errorMessage.append(getTeacherSameTimeConflicts());
     errorMessage.append(getTeacherPreferences());
+    errorMessage.append(getTeacherTimePreference());
     errorMessage.append(getTeacherCreditload());
+    errorMessage.append(getNoTeacherCredit());
     errorMessage.append(getStudentCourses());
     errorMessage.append(getStudentTime());
     return errorMessage.toString();
@@ -45,9 +47,11 @@ public class Display {
     errorMessage.append(getAdvisorPreferences());
     errorMessage.append(getTeacherSameTimeConflicts());
     errorMessage.append(getTeacherPreferences());
+    errorMessage.append(getTeacherTimePreference());
     errorMessage.append(getStudentCourses());
     errorMessage.append(getStudentTime());
     errorMessage.append(getTeacherCreditload());
+    errorMessage.append(getNoTeacherCredit());
     return errorMessage.toString();
   }
   
@@ -61,6 +65,25 @@ public class Display {
     errorMessage
         .append("The following teachers have more credits assigned then their preset limit: ");
     List<Teacher> missingCourses = my_Constraints.checkCreditLoad();
+    if(missingCourses.isEmpty()){
+      errorMessage.append("\nNone");
+    } else {
+      for (Teacher aTeacher : missingCourses) {
+        errorMessage.append(aTeacher.getName() + "\n");
+      }
+    }
+    return errorMessage.toString();
+  }
+  
+  /**
+   * 
+   * @return The list of all teachers who have no classes.  
+   */
+  private String getNoTeacherCredit() {
+    final StringBuilder errorMessage = new StringBuilder();
+    errorMessage
+        .append("The following teachers have no courses: ");
+    List<Teacher> missingCourses = my_Constraints.checkNoCredits();
     if(missingCourses.isEmpty()){
       errorMessage.append("\nNone");
     } else {
