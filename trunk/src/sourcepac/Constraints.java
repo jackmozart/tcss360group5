@@ -255,14 +255,12 @@ public class Constraints {
       Set<Course> courses = s.getCourses();
       
       for(Course course : courses) {
+
         if (tally.containsKey(course)) {
-          int num = tally.get(course);
-          
-          if(num > 0) {
+            int num = tally.get(course);
             tally.put(course, num + 1); //puts the course back with an extra vote added
-          } else {
+        } else {
             tally.put(course, 1);
-          }
         }
       }
     }
@@ -272,11 +270,19 @@ public class Constraints {
      * are in the schedule.
      */
     for (Course course : tally.keySet()) {
-      
+      boolean result = true;
       if (tally.get(course) >= min_needed_votes) {
-        if(!my_courses.contains(course)) {
-          missed_courses.add(course);
+        result = false;
+        for(Course coursecopy : my_courses) {
+          if(course.getCourseTitle().equals(coursecopy.getCourseTitle())){
+            result = true;
+            break;
+          }
         }
+      }
+      
+      if (!result) {
+        missed_courses.add(course);
       }
     }
     
@@ -308,7 +314,7 @@ public class Constraints {
        */
       for(CourseCopy coursecopy : my_courses) { //courses in schedule
         for(Course course : courses) {          //courses in student preferences
-          if(coursecopy.equals(course) && !times.contains(coursecopy.getTime())){
+          if(course.equals(coursecopy) && !times.contains(coursecopy.getTime())){
             int num = tally.get(coursecopy);
             if(num > 0) {
               tally.put(coursecopy, num + 1); //puts the course back with an extra vote added
@@ -318,6 +324,7 @@ public class Constraints {
           }
         }
       }
+      
       /*
        * This portion iterates though the tallied votes and checks if those courses
        * are in the schedule.

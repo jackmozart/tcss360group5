@@ -158,4 +158,15 @@ public class CourseCopy extends Course {
     my_block = block;
   }
 
+  public boolean equals(Object other) {
+    boolean result = super.equals(other);
+    if (result) {
+      CourseCopy other_course = (CourseCopy)other;
+      if(!my_section.equals(other_course.my_section)) {
+        result = false;
+      }
+    }
+    
+    return result;
+  }
 }
