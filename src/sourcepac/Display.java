@@ -40,8 +40,8 @@ public class Display {
   private String getAdvisorPrefrences() {
     final StringBuilder errorMessage = new StringBuilder();
     errorMessage
-        .append("The following courses are not included in the schedual and have been requested by an advisor:");
-    List<Course> missingCourses = my_Constraints.checkAdvisorPrefrences();
+        .append("The following courses are not included in the schedule and have been requested by an advisor: ");
+    List<Course> missingCourses = my_Constraints.checkAdvisorPreferences();
     for (Course aCourse : missingCourses){
       errorMessage.append(aCourse.getCourseTitle() + "\n");
     }
@@ -70,7 +70,7 @@ public class Display {
   private String getTeacherTimePrefrence() {
     final StringBuilder errorMessage = new StringBuilder();
     errorMessage.append("The following courses are taught by a teacher outside of the teachers avaliablity:\n");
-    List<CourseCopy> dissLikedCourses = my_Constraints.checkTeacherPrefrence();
+    List<CourseCopy> dissLikedCourses = my_Constraints.checkTeacherPreference();
     for (CourseCopy course : dissLikedCourses) {
       errorMessage.append(course.getCourseTitle() + "\n");
     }
@@ -86,7 +86,7 @@ public class Display {
     final StringBuilder errorMessage = new StringBuilder();
     errorMessage
         .append("The following courses are taught by teachers who stated they did not wish to teach the course:\n");
-    List<CourseCopy> dissLikedCourses = my_Constraints.checkTeacherPrefrence();
+    List<CourseCopy> dissLikedCourses = my_Constraints.checkTeacherPreference();
     for (CourseCopy course : dissLikedCourses) {
       errorMessage.append(course.getCourseTitle() + "\n");
     }
