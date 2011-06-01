@@ -102,6 +102,7 @@ public class ScheduleMain {
                                                     sm.my_advisors, 
                                                     sm.my_teachers);
     Display d = new Display(c);
+    //sg.outputConstraintViolations(output_location, d.displayConstraints());
     sg.outputConstraintViolations(output_location, d.displayConstraints());
   }
 
