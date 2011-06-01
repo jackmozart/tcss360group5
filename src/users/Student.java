@@ -41,5 +41,8 @@ public class Student extends Voter {
     return Collections.unmodifiableSet(my_course);
   }
   
-
+  public List<Time> getTimes() {
+    return Collections.unmodifiableList(my_times);
+  }
+  
 }

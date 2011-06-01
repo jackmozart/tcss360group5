@@ -26,6 +26,12 @@ public class Constraints {
    * body that is needed for a course to be considered a preference. 
    */
   public static final double COURSE_PREFERENCE_THRESHOLD = .1;
+  
+  /**
+   * This constant hold the percentage of votes from the entire student
+   * body that is needed for a time to be considered a preference. 
+   */
+  public static final double TIME_PREFERENCE_THRESHOLD = .1;
     
   private List<Student> my_students;
 
@@ -294,9 +300,52 @@ public class Constraints {
     return new ArrayList<Course>(missed_courses);
   }
   
-  public List<Time> checkStudentTimePreferences() {
-    List<Time> missed_times = new ArrayList<Time>();
-    return missed_times;
+  /**
+   * 
+   * @return
+   * @author Phillip Bernard
+   */
+  public List<Course> checkStudentTimePreferences() {
+    Set<Course> missed_courses = new HashSet<Course>();
     
+    Map<Course, Integer> tally = new TreeMap<Course, Integer>();
+    
+    int min_needed_votes = (int) (my_students.size() * TIME_PREFERENCE_THRESHOLD);
+    /*
+     * This loop tallies the votes for time from student preferences.
+     */
+    for(Student s: my_students) {
+      List<Time> times = s.getTimes();
+      Set<Course> courses = s.getCourses();
+      
+      
+      for(CourseCopy coursecopy : my_courses) {
+        for(Course course: courses) {
+        if(coursecopy.equals(course) && !times.contains(coursecopy.getTime())){
+          int num = tally.get(course);
+            tally.put(course, num + 1); //puts the course back with an extra vote added
+          } else {
+            tally.put(course, 1);
+          }
+        }
+      }
+      
+      /*
+       * This portion iterates though the tallied votes and checks if those courses
+       * are in the schedule.
+       */
+      for (Course course : tally.keySet()) {
+        
+        if (tally.get(course) < min_needed_votes) {
+          if(!my_courses.contains(course)) {
+            missed_courses.add(course);
+          }
+        }
+      }
+
+   
+      
+    }
+    return new ArrayList<Course>(missed_courses);
   }
 }
