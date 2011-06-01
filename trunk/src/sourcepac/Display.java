@@ -26,11 +26,11 @@ public class Display {
    */
   public String toString() {
     final StringBuilder errorMessage = new StringBuilder();
-    errorMessage.append(getAdvisorPrefrences());
+    errorMessage.append(getAdvisorPreferences());
     errorMessage.append(getTeacherSameTimeConflicts());
-    errorMessage.append(getTeacherPrefrences());
+    errorMessage.append(getTeacherPreferences());
     errorMessage.append(getStudentCourses());
-    errorMessage.append(getStudentCourses());
+   // errorMessage.append(getStudentCourses());
     System.out.print(errorMessage);
     return errorMessage.toString();
   }
@@ -40,9 +40,10 @@ public class Display {
    */
   public String displayConstraints() {
     final StringBuilder errorMessage = new StringBuilder();
-    errorMessage.append(getAdvisorPrefrences());
+    errorMessage.append(getAdvisorPreferences());
     errorMessage.append(getTeacherSameTimeConflicts());
-    errorMessage.append(getTeacherPrefrences());
+    errorMessage.append(getTeacherPreferences());
+    errorMessage.append(getStudentCourses());
     System.out.print(errorMessage);
     return errorMessage.toString();
   }
@@ -51,7 +52,7 @@ public class Display {
    * 
    * @return
    */
-  private String getAdvisorPrefrences() {
+  private String getAdvisorPreferences() {
     final StringBuilder errorMessage = new StringBuilder();
     errorMessage
         .append("The following courses are not included in the schedule and have been requested by an advisor: ");
@@ -81,7 +82,7 @@ public class Display {
    * @return List of all courses that are being taught by teachers who have
    *         specified the course time is outside of the ability.
    */
-  private String getTeacherTimePrefrence() {
+  private String getTeacherTimePreference() {
     final StringBuilder errorMessage = new StringBuilder();
     errorMessage.append("The following courses are taught by a teacher outside of the teachers avaliablity:\n");
     List<CourseCopy> dissLikedCourses = my_Constraints.checkTeacherPreference();
@@ -96,7 +97,7 @@ public class Display {
    * @return List of all courses that are being taught by teachers who had the
    *         courses on their dislike list.
    */
-  private String getTeacherPrefrences(){
+  private String getTeacherPreferences(){
     final StringBuilder errorMessage = new StringBuilder();
     errorMessage
         .append("The following courses are taught by teachers who stated they did not wish to teach the course:\n");
@@ -116,8 +117,8 @@ public class Display {
     final StringBuilder errorMessage = new StringBuilder();
     errorMessage
         .append("The following courses have been requested by the  preset number of students but are not beging offered:\n");
-    List<CourseCopy> dissLikedCourses = my_Constraints.checkStudentCoursePreferences();
-    for (CourseCopy course : dissLikedCourses) {
+    List<Course> dissLikedCourses = my_Constraints.checkStudentCoursePreferences();
+    for (Course course : dissLikedCourses) {
       errorMessage.append(course.getCourseTitle() + "\n");
     }
     return errorMessage.toString();

@@ -219,6 +219,7 @@ public class ScheduleMain {
      
       final Scanner line_scanner = new Scanner(next_line); 
       final UserRoleList roles = new UserRoleList(); 
+      int linenumber = 1;
       while (line_scanner.hasNext()) {
         user_type = line_scanner.next();
         
@@ -262,10 +263,12 @@ public class ScheduleMain {
             my_teachers.add(t);
             break;
           default:
-            throw new IllegalArgumentException("Invalid Character");
+            throw new IllegalArgumentException("Invalid Character at line number " + 
+                                                                         linenumber);
         } 
       }
       users.put(user_name, roles);
+      linenumber++;
     }
     return users;
   }

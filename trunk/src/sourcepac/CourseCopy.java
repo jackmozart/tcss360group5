@@ -124,5 +124,11 @@ public class CourseCopy extends Course {
     return my_days;
   }
 
+  public void setBlock() {
+    switch(my_time.getStartTime()) {
+      //case ;//
+      
+    }
+  }
 
 }

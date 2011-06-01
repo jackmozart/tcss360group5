@@ -169,7 +169,7 @@ public class Constraints {
         error_message.append(teacher.getCurrCredits()- //PB I adjust this code so that it compiles and  
                                            teacher_pref.getMaxCredits()); //uses the methods already in Teacher
         error_message.append(" credits.\n ");
-     }
+       }
      }
      return error_message.toString();
   }
@@ -257,7 +257,7 @@ public class Constraints {
    * @return
    * @author Phillip Bernard
    */
-  public List<Course> checkStudentCoursePreferences(List<Course> schedule) {
+  public List<Course> checkStudentCoursePreferences() {
     Set<Course> missed_courses = new HashSet<Course>();
     Map<Course, Integer> tally = new TreeMap<Course, Integer>();
     
@@ -266,7 +266,7 @@ public class Constraints {
      * This loop tallies the votes for courses from student preferences.
      */
     for(Student s: my_students) {
-      HashSet<Course> courses = (HashSet<Course>) s.getCourses();
+      Set<Course> courses = s.getCourses();
       
       for(Course course : courses) {
         if (tally.containsKey(course)) {
@@ -285,12 +285,18 @@ public class Constraints {
     for (Course course : tally.keySet()) {
       
       if (tally.get(course) >= min_needed_votes) {
-        if(!schedule.contains(course)) {
+        if(!my_courses.contains(course)) {
           missed_courses.add(course);
         }
       }
     }
     
     return new ArrayList<Course>(missed_courses);
+  }
+  
+  public List<Time> checkStudentTimePreferences() {
+    List<Time> missed_times = new ArrayList<Time>();
+    return missed_times;
+    
   }
 }
