@@ -136,14 +136,25 @@ public class CourseCopy extends Course {
 
   public void setBlock() {
     int block = 0;
-    
-    if (ScheduleMain.my_course_times.values() != null) {
-      List<Time> times = new ArrayList<Time>(ScheduleMain.my_course_times.values());
-      Collections.sort(times);
-    
-      while(!times.get(block).equals(my_time) && block < (times.size() - 1)){
-        block++;
-      }
+    switch(my_time.getStartTime()) {
+      case 800:
+        block = 0;
+        break;
+      case 1020:
+        block = 1;
+        break;
+      case 1330:
+        block = 2;
+        break;
+      case 1615:
+        block = 3;
+        break;
+      case 1835:
+        block = 4;
+        break;
+      default:
+        throw new IllegalArgumentException("Invalid time" + 
+                                             my_time.getStartTime());
     }
     my_block = block;
   }
