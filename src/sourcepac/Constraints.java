@@ -277,9 +277,12 @@ public class Constraints {
       for(Course course : courses) {
         if (tally.containsKey(course)) {
           int num = tally.get(course);
-          tally.put(course, num + 1); //puts the course back with an extra vote added
-        } else {
-          tally.put(course, 1);
+          
+          if(num > 0) {
+            tally.put(course, num + 1); //puts the course back with an extra vote added
+          } else {
+            tally.put(course, 1);
+          }
         }
       }
     }
@@ -306,40 +309,41 @@ public class Constraints {
    * @author Phillip Bernard
    */
   public List<Course> checkStudentTimePreferences() {
-    Set<Course> missed_courses = new HashSet<Course>();
+    Set<CourseCopy> missed_courses = new HashSet<CourseCopy>();
     
-    Map<Course, Integer> tally = new TreeMap<Course, Integer>();
+    Map<CourseCopy, Integer> tally = new TreeMap<CourseCopy, Integer>();
     
     int min_needed_votes = (int) (my_students.size() * TIME_PREFERENCE_THRESHOLD);
     /*
-     * This loop tallies the votes for time from student preferences.
+     * This loop tallies votes for each class and time from student preferences.
      */
     for(Student s: my_students) {
       List<Time> times = s.getTimes();
       Set<Course> courses = s.getCourses();
       
-      
-      for(CourseCopy coursecopy : my_courses) {
-        for(Course course: courses) {
-        if(coursecopy.equals(course) && !times.contains(coursecopy.getTime())){
-          int num = tally.get(course);
-            tally.put(course, num + 1); //puts the course back with an extra vote added
-          } else {
-            tally.put(course, 1);
+      /*
+       * If the course is not scheduled for a time requested the course is recorded
+       */
+      for(CourseCopy coursecopy : my_courses) { //courses in schedule
+        for(Course course : courses) {          //courses in student preferences
+          if(coursecopy.equals(course) && !times.contains(coursecopy.getTime())){
+            int num = tally.get(coursecopy);
+            if(num > 0) {
+              tally.put(coursecopy, num + 1); //puts the course back with an extra vote added
+            } else {
+              tally.put(coursecopy, 1);
+            }
           }
         }
       }
-      
       /*
        * This portion iterates though the tallied votes and checks if those courses
        * are in the schedule.
        */
-      for (Course course : tally.keySet()) {
+      for (CourseCopy coursecopy : tally.keySet()) {
         
-        if (tally.get(course) < min_needed_votes) {
-          if(!my_courses.contains(course)) {
-            missed_courses.add(course);
-          }
+        if (tally.get(coursecopy) >= min_needed_votes) {
+          missed_courses.add(coursecopy);
         }
       }
 
