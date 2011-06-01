@@ -3,7 +3,6 @@ package tests;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 
 import org.junit.Test;
 

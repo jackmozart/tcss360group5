@@ -1,7 +1,6 @@
 
 package sourcepac;
 
-import users.Teacher;
 
 /**
  * This class holds the basic information about a course including the Course
