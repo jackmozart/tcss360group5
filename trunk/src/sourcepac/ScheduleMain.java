@@ -92,8 +92,21 @@ public class ScheduleMain {
    */
   public static void main(String[] the_args) {
     ScheduleMain sm = new ScheduleMain();
-    String input_schedule_location = the_args[0];
-    String output_location = the_args[1];
+    String input_schedule_location;
+    String output_location;
+    
+    if (the_args.length > 0 && the_args[0] != null) {
+      input_schedule_location = the_args[0];
+    } else {
+      input_schedule_location = "inputschedule.csv";
+    }
+    
+    if (the_args.length > 1 && the_args[1] != null) {
+      output_location = the_args[1];
+    } else {
+      output_location = "output.txt";
+    }
+    
     ScheduleGenerator sg = new ScheduleGenerator();
     sg.importSchedule(input_schedule_location);
     addCoursesToTeachers(sg.getSchedule());
@@ -102,7 +115,6 @@ public class ScheduleMain {
                                                     sm.my_advisors, 
                                                     sm.my_teachers);
     Display d = new Display(c);
-    //sg.outputConstraintViolations(output_location, d.displayConstraints());
     sg.outputConstraintViolations(output_location, d.displayConstraints());
   }
 

@@ -129,24 +129,9 @@ public class ScheduleGenerator {
     
     out.print(the_constraints);
     out.close();
+    
+    System.out.println("file printed to : " + output.getAbsoluteFile());
   }
-
-  private static void output(String out) {
-    FileOutputStream aFileOutStream;
-    PrintStream aPrintStream;
-    try
-    {
-    aFileOutStream = new FileOutputStream("constraints.txt");
-    aPrintStream = new PrintStream( aFileOutStream );
-    aPrintStream.format(out);
-    aPrintStream.close();
-    }
-    catch (Exception e)
-    {
-    System.err.println ("Error writing to file");
-    }
-
-    }
 
   /**
    * Getter method for the Schedule being generated.  Contains no
