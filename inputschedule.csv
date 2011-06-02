@@ -1,4 +1,4 @@
-% Generated: 5/23/2011,,,,,,,
+% Generated: 6/1/2011,,,,,,,
 % Day of week abbreviations: M = Mon; T = Tues; W = Wed; R = Thurs; F = Fri; S = Sat; and N = Sun,,,,,,,
 % checks handling an duplicates classes for 3 sections,,,,,,,
 Fall 2011 Schedule,,,,,,,
@@ -16,7 +16,7 @@ TCSS142,B,Introduction to Object-Oriented Programming,Alan Fowler,TR,1330,1330,5
 TCSS143,B,Fundamentals of OOP Theory and Application,John Mayer,TR,1020,1225,5
 TCSS371,A,Machine Organization,John Mayer,TR,1330,1330,5
 TCSS143,C,Fundamentals of OOP Theory and Application,Matthew Alden,F,1330,1535,5
-TCSS305,B,Programming Practicum,Dan Zimmerman,TR,1835,2040,5
+TCSS305,B,Programming Practicum,Josh Tenenberg,TR,1835,2040,5
 TCSS440,A,Formal Models in Computer Science,Ken Meerdink,T,800,1005,5
 TCSS498,A,Directed Readings in Computing and Software Systems,TBA,W,1020,1225,1
 TCSS437,A,Mobile Robotics,TBA,R,1330,1535,5
